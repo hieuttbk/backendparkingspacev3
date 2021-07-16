@@ -19,4 +19,5 @@ public interface FieldRepo{
 
     boolean managerDelete(int id, Manager manager);
 
+    Field findById(Integer fieldId);
 }

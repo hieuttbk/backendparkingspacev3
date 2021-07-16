@@ -230,7 +230,7 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public Contract park(ParkPayload parkPayload, User user) {
-        System.out.println("UserRepo_Impl.park" + parkPayload);
+     //   System.out.println("UserRepo_Impl.park" + parkPayload);
         return contractRepo.createAndUpdate(Contract.builder()
                 .fieldId(parkPayload.getFieldId())
                 .timeInBook(null)
@@ -243,6 +243,18 @@ public class UserRepo_Impl implements UserRepo {
                 .cost("")
                 .userId(user.getId())
                 .build());
+    }
+
+    @Override
+    public User findByTagId(String tagId) {
+       // System.out.println("Find User by tagID " + tagId);
+        Query query = entityManager
+                .createQuery("select u from User u where u.equipment= :equipment");
+        List<User> users = query.setParameter("equipment", tagId).getResultList();
+        if(users.size() == 1){
+            return users.get(0);
+        }
+        return null;
     }
 
     public String getRandomCode(){

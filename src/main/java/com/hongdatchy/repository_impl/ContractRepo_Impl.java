@@ -2,14 +2,19 @@ package com.hongdatchy.repository_impl;
 
 import com.hongdatchy.entities.data.Contract;
 
+import com.hongdatchy.entities.data.User;
 import com.hongdatchy.repository.ContractRepo;
 import com.hongdatchy.repository.SlotRepo;
+import com.hongdatchy.security.SHA256Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
@@ -49,5 +54,17 @@ public class ContractRepo_Impl implements ContractRepo {
     public List<Contract> findAll() {
         return  entityManager.createQuery("select g from Contract g").getResultList();
     }
+
+    @Override
+    public List<Contract> findByUser(User user) {
+        Integer userId=user.getId();
+        Query query = entityManager
+                .createQuery("select u from Contract u where u.userId= :userId");
+        List<Contract> contracts = query.setParameter("userId", userId).getResultList();
+
+        return contracts;
+
+    }
+
 
 }
