@@ -4,6 +4,7 @@ import com.hongdatchy.entities.data.Field;
 import com.hongdatchy.entities.data.Manager;
 import com.hongdatchy.entities.data.ManagerField;
 
+import com.hongdatchy.entities.data.User;
 import com.hongdatchy.repository.FieldRepo;
 import com.hongdatchy.repository.SlotRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +86,17 @@ public class FieldRepo_Impl implements FieldRepo {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Field findById(Integer fieldId) {
+        Query query = entityManager
+                .createQuery("select u from Field u where u.id= :fieldId");
+        List<Field> fields = query.setParameter("fieldId", fieldId).getResultList();
+        if(fields.size() == 1){
+            return fields.get(0);
+        }
+        return null;
     }
 
     boolean check(Field field, Manager manager){

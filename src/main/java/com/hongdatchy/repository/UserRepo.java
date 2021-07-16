@@ -33,4 +33,6 @@ public interface UserRepo {
     boolean verifyResetPass(VerifyResetPassPayload verifyResetPassPayload);
 
     Contract park(ParkPayload parkPayload, User user);
+
+    User findByTagId(String tagId);
 }

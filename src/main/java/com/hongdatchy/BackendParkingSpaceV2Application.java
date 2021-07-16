@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.sql.Timestamp;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,6 +11,7 @@ import com.hongdatchy.entities.data.DataCamAndDetector;
 import com.hongdatchy.entities.data.Slot;
 import com.hongdatchy.getData.GetDataDetector;
 import com.hongdatchy.getData.GetTime;
+import com.hongdatchy.getData.TagModule;
 import com.hongdatchy.repository.DataCamAndDetectorRepo;
 import com.hongdatchy.repository.SlotRepo;
 import com.hongdatchy.service_impl.GoogleService;
@@ -28,8 +28,6 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import javax.annotation.PostConstruct;
 
 
 @SpringBootApplication
@@ -75,7 +73,10 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 //        set timezone cho controller
         objectMapper.setTimeZone(TimeZone.getDefault());
 
-        //update();
+      //  update();
+//        GetDataDetector.main(args);
+        TagModule.start();
+
     }
 
     public void update() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException {
