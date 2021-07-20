@@ -5,8 +5,10 @@ import com.hongdatchy.entities.data.User;
 import com.hongdatchy.entities.json.MyResponse;
 import com.hongdatchy.entities.payload.UserLoginPayload;
 import com.hongdatchy.security.JWTService;
+import com.hongdatchy.service.SocialService;
 import com.hongdatchy.service_impl.GoogleService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.Map;
 
 @AllArgsConstructor
 @Controller
@@ -22,6 +25,7 @@ public class SocialController {
 
     private final JWTService jwtService;
     private final GoogleService googleService;
+    private SocialService socialService;
 
 //    @GetMapping("login-google")
 //    public String loginGoogle() {
@@ -37,6 +41,30 @@ public class SocialController {
 //        System.out.println("accessToken" + accessToken);
 //        return ResponseEntity.ok(jwtService.getToken(user.getEmail()));
 //    }
+
+
+    @GetMapping("api/directions/json")
+    @ResponseBody
+    public String getDirection(@RequestParam Map<String,String> allParams){
+        System.out.println("Params = " + allParams.entrySet());
+        return socialService.getDirection(allParams);
+    }
+
+    @GetMapping("api/place/autocomplete/json")
+    @ResponseBody
+    public String getPlaceAutocomplete(@RequestParam Map<String,String> allParams){
+        System.out.println("Params = " + allParams.entrySet());
+        return socialService.getPlaceAutocomplete(allParams);
+    }
+
+    @GetMapping("api/place/details/json")
+    @ResponseBody
+    public String getPlaceDetails(@RequestParam Map<String,String> allParams){
+        System.out.println("Params = " + allParams.entrySet());
+        return socialService.getPlaceDetails(allParams);
+    }
+
+
 
     @GetMapping("api/login-google/access-token")
     @ResponseBody
