@@ -1,8 +1,8 @@
 package com.sparking.controller;
 
 import com.sparking.entities.data.User;
-import com.sparking.entities.json.MyResponse;
-import com.sparking.entities.payload.UserLoginPayload;
+import com.sparking.entities.jsonResp.MyResponse;
+import com.sparking.entities.payloadReq.UserLoginPayload;
 import com.sparking.security.JWTService;
 import com.sparking.service.SocialService;
 import com.sparking.service_impl.GoogleService;

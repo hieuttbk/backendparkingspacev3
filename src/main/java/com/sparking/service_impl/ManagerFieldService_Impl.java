@@ -1,7 +1,7 @@
 package com.sparking.service_impl;
 
 import com.sparking.entities.data.ManagerField;
-import com.sparking.entities.payload.ManagerFieldPayload;
+import com.sparking.entities.payloadReq.ManagerFieldPayload;
 import com.sparking.repository.ManagerFieldRepo;
 import com.sparking.repository.ManagerRepo;
 import com.sparking.service.ManagerFieldService;

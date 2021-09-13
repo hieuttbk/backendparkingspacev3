@@ -1,6 +1,6 @@
 package com.sparking.service_impl;
 
-import com.sparking.entities.payload.LoginForm;
+import com.sparking.entities.payloadReq.LoginForm;
 import com.sparking.repository.AdminRepo;
 import com.sparking.repository.BlackListRepo;
 import com.sparking.service.AdminService;

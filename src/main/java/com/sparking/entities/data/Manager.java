@@ -33,4 +33,7 @@ public class Manager {
     @Column(name = "acp", nullable = false)
     private Boolean acp;
 
+
+
+    //TODO: Change manger to same user with email, icon, ...
 }

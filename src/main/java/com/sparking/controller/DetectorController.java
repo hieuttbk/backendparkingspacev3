@@ -1,6 +1,6 @@
 package com.sparking.controller;
 
-import com.sparking.entities.json.MyResponse;
+import com.sparking.entities.jsonResp.MyResponse;
 import com.sparking.security.JWTService;
 import com.sparking.service.DetectorService;
 import org.springframework.beans.factory.annotation.Autowired;

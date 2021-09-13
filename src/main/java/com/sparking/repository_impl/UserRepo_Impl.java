@@ -1,7 +1,7 @@
 package com.sparking.repository_impl;
 
 import com.sparking.entities.data.*;
-import com.sparking.entities.payload.*;
+import com.sparking.entities.payloadReq.*;
 import com.sparking.repository.*;
 import com.sparking.security.SHA256Service;
 import com.sparking.service.SendMailService;

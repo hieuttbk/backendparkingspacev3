@@ -1,4 +1,4 @@
-package com.sparking.entities.json;
+package com.sparking.entities.jsonResp;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.sparking.service;
 
 import com.sparking.entities.data.Gateway;
-import com.sparking.entities.json.GatewayJson;
+import com.sparking.entities.jsonResp.GatewayJson;
 
 import java.util.List;
 

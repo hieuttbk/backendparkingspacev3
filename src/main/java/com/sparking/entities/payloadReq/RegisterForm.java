@@ -1,4 +1,4 @@
-package com.sparking.entities.payload;
+package com.sparking.entities.payloadReq;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -6,18 +6,17 @@ import lombok.Data;
 import java.sql.Date;
 
 @Data
-public class UserPayload {
+public class RegisterForm {
 
-    private Integer id;
-    private String password;
-    private Integer idNumber;
-    private String phone;
     private String email;
+    private String password;
+    private String rePassword;
+    private Integer idNumber;
     private String equipment;
-    private String image;
     private String address;
+    private String phone;
+    private String image;
     private String sex;
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date birth;
-
 }

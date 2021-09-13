@@ -1,7 +1,7 @@
 package com.sparking.service;
 
 import com.sparking.entities.data.Detector;
-import com.sparking.entities.payload.DetectorPayload;
+import com.sparking.entities.payloadReq.DetectorPayload;
 
 import java.util.List;
 

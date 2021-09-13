@@ -1,8 +1,8 @@
 package com.sparking.controller;
 
 import com.sparking.entities.data.User;
-import com.sparking.entities.json.MyResponse;
-import com.sparking.entities.payload.*;
+import com.sparking.entities.jsonResp.MyResponse;
+import com.sparking.entities.payloadReq.*;
 import com.sparking.repository.ContractRepo;
 import com.sparking.repository.UserRepo;
 import com.sparking.security.JWTService;

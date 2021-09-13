@@ -1,7 +1,7 @@
 package com.sparking.service;
 
 import com.sparking.entities.data.ManagerField;
-import com.sparking.entities.payload.ManagerFieldPayload;
+import com.sparking.entities.payloadReq.ManagerFieldPayload;
 
 import java.util.List;
 

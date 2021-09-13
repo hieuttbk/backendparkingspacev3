@@ -1,6 +1,6 @@
 package com.sparking.controller;
 
-import com.sparking.entities.json.MyResponse;
+import com.sparking.entities.jsonResp.MyResponse;
 import com.sparking.repository.PackageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

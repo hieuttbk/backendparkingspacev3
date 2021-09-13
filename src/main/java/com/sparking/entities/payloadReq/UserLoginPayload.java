@@ -1,4 +1,4 @@
-package com.sparking.entities.payload;
+package com.sparking.entities.payloadReq;
 
 import com.sparking.entities.data.User;
 import lombok.AllArgsConstructor;

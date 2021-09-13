@@ -1,6 +1,6 @@
 package com.sparking.service;
 
-import com.sparking.entities.payload.LoginForm;
+import com.sparking.entities.payloadReq.LoginForm;
 
 public interface AdminService {
 

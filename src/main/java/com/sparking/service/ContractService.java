@@ -1,7 +1,7 @@
 package com.sparking.service;
 
 import com.sparking.entities.data.Contract;
-import com.sparking.entities.payload.ContractPayload;
+import com.sparking.entities.payloadReq.ContractPayload;
 
 import java.sql.Timestamp;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.sparking.repository_impl;
 
 import com.sparking.entities.data.Admin;
-import com.sparking.entities.payload.LoginForm;
+import com.sparking.entities.payloadReq.LoginForm;
 import com.sparking.repository.AdminRepo;
 import com.sparking.security.SHA256Service;
 import org.springframework.stereotype.Repository;

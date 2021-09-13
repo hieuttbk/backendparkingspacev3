@@ -2,7 +2,7 @@ package com.sparking.service_impl;
 
 import com.sparking.entities.data.Field;
 import com.sparking.entities.data.Manager;
-import com.sparking.entities.json.FieldJson;
+import com.sparking.entities.jsonResp.FieldJson;
 import com.sparking.repository.ContractRepo;
 import com.sparking.repository.FieldRepo;
 import com.sparking.repository.ManagerRepo;

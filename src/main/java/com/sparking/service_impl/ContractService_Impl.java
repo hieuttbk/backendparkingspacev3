@@ -2,7 +2,7 @@ package com.sparking.service_impl;
 
 import com.sparking.entities.data.Contract;
 import com.sparking.entities.data.Field;
-import com.sparking.entities.payload.ContractPayload;
+import com.sparking.entities.payloadReq.ContractPayload;
 import com.sparking.repository.ContractRepo;
 import com.sparking.repository.FieldRepo;
 import com.sparking.service.ContractService;

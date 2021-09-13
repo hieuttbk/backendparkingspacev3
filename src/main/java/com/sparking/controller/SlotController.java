@@ -1,7 +1,7 @@
 package com.sparking.controller;
 
 import com.sparking.entities.data.Slot;
-import com.sparking.entities.json.MyResponse;
+import com.sparking.entities.jsonResp.MyResponse;
 import com.sparking.service.SlotService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -3,7 +3,7 @@ package com.sparking.service_impl;
 import com.sparking.entities.data.DataCamAndDetector;
 import com.sparking.entities.data.Detector;
 import com.sparking.entities.data.Slot;
-import com.sparking.entities.json.SlotJson;
+import com.sparking.entities.jsonResp.SlotJson;
 import com.sparking.repository.DataCamAndDetectorRepo;
 import com.sparking.repository.DetectorRepo;
 import com.sparking.repository.GatewayRepo;

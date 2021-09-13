@@ -1,7 +1,7 @@
 package com.sparking.service;
 
 import com.sparking.entities.data.Slot;
-import com.sparking.entities.json.SlotJson;
+import com.sparking.entities.jsonResp.SlotJson;
 
 import java.util.List;
 

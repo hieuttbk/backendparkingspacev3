@@ -1,4 +1,4 @@
-package com.sparking.entities.payload;
+package com.sparking.entities.payloadReq;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;

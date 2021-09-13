@@ -2,7 +2,7 @@ package com.sparking.service_impl;
 
 import com.sparking.entities.data.Gateway;
 import com.sparking.entities.data.Manager;
-import com.sparking.entities.json.GatewayJson;
+import com.sparking.entities.jsonResp.GatewayJson;
 import com.sparking.repository.DetectorRepo;
 import com.sparking.repository.GatewayRepo;
 import com.sparking.repository.ManagerRepo;

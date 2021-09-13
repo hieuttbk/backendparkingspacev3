@@ -1,7 +1,7 @@
 package com.sparking.service;
 
 import com.sparking.entities.data.Field;
-import com.sparking.entities.json.FieldJson;
+import com.sparking.entities.jsonResp.FieldJson;
 
 import java.util.List;
 
