@@ -1,10 +1,7 @@
 package com.sparking.service;
 
 import com.sparking.entities.data.Manager;
-import com.sparking.entities.payloadReq.ChangePassForm;
-import com.sparking.entities.payloadReq.LoginForm;
-import com.sparking.entities.payloadReq.ManagerPayload;
-import com.sparking.entities.payloadReq.VerifyResetPassPayload;
+import com.sparking.entities.payloadReq.*;
 
 import java.util.List;
 
@@ -25,6 +22,8 @@ public interface ManagerService {
     boolean resetPass(String email);
 
     boolean verifyResetPass(VerifyResetPassPayload verifyResetPassPayload);
+
+    Manager updateInfo(ManUpdateInfoPayload manUpdateInfo, String email);
 
     // boolean changePass(ChangePassForm changePassForm, String email);
 }
