@@ -2,10 +2,7 @@ package com.sparking.service_impl;
 
 import com.sparking.entities.data.Manager;
 import com.sparking.entities.data.User;
-import com.sparking.entities.payloadReq.ChangePassForm;
-import com.sparking.entities.payloadReq.LoginForm;
-import com.sparking.entities.payloadReq.ManagerPayload;
-import com.sparking.entities.payloadReq.VerifyResetPassPayload;
+import com.sparking.entities.payloadReq.*;
 import com.sparking.repository.BlackListRepo;
 import com.sparking.repository.ManagerRepo;
 import com.sparking.service.ManagerService;
@@ -66,6 +63,28 @@ public class ManagerService_Impl implements ManagerService {
     @Override
     public boolean verifyResetPass(VerifyResetPassPayload verifyResetPassPayload) {
        return managerRepo.verifyResetPass(verifyResetPassPayload);
+    }
+
+    @Override
+    public Manager updateInfo(ManUpdateInfoPayload manUpdateInfo, String email) {
+        Manager man = managerRepo.findByEmail(email);
+
+        //TODO
+                //Confg Manager in DB and update info
+//        return managerRepo.createAndUpdate(Manager.builder()
+//                .id(man.getId())
+//                .birth(manUpdateInfo.getBirth())
+//                .image(manUpdateInfo.getImage())
+//                .sex(manUpdateInfo.getSex())
+//                .phone(manUpdateInfo.getPhone())
+//                .address(manUpdateInfo.getAddress())
+//                .idNumber(manUpdateInfo.getIdNumber())
+//                .email(man.getEmail())
+//                .password(man.getPass())
+//                .equipment(manUpdateInfo.getEquipment())
+//                .lastTimeAccess(man.getLastTimeAccess())
+//                .build());
+        return null;
     }
 
 

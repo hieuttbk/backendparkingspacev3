@@ -100,12 +100,14 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public User createAndUpdate(User user) {
+        // SELECT c FROM Clazz c where c.id =: id >> id = user.getId()
         List<User> oldUsers = entityManager.createQuery("select x from User x where x.id =: id")
                 .setParameter("id", user.getId()).getResultList();
-        if(checkEmailExisted(user.getEmail())){
-            if(oldUsers.size() == 0
-                    || !oldUsers.get(0).getId().equals(user.getId())
-                    || !oldUsers.get(0).getEmail().equals(user.getEmail())){
+
+        if(checkEmailExisted(user.getEmail())){ // user contains email
+            if(oldUsers.size() == 0             // no user
+                    || !oldUsers.get(0).getId().equals(user.getId()) // id of user update info don't match in DB
+                    || !oldUsers.get(0).getEmail().equals(user.getEmail())){ // email isn't matched
                 return null;
             }
         }

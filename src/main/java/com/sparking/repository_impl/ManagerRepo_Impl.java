@@ -44,12 +44,10 @@ private static Logger logger = LoggerFactory.getLogger(ManagerRepo_Impl.class);
             if(oldManagers.size() == 0
                     || !oldManagers.get(0).getId().equals(manager.getId())
                     || !oldManagers.get(0).getEmail().equals(manager.getEmail())){
-                System.out.println(oldManagers);
-                System.out.println(manager);
                 return null;
             }
         }
-        manager.setPass(SHA256Service.getSHA256(manager.getPass()));
+        manager.setPass(SHA256Service.getSHA256(manager.getPass())); // just update password for manager
         return entityManager.merge(manager);
     }
 

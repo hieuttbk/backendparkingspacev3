@@ -1,9 +1,7 @@
 package com.sparking.controller;
 
 import com.sparking.entities.jsonResp.MyResponse;
-import com.sparking.entities.payloadReq.ChangePassForm;
-import com.sparking.entities.payloadReq.ManagerPayload;
-import com.sparking.entities.payloadReq.VerifyResetPassPayload;
+import com.sparking.entities.payloadReq.*;
 import com.sparking.security.JWTService;
 import com.sparking.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,11 @@ public class ManagerController {
     @Autowired
     JWTService jwtService;
 
-
+    @PostMapping("api/mn/update_info")
+    public ResponseEntity<Object> updateInfo(@RequestBody ManUpdateInfoPayload manUpdateInfo, @RequestHeader String token) {
+        String email = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(managerService.updateInfo(manUpdateInfo, email)));
+    }
     @PostMapping("api/mn/verify_reset_pass")
     public ResponseEntity<Object> resetPass(@RequestBody VerifyResetPassPayload verifyResetPassPayload) {
         return ResponseEntity.ok(MyResponse.success(managerService.verifyResetPass(verifyResetPassPayload)));
