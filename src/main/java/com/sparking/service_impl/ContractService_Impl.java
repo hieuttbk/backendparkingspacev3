@@ -1,5 +1,6 @@
 package com.sparking.service_impl;
 
+import com.sparking.common.Utils;
 import com.sparking.entities.data.Contract;
 import com.sparking.entities.data.Field;
 import com.sparking.entities.payloadReq.ContractPayload;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -88,7 +90,41 @@ public class ContractService_Impl implements ContractService {
         }else {
             timeCostOut = timeCarOut;
         }
-        return cost = (double)(timeCostOut.getTime() - timeCostIn.getTime())/1000/60/60 * price;
+        cost = (double)(timeCostOut.getTime() - timeCostIn.getTime())/1000/60/60 * price;
+        return cost;
+    }
+
+    public List<Contract> findByTime(String type, String t1, String t2) throws ParseException {
+
+        List<Contract> contracts = findAll();
+        Timestamp timestamp1 = Utils.getTime(t1);
+        Timestamp timestamp2 = Utils.getTime(t2);
+        return contracts.stream().filter(contract -> {
+            Timestamp timestamp = null;
+            switch (type){
+                case "timeInBook":
+                    timestamp = contract.getTimeInBook();
+                    break;
+                case "timeOutBook":
+                    timestamp = contract.getTimeOutBook();
+                    break;
+                case "dtCreate":
+                    timestamp = contract.getDtCreate();
+                    break;
+                default:
+                    break;
+            }
+            if(timestamp == null){
+                return false;
+            }
+//            System.out.println(timestamp1);
+//            System.out.println(timestamp);
+//            System.out.println(timestamp2);
+//            System.out.println(timestamp.after(timestamp1));
+//            System.out.println(timestamp.before(timestamp2));
+//            System.out.println("----------------");
+            return timestamp.after(timestamp1) && timestamp.before(timestamp2);
+        }).collect(Collectors.toList());
     }
 
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+
 @RestController
 public class ContractController {
 
@@ -19,12 +21,18 @@ public class ContractController {
     }
 
     @GetMapping("api/ad/contract/find_all")
-    public ResponseEntity<Object> findAll(){
+    public ResponseEntity<Object> findAll(@RequestParam(required = false) String type,
+                                          @RequestParam(required = false) String t1,
+                                          @RequestParam(required = false) String t2) throws ParseException {
+
+        if(type != null && t1!= null && t2 != null){
+            return ResponseEntity.ok(MyResponse.success(contractService.findByTime(type, t1, t2)));
+        }
         return ResponseEntity.ok(MyResponse.success(contractService.findAll()));
     }
 
     @GetMapping("api/mn/contract/find_all")
-    public ResponseEntity<Object> findAllMan(){
+    public ResponseEntity<Object> findAllMn(){
         return ResponseEntity.ok(MyResponse.success(contractService.findAll()));
     }
 

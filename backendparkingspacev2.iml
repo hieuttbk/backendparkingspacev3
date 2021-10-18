@@ -7,7 +7,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="backendparkingspacev2" value="aae51390-2c59-4a38-9fb3-f1e25af4f8bf" />
-          <factory-entry name="entityManagerFactory" value="ae1ed810-ca6c-4d3e-98b6-2fad92f0b856" />
+          <factory-entry name="entityManagerFactory" value="22e1d61b-b379-4707-83a2-b5532dd7736d" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>
