@@ -3,6 +3,7 @@ package com.sparking.repository_impl;
 import com.sparking.entities.data.Detector;
 import com.sparking.entities.data.Gateway;
 import com.sparking.entities.data.Manager;
+import com.sparking.entities.payloadReq.UpdateSlotIdPayload;
 import com.sparking.repository.DetectorRepo;
 import com.sparking.repository.GatewayRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,24 @@ public class DetectorRepo_Impl implements DetectorRepo {
     @Override
     public Detector managerCreateAndUpdate(Detector detector, Manager manager) {
         return check(detector, manager) ? entityManager.merge(detector) : null;
+    }
+
+    @Override
+    public Detector updateSlotId(UpdateSlotIdPayload updateSlotIdPayload) {
+        String addressDetector = updateSlotIdPayload.getAddressDetector();
+        int gatewayId = updateSlotIdPayload.getGatewayId();
+        int slotId = updateSlotIdPayload.getSlotId();
+
+        List<Detector> detectors = entityManager
+                .createQuery("select d from Detector d where d.addressDetector =: add and d.gatewayId =: gwId")
+                .setParameter("add", addressDetector).setParameter("gwId", gatewayId).getResultList();
+
+        Detector detector = detectors.get(0);
+        if (detectors.size() == 0 || detector.getSlotId().equals(slotId)) {
+            return null;
+        }
+        detector.setSlotId(slotId);
+        return detector;
     }
 
     @Override

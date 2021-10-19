@@ -1,6 +1,8 @@
 package com.sparking.controller;
 
 import com.sparking.entities.jsonResp.MyResponse;
+import com.sparking.entities.payloadReq.UpdateSlotIdPayload;
+import com.sparking.entities.payloadReq.UpdateSlotIdPayload;
 import com.sparking.security.JWTService;
 import com.sparking.service.DetectorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +61,12 @@ public class DetectorController {
     public ResponseEntity<Object> managerFindById(@PathVariable Integer id,@RequestHeader String token){
         String phone = jwtService.decode(token);
         return ResponseEntity.ok(MyResponse.success(detectorService.managerFindById(id, phone)));
+    }
+
+    @PostMapping("api/ad/detector")
+    public ResponseEntity<Object> UpdateSlotId(
+            @RequestBody UpdateSlotIdPayload updateSlotIdPayload
+    ) {
+        return ResponseEntity.ok(MyResponse.success(detectorService.updateSlotId(updateSlotIdPayload)));
     }
 }
