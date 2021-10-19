@@ -79,10 +79,11 @@ public class DetectorRepo_Impl implements DetectorRepo {
                 .setParameter("add", addressDetector).setParameter("gwId", gatewayId).getResultList();
 
         Detector detector = detectors.get(0);
-        if (detectors.size() == 0 || detector.getSlotId().equals(slotId)) {
+        if (detector.getSlotId().equals(slotId)) {
             return null;
         }
         detector.setSlotId(slotId);
+        entityManager.merge(detector);
         return detector;
     }
 
