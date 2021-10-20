@@ -4,13 +4,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.sparking.entities.data.Contract;
 import com.sparking.entities.data.DataCamAndDetector;
 import com.sparking.entities.data.Slot;
 import com.sparking.getData.GetTime;
 import com.sparking.getData.TagModule;
+import com.sparking.repository.ContractRepo;
 import com.sparking.repository.DataCamAndDetectorRepo;
 import com.sparking.repository.SlotRepo;
 import com.sparking.service_impl.GoogleService;
@@ -41,6 +44,9 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     SlotRepo slotRepo;
 
     @Autowired
+    ContractRepo contractRepo;
+
+    @Autowired
     GoogleService googleService;
 
     @Autowired
@@ -64,6 +70,8 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     String pathDataCam;
     @Value("${pathDetectorStatus}")
     String pathDetectorStatus;
+    @Value("timeExpiredContract")
+    String timeExpiredContract;
 
     @Autowired
     com.fasterxml.jackson.databind.ObjectMapper objectMapper;
@@ -86,6 +94,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
     public void update() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException {
         while (true){
+            deleteExpiredContract();
             if(!getDataCam()){
                 System.out.println("file data cam does not exist");
             }
@@ -147,4 +156,14 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
             slots.addAll(newSlots);
         }
     }
+
+    void deleteExpiredContract() {
+        for(Contract contract: contractRepo.findAll()){
+            if (new Timestamp(new Date().getTime()).getTime() - contract.getTimeInBook().getTime() >= Integer.parseInt(timeExpiredContract)
+                    && contract.getTimeCarIn() == null){
+                contractRepo.delete(contract.getId());
+            }
+        }
+    }
+
 }

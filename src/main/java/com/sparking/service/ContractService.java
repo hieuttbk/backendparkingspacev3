@@ -20,5 +20,8 @@ public interface ContractService {
 
     double getCost(Timestamp timeCarin, Timestamp timeCarOut, Timestamp timeBookIn, Timestamp timeBookOut, double price);
 
-    List<Contract> findByTime(String type, String t1, String t2) throws ParseException;
+    List<Contract> findByTime(String t1, String t2) throws ParseException;
+
+    List<Contract> managerFind(String email);
+
 }
