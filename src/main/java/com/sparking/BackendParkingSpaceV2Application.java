@@ -86,7 +86,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 //        set timezone cho controller
         objectMapper.setTimeZone(TimeZone.getDefault());
 
-      //  update();
+        update();
 //        GetDataDetector.main(args);
         TagModule.start();
 
@@ -95,10 +95,10 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     public void update() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException {
         while (true){
             deleteExpiredContract();
-            if(!getDataCam()){
-                System.out.println("file data cam does not exist");
-            }
-            writeDataDetector();
+//            if(!getDataCam()){
+//                System.out.println("file data cam does not exist");
+//            }
+//            writeDataDetector();
             Thread.sleep(5000);
         }
     }
