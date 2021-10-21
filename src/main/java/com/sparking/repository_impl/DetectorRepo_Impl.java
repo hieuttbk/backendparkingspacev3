@@ -3,8 +3,12 @@ package com.sparking.repository_impl;
 import com.sparking.entities.data.Detector;
 import com.sparking.entities.data.Gateway;
 import com.sparking.entities.data.Manager;
+import com.sparking.entities.payloadReq.UpdateSlotIdPayload;
 import com.sparking.repository.DetectorRepo;
 import com.sparking.repository.GatewayRepo;
+import com.sparking.service_impl.ContractService_Impl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +21,7 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
 @Repository
 public class DetectorRepo_Impl implements DetectorRepo {
+    private static Logger logger = LoggerFactory.getLogger(DetectorRepo_Impl.class);
 
     @PersistenceContext
     EntityManager entityManager;
@@ -65,6 +70,27 @@ public class DetectorRepo_Impl implements DetectorRepo {
     @Override
     public Detector managerCreateAndUpdate(Detector detector, Manager manager) {
         return check(detector, manager) ? entityManager.merge(detector) : null;
+    }
+
+    @Override
+    public Detector updateSlotId(UpdateSlotIdPayload updateSlotIdPayload) {
+        String addressDetector = updateSlotIdPayload.getAddressDetector();
+        int gatewayId = updateSlotIdPayload.getGatewayId();
+        int slotId = updateSlotIdPayload.getSlotId();
+      //  logger.info(updateSlotIdPayload.toString());
+
+
+        List<Detector> detectors = entityManager
+                .createQuery("select d from Detector d where d.addressDetector =: add and d.gatewayId =: gwId")
+                .setParameter("add", addressDetector).setParameter("gwId", gatewayId).getResultList();
+
+        Detector detector = detectors.get(0);
+        if (detector.getSlotId().equals(slotId)) {
+            return null;
+        }
+        detector.setSlotId(slotId);
+        entityManager.merge(detector);
+        return detector;
     }
 
     @Override

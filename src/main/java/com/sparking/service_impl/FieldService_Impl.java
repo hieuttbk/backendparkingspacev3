@@ -45,8 +45,8 @@ public class FieldService_Impl implements FieldService {
     }
 
     @Override
-    public List<Field> managerFind(String phone) {
-        Manager manager = managerRepo.findByEmail(phone);
+    public List<Field> managerFind(String email) {
+        Manager manager = managerRepo.findByEmail(email);
         if(manager == null){
             return null;
         }

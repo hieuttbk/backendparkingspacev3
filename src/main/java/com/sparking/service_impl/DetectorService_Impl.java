@@ -3,6 +3,7 @@ package com.sparking.service_impl;
 import com.sparking.entities.data.Detector;
 import com.sparking.entities.data.Manager;
 import com.sparking.entities.payloadReq.DetectorPayload;
+import com.sparking.entities.payloadReq.UpdateSlotIdPayload;
 import com.sparking.repository.DetectorRepo;
 import com.sparking.repository.FieldRepo;
 import com.sparking.repository.ManagerRepo;
@@ -57,6 +58,12 @@ public class DetectorService_Impl implements DetectorService {
 //        Manager manager = managerRepo.findByEmail(email);
 //        return detectorRepo.managerCreateAndUpdate(payLoad2Data(detectorPayload), manager);
         return null;
+    }
+
+    // api/ad/detector (Method POST)
+    @Override
+    public Detector updateSlotId(UpdateSlotIdPayload updateSlotIdPayload) {
+        return detectorRepo.updateSlotId(updateSlotIdPayload);
     }
 
     @Override

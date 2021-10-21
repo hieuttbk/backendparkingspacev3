@@ -15,6 +15,8 @@ public interface ContractRepo {
 
     List<Contract> findByUser(User user);
 
+
+
 //    List<Contract>  findBySlotId(int slotId);
 
 }

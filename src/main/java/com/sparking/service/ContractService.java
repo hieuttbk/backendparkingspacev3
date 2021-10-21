@@ -4,6 +4,7 @@ import com.sparking.entities.data.Contract;
 import com.sparking.entities.payloadReq.ContractPayload;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.List;
 
 
@@ -18,4 +19,9 @@ public interface ContractService {
     Contract payload2data(ContractPayload contractPayload);
 
     double getCost(Timestamp timeCarin, Timestamp timeCarOut, Timestamp timeBookIn, Timestamp timeBookOut, double price);
+
+    List<Contract> findByTime(String t1, String t2) throws ParseException;
+
+    List<Contract> managerFind(String email);
+
 }

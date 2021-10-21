@@ -1,5 +1,6 @@
 package com.sparking.service_impl;
 
+import com.sparking.common.Utils;
 import com.sparking.entities.data.Contract;
 import com.sparking.entities.data.Field;
 import com.sparking.entities.data.User;
@@ -160,19 +161,19 @@ public class UserService_Impl implements UserService {
             return null;
         }
 
-        if(getTime(timeUpdateForm.getTimeCarIn()) != null){
-            contract.setTimeCarIn(getTime(timeUpdateForm.getTimeCarIn()));
+        if(Utils.getTime(timeUpdateForm.getTimeCarIn()) != null){
+            contract.setTimeCarIn(Utils.getTime(timeUpdateForm.getTimeCarIn()));
         }
-        if(getTime(timeUpdateForm.getTimeCarOut()) != null){
-            contract.setTimeCarOut(getTime(timeUpdateForm.getTimeCarOut()));
+        if(Utils.getTime(timeUpdateForm.getTimeCarOut()) != null){
+            contract.setTimeCarOut(Utils.getTime(timeUpdateForm.getTimeCarOut()));
         }
         // luc dau dang là V
 
         // xe vao
-        if(getTime(timeUpdateForm.getTimeCarIn()) != null && getTime(timeUpdateForm.getTimeCarOut()) == null){
+        if(Utils.getTime(timeUpdateForm.getTimeCarIn()) != null && Utils.getTime(timeUpdateForm.getTimeCarOut()) == null){
             contract.setStatus("Y");
         }
-        if(getTime(timeUpdateForm.getTimeCarOut()) != null){
+        if(Utils.getTime(timeUpdateForm.getTimeCarOut()) != null){
             contract.setStatus("R");
             double cost = contractService.getCost(contract.getTimeCarIn(), contract.getTimeCarOut()
                     , contract.getTimeCarIn(), contract.getTimeCarOut(), fields.get(0).getPrice());
@@ -236,15 +237,4 @@ public class UserService_Impl implements UserService {
         return userRepo.resetPass(email);
     }
 
-
-
-    Timestamp getTime(String time) throws ParseException {
-        Timestamp timestamp = null;
-        if(!time.equals("")){
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-            Date parsedDate = dateFormat.parse(time);
-            timestamp = new Timestamp(parsedDate.getTime());
-        }
-        return timestamp;
-    }
 }
