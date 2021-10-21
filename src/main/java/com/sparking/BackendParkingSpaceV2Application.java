@@ -88,7 +88,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
       //  update();
 //        GetDataDetector.main(args);
-//        TagModule.start();
+        TagModule.start();
 
     }
 

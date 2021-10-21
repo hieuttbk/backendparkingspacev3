@@ -3,6 +3,7 @@ package com.sparking.getData;
 import com.sparking.common.ConfigVar;
 import com.sparking.entities.data.Contract;
 import com.sparking.entities.data.Field;
+import com.sparking.entities.data.Tag;
 import com.sparking.entities.data.User;
 import com.sparking.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,14 @@ public class TagModule {
     FieldRepo fieldRepo;
     @Autowired
     SlotRepo slotRepo;
+    @Autowired
+    TagRepo tagRepo;
 
     private static UserRepo userRepoStatic;
     private static ContractRepo contractRepoStatic;
     private static FieldRepo fieldRepoStatic;
     private static SlotRepo slotRepoStatic;
-
+    private static TagRepo tagRepoStatic;
 
     @PostConstruct
     private void initStatic() {
@@ -41,6 +44,7 @@ public class TagModule {
         contractRepoStatic = this.contractRepo;
         fieldRepoStatic = this.fieldRepo;
         slotRepoStatic = this.slotRepo;
+        tagRepoStatic = this.tagRepo;
     }
 
     final static String SIGN = "@V2X,";
@@ -68,7 +72,7 @@ public class TagModule {
 
         ServerSocket listener = null;
 
-        System.out.println("Server is waiting to accept user...");
+        System.out.println("[For TAG] Server is waiting to accept user...");
         int clientNumber = 0;
 
         // open ServerSocket (port)
@@ -112,7 +116,7 @@ public class TagModule {
             this.socketOfServer = socketOfServer;
 
             // Log
-            log("New connection with client# " + this.clientNumber + " at "
+            log("New connection with tag# " + this.clientNumber + " at "
                     + socketOfServer);
         }
 
@@ -162,6 +166,12 @@ public class TagModule {
                             TagPacket packet = new TagPacket(pram[0], pram[1],
                                     pram[2], pram[3], pram[4], pram[5], pram[6],
                                     pram[7], pram[8]);
+
+
+                            //TODO:
+                            // create packet_tag logging in database
+                            // API to create tagId mapping with userId (using email parameter)
+
 						/*	System.out.println("SIGN = " + packet.getSign());
 							System.out.println("SEQ = " + packet.getNumOfPacket());
 							System.out.println("MTY = " + packet.getTypeOfPacket());
@@ -197,6 +207,8 @@ public class TagModule {
                             boolean carOut = !carIn;
 
                             // CHECK LOC and FULL SLOT
+                            //TODO:
+                                // tune RANGE and GPS to  match with only field !!!!
                             System.out.println("[TagModule] Process with LOC");
                             int fieldId = -1;
                             Double price = 0.0;
@@ -224,7 +236,10 @@ public class TagModule {
 
                             // CHECK REGISTERED TAG
                             System.out.println("[TagModule] Process with tagID = " + packet.getId());
-                            User user = userRepoStatic.findByTagId(packet.getId());
+                            Tag tag = tagRepoStatic.findByTagId(packet.getId());
+                            User user = userRepoStatic.findById(tag.getUserId());
+                          //  User user = userRepoStatic.findByTagId(packet.getId());
+
 
 
                             if (fieldId < 0) {
@@ -238,14 +253,15 @@ public class TagModule {
                                 System.out.println("[TagModule] No user with " + packet.getId());
                             } else {
 
-
+                                System.out.println("[TagModule] FiedId is " + fieldId);
                                 Contract contract = null;
                                 boolean checkBooked = false; //
                                 boolean checkStateContract = false;
 
                                 List<Contract> contracts = contractRepoStatic.findByUser(user);
-                                if (contracts == null) {
+                                if (contracts.size()<1) {
                                     System.out.println("No Contract");
+                                    state = StateServer.ERR;
                                     if (carIn) {
                                         checkStateContract = true;  // người dùng mới hoàn toàn, chưa tạo contract
                                     } else {
@@ -302,7 +318,7 @@ public class TagModule {
                                                 contract.setStatus("Y");
                                                 contractRepoStatic.createAndUpdate(contract);
                                                 state = StateServer.IN;
-                                                System.out.println("[TagModule] Car in parking with booked contract");
+                                                System.out.println("[TagModule] OK: Car in parking with booked contract");
                                             } else { // update when tag out
                                                 contract.setTimeCarOut(timestamp);
                                                 contract.setStatus("R");
@@ -428,7 +444,7 @@ public class TagModule {
 
                             break; // end of connection OK
                         } else {
-                            System.out.println("WRONG message: ");
+                            System.out.println("Waiting ACK message: ");
                         }
                     }
 

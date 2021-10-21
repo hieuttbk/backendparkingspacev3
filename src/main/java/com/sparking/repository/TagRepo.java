@@ -12,4 +12,5 @@ public interface TagRepo {
 
     List<Tag> findAll();
 
+    Tag findByTagId(String id);
 }

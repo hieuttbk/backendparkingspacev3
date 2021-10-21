@@ -13,7 +13,7 @@ public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private String id;
+    private int id;
 
     @Column(name = "user_id", nullable = false)
     private Integer userId;
@@ -23,5 +23,8 @@ public class Tag {
 
     @Column(name = "time_car_out")
     private Timestamp timeCarOut;
+
+    @Column(name = "tag_id", nullable = false)
+    private String tagId;
 
 }

@@ -35,4 +35,6 @@ public interface UserRepo {
     Contract park(ParkPayload parkPayload, User user);
 
     User findByTagId(String tagId);
+
+    User findById(Integer userId);
 }

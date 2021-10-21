@@ -1673,3 +1673,58 @@ java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
 	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_301]
 
 2021-10-21 11:05:27.970  INFO 5272 --- [http-nio-6969-exec-5] c.s.repository_impl.DetectorRepo_Impl    : UpdateSlotIdPayload(addressDetector=255.255.0.100, gatewayId=1, slotId=8)
+2021-10-21 14:21:45.243  INFO 13864 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HIEUTTBK with PID 13864 (C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3\target\classes started by Thinkpad in C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3)
+2021-10-21 14:21:45.246  INFO 13864 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 14:21:47.316  WARN 13864 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 14:21:48.566  INFO 13864 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.714 seconds (JVM running for 4.858)
+2021-10-21 14:21:48.568  INFO 13864 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-10-21 15:30:30.758  INFO 19080 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HIEUTTBK with PID 19080 (C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3\target\classes started by Thinkpad in C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3)
+2021-10-21 15:30:30.761  INFO 19080 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 15:30:32.803  WARN 19080 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 15:30:34.034  INFO 19080 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.667 seconds (JVM running for 4.719)
+2021-10-21 15:30:34.036  INFO 19080 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-10-21 15:31:05.011  INFO 4016 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HIEUTTBK with PID 4016 (C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3\target\classes started by Thinkpad in C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3)
+2021-10-21 15:31:05.013  INFO 4016 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 15:31:07.031  WARN 4016 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 15:31:08.224  INFO 4016 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.63 seconds (JVM running for 4.695)
+2021-10-21 15:31:08.226  INFO 4016 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-10-21 15:37:02.515  INFO 16004 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HIEUTTBK with PID 16004 (C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3\target\classes started by Thinkpad in C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3)
+2021-10-21 15:37:02.518  INFO 16004 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 15:37:04.533  WARN 16004 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 15:37:05.743  INFO 16004 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.619 seconds (JVM running for 4.669)
+2021-10-21 15:37:05.746  INFO 16004 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-10-21 15:39:13.142  INFO 18648 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HIEUTTBK with PID 18648 (C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3\target\classes started by Thinkpad in C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3)
+2021-10-21 15:39:13.145  INFO 18648 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 15:39:15.108  WARN 18648 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 15:39:16.307  INFO 18648 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.561 seconds (JVM running for 4.609)
+2021-10-21 15:39:16.310  INFO 18648 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-10-21 15:39:41.556  INFO 19400 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HIEUTTBK with PID 19400 (C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3\target\classes started by Thinkpad in C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3)
+2021-10-21 15:39:41.559  INFO 19400 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 15:39:43.848  WARN 19400 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 15:39:45.332  INFO 19400 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.22 seconds (JVM running for 5.812)
+2021-10-21 15:39:45.335  INFO 19400 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-10-21 15:41:05.460  INFO 8240 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HIEUTTBK with PID 8240 (C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3\target\classes started by Thinkpad in C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3)
+2021-10-21 15:41:05.463  INFO 8240 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 15:41:07.523  WARN 8240 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 15:41:08.869  INFO 8240 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.807 seconds (JVM running for 4.914)
+2021-10-21 15:41:08.871  INFO 8240 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-10-21 15:43:19.795  INFO 19192 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HIEUTTBK with PID 19192 (C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3\target\classes started by Thinkpad in C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3)
+2021-10-21 15:43:19.798  INFO 19192 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 15:43:21.834  WARN 19192 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 15:43:23.012  INFO 19192 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.608 seconds (JVM running for 4.638)
+2021-10-21 15:43:23.014  INFO 19192 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-10-21 15:46:15.840  INFO 18848 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HIEUTTBK with PID 18848 (C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3\target\classes started by Thinkpad in C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3)
+2021-10-21 15:46:15.842  INFO 18848 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 15:46:17.898  WARN 18848 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 15:46:19.117  INFO 18848 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.677 seconds (JVM running for 4.761)
+2021-10-21 15:46:19.119  INFO 18848 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-10-21 16:18:03.820  INFO 10596 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HIEUTTBK with PID 10596 (C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3\target\classes started by Thinkpad in C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3)
+2021-10-21 16:18:03.824  INFO 10596 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 16:18:05.933  WARN 10596 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 16:18:07.101  INFO 10596 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.677 seconds (JVM running for 4.904)
+2021-10-21 16:18:07.103  INFO 10596 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-10-21 16:32:15.905  INFO 10736 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HIEUTTBK with PID 10736 (C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3\target\classes started by Thinkpad in C:\Users\Thinkpad\IdeaProjects\backendparkingspacev3)
+2021-10-21 16:32:15.909  INFO 10736 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 16:32:18.007  WARN 10736 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 16:32:19.305  INFO 10736 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.777 seconds (JVM running for 4.79)
+2021-10-21 16:32:19.308  INFO 10736 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED

@@ -257,6 +257,11 @@ public class UserRepo_Impl implements UserRepo {
         return null;
     }
 
+    @Override
+    public User findById(Integer userId) {
+        return entityManager.find(User.class, userId);
+    }
+
     public String getRandomCode(){
         String rs="";
         for (int i=0; i< 4; i++){
