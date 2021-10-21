@@ -6,6 +6,9 @@ import com.sparking.entities.data.Manager;
 import com.sparking.entities.payloadReq.UpdateSlotIdPayload;
 import com.sparking.repository.DetectorRepo;
 import com.sparking.repository.GatewayRepo;
+import com.sparking.service_impl.ContractService_Impl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +21,7 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
 @Repository
 public class DetectorRepo_Impl implements DetectorRepo {
+    private static Logger logger = LoggerFactory.getLogger(DetectorRepo_Impl.class);
 
     @PersistenceContext
     EntityManager entityManager;
@@ -73,6 +77,8 @@ public class DetectorRepo_Impl implements DetectorRepo {
         String addressDetector = updateSlotIdPayload.getAddressDetector();
         int gatewayId = updateSlotIdPayload.getGatewayId();
         int slotId = updateSlotIdPayload.getSlotId();
+      //  logger.info(updateSlotIdPayload.toString());
+
 
         List<Detector> detectors = entityManager
                 .createQuery("select d from Detector d where d.addressDetector =: add and d.gatewayId =: gwId")

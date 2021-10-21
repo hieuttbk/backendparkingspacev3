@@ -1,5 +1,6 @@
 package com.sparking.service_impl;
 
+import com.sparking.BackendParkingSpaceV2Application;
 import com.sparking.common.Utils;
 import com.sparking.entities.data.Contract;
 import com.sparking.entities.data.Field;
@@ -10,6 +11,8 @@ import com.sparking.repository.ManagerRepo;
 import com.sparking.repository.SlotRepo;
 import com.sparking.service.ContractService;
 import com.sparking.service.FieldService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,7 +25,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ContractService_Impl implements ContractService {
-
+    private static Logger logger = LoggerFactory.getLogger(ContractService_Impl.class);
 
 
     @Value("${timeConditionDelay}")
@@ -117,12 +120,20 @@ public class ContractService_Impl implements ContractService {
             Timestamp to = contract.getTimeCarOut();
             long dt = t2.getTime() - t1.getTime();
             double b = 0;
-            if(!contract.getStatus().equals("R")){
+
+
+            if((!contract.getStatus().equals("R"))||(null==ti)||(null==to)) { // ti, to may be null in contracts
                 return false;
             }
-            if(t1.after(to)){ // hinh nhu cai nay khong can vi bo di b = 0-> cung loai o duoi
+            if(t1.after(to)||t2.before(ti)){ // ti-to is out of t1-t2
                 return false;
             }
+
+//            logger.info("t1 " + t1);
+//            logger.info("t2 " + t2);
+//            logger.info("ti " + ti);
+//            logger.info("to " + to);
+
             if(t1.before(ti)){
                 b = (to.getTime()-ti.getTime())  * 1.0 / dt; //  * 1.0 de no tinh theo double
             }
