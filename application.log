@@ -1673,3 +1673,8 @@ java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
 	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_301]
 
 2021-10-21 11:05:27.970  INFO 5272 --- [http-nio-6969-exec-5] c.s.repository_impl.DetectorRepo_Impl    : UpdateSlotIdPayload(addressDetector=255.255.0.100, gatewayId=1, slotId=8)
+2021-10-21 22:13:54.680  INFO 15752 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HONGDATCHY with PID 15752 (E:\BackendSpaceV3_anhHieu\add-filer\target\classes started by Microsoft Windows in E:\BackendSpaceV3_anhHieu\add-filer)
+2021-10-21 22:13:54.680  INFO 15752 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-21 22:13:56.915  WARN 15752 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 22:13:58.418  INFO 15752 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.529 seconds (JVM running for 6.624)
+2021-10-21 22:13:58.418  INFO 15752 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
