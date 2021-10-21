@@ -66,10 +66,9 @@ CREATE TABLE user(
 CREATE TABLE tag(
 	id int NOT NULL AUTO_INCREMENT,
     user_id int not null,
-    tag_id varchar(20) NOT NULL,
 	time_car_in datetime,
     time_car_out datetime,
-    primary key (tag_id),
+    primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
     CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -177,24 +176,7 @@ CREATE TABLE code_reset_pass(
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE tag_package (
-    news_id int not null AUTO_INCREMENT,
-    sign varchar(30) DEFAULT '@V2X' not null,
-    seq varchar(10) not null,
-    mty varchar(10) not null,
-    tag_id varchar(40) not null,
-    lat varchar(40) not null,
-    log varchar(40) not null,
-    tag_date varchar(255) not null,
-    tag_time varchar(255) not null,
-    state varchar(10) not null,
-    primary key (news_id),
-    UNIQUE KEY `id_UNIQUE` (`news_id`),
-    CONSTRAINT `tag_package_1` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/* Insert to table */
-INSERT INTO `parking_space_2021`.`admin` (`id`, `email`, `pass`) VALUES ('1', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+INSERT INTO `parking_space_v3`.`admin` (`id`, `email`, `pass`) VALUES ('0', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 
 INSERT INTO `field` VALUES ('1', 'C9', '20.960377427559497', '105.79658800934396', "Đại học BKHN", "", '50000', 'O', 50, "Bãi đồ xe C9");
 INSERT INTO `field` VALUES ('2', 'C3', '21.0066272', '105.8416806', "Đại học BKHN", "", '50000', 'O', 40, "Bãi đồ xe C3");
@@ -214,14 +196,12 @@ INSERT INTO `field` VALUES ('14', 'Điểm đỗ xe Vạn Phúc, Ba Đình', 'H�
 INSERT INTO `gateway` VALUES("1","1","255.255.0.0");
 INSERT INTO `gateway` VALUES("2","2","255.255.0.8");
 
-INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('1', '0a041b9462caa4a31bac3567e0b6e6fd9100787db2ab433d96f6d178cabfce90', '0', 'user1@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
-INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('2', '6025d18fe48abd45168528f18a82e265dd98d421a7084aa09f61b341703901a3', '0', 'user2@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
-INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('3', '5860faf02b6bc6222ba5aca523560f0e364ccd8b67bee486fe8bf7c01d492ccb', '0', 'user3@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
-
---INSERT INTO `parking_space_2021`.`tag_package` (`sign`, `seq`, `mty`, `tag_id`, `lat`, `log`, `tag_date`, `tag_time`, `state`) VALUES ('@V2X', '1', '1', '000000000000001', '21.19254315', '105.82550243', '2021-5-10', '06:27:49', '1');
---INSERT INTO `parking_space_2021`.`tag` (`id`, `user_id`, `tag_id`, `time_car_in`, `time_car_out`) VALUES (1 , 23, '000000000000001', '2021-10-5 02:25:13', '2021-10-5 02:11:26');
+INSERT INTO `parking_space_v3`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('1', '0a041b9462caa4a31bac3567e0b6e6fd9100787db2ab433d96f6d178cabfce90', '0', 'user1@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
+INSERT INTO `parking_space_v3`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('2', '6025d18fe48abd45168528f18a82e265dd98d421a7084aa09f61b341703901a3', '0', 'user2@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
+INSERT INTO `parking_space_v3`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('3', '5860faf02b6bc6222ba5aca523560f0e364ccd8b67bee486fe8bf7c01d492ccb', '0', 'user3@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
 
 ALTER TABLE tag MODIFY id varchar(50);
+
 -- phai init data trong be xong ms dc chay cac dong ben duoi
 -- INSERT INTO `detector` VALUES ("0","255.255.0.100","22","1","015","Communication Level","20210422123247","2021-04-22 12:25:54");
 -- INSERT INTO `detector` VALUES ("1","255.255.0.101","23","1","015","Communication Level","20210422123247","2021-04-22 13:25:54");
