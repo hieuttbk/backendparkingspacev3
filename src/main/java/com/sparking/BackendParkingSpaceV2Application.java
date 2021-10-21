@@ -70,7 +70,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     String pathDataCam;
     @Value("${pathDetectorStatus}")
     String pathDetectorStatus;
-    @Value("timeExpiredContract")
+    @Value("${timeExpiredContract}")
     String timeExpiredContract;
 
     @Autowired
