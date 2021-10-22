@@ -14,4 +14,8 @@ public interface SlotService {
     List<SlotJson> findAll();
 
     SlotJson findById(int id);
+
+    SlotJson managerCreateAndUpdate(String email, Slot slot);
+
+    boolean managerDelete(String email, int id);
 }
