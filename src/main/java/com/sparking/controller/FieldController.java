@@ -22,10 +22,6 @@ public class FieldController {
         return ResponseEntity.ok(MyResponse.success(fieldService.createAndUpdate(field)));
     }
 
-    @PostMapping("api/mn/field/create")
-    public ResponseEntity<Object> createAndUpdateMan(@RequestBody Field field){
-        return ResponseEntity.ok(MyResponse.success(fieldService.createAndUpdate(field)));
-    }
     @GetMapping(value = {"api/public/field/find_all","api/ad/field/find_all"})// can multiple mapping
     public ResponseEntity<Object> findAll(){
         return ResponseEntity.ok(MyResponse.success(fieldService.findAll()));

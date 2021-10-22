@@ -1,14 +1,12 @@
 package com.sparking.repository_impl;
 
 import com.sparking.entities.data.Field;
+import com.sparking.entities.data.Gateway;
 import com.sparking.entities.data.Manager;
 import com.sparking.entities.data.ManagerField;
-
 import com.sparking.repository.FieldRepo;
-import com.sparking.repository.SlotRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +24,6 @@ public class FieldRepo_Impl implements FieldRepo {
     @PersistenceContext
     EntityManager entityManager;
 
-    @Autowired
-    SlotRepo slotRepo;
 
     @Override
     public Field createAndUpdate(Field field) {
@@ -38,10 +34,20 @@ public class FieldRepo_Impl implements FieldRepo {
     public boolean delete(int id) {
         Field field = entityManager.find(Field.class, id);
         if(field != null){
+            // delete Contract -> ManagerField -> Detector -> Gateway -> Slot
             entityManager.createQuery("delete from Contract x where x.fieldId =:id")
                     .setParameter("id", id).executeUpdate();
 
             entityManager.createQuery("delete from ManagerField x where x.fieldId =:id")
+                    .setParameter("id", id).executeUpdate();
+
+            List<Gateway> gateways = entityManager.createQuery("select x from Gateway x where x.fieldId =:id")
+                    .setParameter("id", id).getResultList();
+            for(Gateway gateway : gateways){
+                entityManager.createQuery("delete from Detector x where x.gatewayId =:id")
+                        .setParameter("id", gateway.getId()).executeUpdate();
+            }
+            entityManager.createQuery("delete from Gateway x where x.fieldId =:id")
                     .setParameter("id", id).executeUpdate();
 
             entityManager.createQuery("select x from Slot x where x.fieldId =:id")
@@ -84,16 +90,7 @@ public class FieldRepo_Impl implements FieldRepo {
         if (field == null) {
             return false;
         }else if(check(field, manager)){
-            entityManager.createQuery("delete from Contract x where x.fieldId =:id")
-                    .setParameter("id", id).executeUpdate();
-
-            entityManager.createQuery("delete from ManagerField x where x.fieldId =:id")
-                    .setParameter("id", id).executeUpdate();
-
-            entityManager.createQuery("select x from Slot x where x.fieldId =:id")
-                    .setParameter("id", id).getResultList();
-            entityManager.remove(field);
-            return true;
+            return delete(id);
         }
         return false;
     }

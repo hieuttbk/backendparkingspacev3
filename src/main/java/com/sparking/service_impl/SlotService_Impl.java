@@ -1,13 +1,8 @@
 package com.sparking.service_impl;
 
-import com.sparking.entities.data.DataCamAndDetector;
-import com.sparking.entities.data.Detector;
-import com.sparking.entities.data.Slot;
+import com.sparking.entities.data.*;
 import com.sparking.entities.jsonResp.SlotJson;
-import com.sparking.repository.DataCamAndDetectorRepo;
-import com.sparking.repository.DetectorRepo;
-import com.sparking.repository.GatewayRepo;
-import com.sparking.repository.SlotRepo;
+import com.sparking.repository.*;
 import com.sparking.service.SlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +25,9 @@ public class SlotService_Impl implements SlotService {
     @Autowired
     DataCamAndDetectorRepo dataCamAndDetectorRepo;
 
+    @Autowired
+    ManagerRepo managerRepo;
+
     @Override
     public SlotJson createAndUpdate(Slot slot) {
         Slot newSlot = slotRepo.createAndUpdate(slot);
@@ -51,6 +49,26 @@ public class SlotService_Impl implements SlotService {
         Slot slot = slotRepo.findById(id);
         return slot == null ? null : data2Json(slotRepo.findById(id));
     }
+
+    @Override
+    public SlotJson managerCreateAndUpdate(String email, Slot slot) {
+        Manager manager = managerRepo.findByEmail(email);
+        if(manager == null){
+            return null;
+        }
+        return data2Json(slotRepo.managerCreateAndUpdate(manager, slot));
+    }
+
+    @Override
+    public boolean managerDelete(String email, int id) {
+        Manager manager = managerRepo.findByEmail(email);
+        if(manager == null){
+            return false;
+        }
+        return slotRepo.managerDelete(manager,id);
+    }
+
+
 
     public SlotJson data2Json(Slot slot){
         List<Detector> detectors = detectorRepo.findBySlotId(slot.getId());
