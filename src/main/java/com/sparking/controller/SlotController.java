@@ -2,6 +2,7 @@ package com.sparking.controller;
 
 import com.sparking.entities.data.Slot;
 import com.sparking.entities.jsonResp.MyResponse;
+import com.sparking.security.JWTService;
 import com.sparking.service.SlotService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,25 +12,25 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SlotController {
+
     private static Logger logger = LoggerFactory.getLogger(SlotController.class);
+
     @Autowired
     SlotService slotService;
+
+    @Autowired
+    JWTService jwtService;
 
     @PostMapping("api/ad/slot/create_and_update")
     public ResponseEntity<Object> createAndUpdate(@RequestBody Slot slot){
         return ResponseEntity.ok(MyResponse.success(slotService.createAndUpdate(slot)));
     }
 
-    @PostMapping("api/mn/slot/create")
-    public ResponseEntity<Object> createeMan(@RequestBody Slot slot){
+    @PostMapping("api/mn/slot/create_and_update")
+    public ResponseEntity<Object> updateMan(@RequestBody Slot slot ,@RequestHeader String token){
         logger.info(slot.toString());
-        return ResponseEntity.ok(MyResponse.success(slotService.createAndUpdate(slot)));
-    }
-
-    @PostMapping("api/mn/slot/update")
-    public ResponseEntity<Object> updateMan(@RequestBody Slot slot){
-        logger.info(slot.toString());
-        return ResponseEntity.ok(MyResponse.success(slotService.createAndUpdate(slot)));
+        String email = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(slotService.managerCreateAndUpdate(email, slot)));
     }
 
     @GetMapping(value = {"api/public/slot/find_all","api/ad/slot/find_all"})
@@ -43,8 +44,9 @@ public class SlotController {
     }
 
     @DeleteMapping("api/mn/slot/delete/{id}")
-    public ResponseEntity<Object> deleteMan(@PathVariable int id){
-        return ResponseEntity.ok(MyResponse.success(slotService.delete(id)));
+    public ResponseEntity<Object> deleteMan(@PathVariable int id, @RequestHeader String token){
+        String email = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(slotService.managerDelete(email, id)));
     }
 
     @GetMapping(value = {"api/public/slot/find_by_id/{id}"})

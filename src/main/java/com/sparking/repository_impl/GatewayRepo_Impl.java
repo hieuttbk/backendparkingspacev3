@@ -36,7 +36,6 @@ public class GatewayRepo_Impl implements GatewayRepo {
         if(gateway != null){
             entityManager.createQuery("delete from Detector x where x.gatewayId =:id")
             .setParameter("id", id).executeUpdate();
-
             entityManager.remove(gateway);
             return true;
         }else {
@@ -81,7 +80,7 @@ public class GatewayRepo_Impl implements GatewayRepo {
         if(gateway == null){
             return false;
         }else if(check(gateway, manager)){
-            entityManager.remove(gateway);
+            return delete(id);
         }
         return false;
     }
@@ -89,7 +88,7 @@ public class GatewayRepo_Impl implements GatewayRepo {
     boolean check(Gateway gateway, Manager manager){
         List<Gateway> gateways = managerFind(manager);
         for (Gateway g: gateways) {
-            if(g.getId() == gateway.getId()) return true;
+            if(g.getId().equals(gateway.getId())) return true;
         }
         return  false;
     }
