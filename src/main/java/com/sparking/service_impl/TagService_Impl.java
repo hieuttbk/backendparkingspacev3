@@ -5,7 +5,9 @@ import com.sparking.entities.payloadReq.RegisterTagsPayload;
 import com.sparking.repository.TagRepo;
 import com.sparking.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TagService_Impl implements TagService {
     @Autowired
     TagRepo tagRepo;
