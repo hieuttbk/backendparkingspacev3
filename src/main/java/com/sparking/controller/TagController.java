@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TagController {
     @Autowired
-    TagService tagsService;
+    TagService tagService;
 
     @PostMapping("api/ad/tags")
     public ResponseEntity<Object> registerTagForUser(@RequestBody RegisterTagsPayload registerTagsPayload) {
         return ResponseEntity.ok(
-                MyResponse.success(tagsService.registerTagForUser(registerTagsPayload))
+                MyResponse.success(tagService.registerTagForUser(registerTagsPayload))
         );
     }
 }
