@@ -2,7 +2,10 @@ package com.sparking.repository_impl;
 
 import com.sparking.entities.data.Tag;
 import com.sparking.entities.data.User;
+import com.sparking.entities.payloadReq.RegisterTagsPayload;
 import com.sparking.repository.TagRepo;
+import com.sparking.repository.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +20,9 @@ public class TagRepo_Impl implements TagRepo {
 
     @PersistenceContext
     EntityManager entityManager;
+
+    @Autowired
+    UserRepo userRepo;
 
     @Override
     public Tag createAndUpdate(Tag tag) {
@@ -57,5 +63,28 @@ public class TagRepo_Impl implements TagRepo {
             return tags.get(0);
         }
         return null;
+    }
+
+    @Override
+    public Tag registerTagForUser(RegisterTagsPayload registerTagsPayload) {
+        String email = registerTagsPayload.getEmail();
+        String tagId = registerTagsPayload.getTagId();
+        Tag tag;
+
+        User user = userRepo.findByEmail(email);
+        int userId = user.getId();
+        List<Tag> tags = entityManager.createQuery("select t from Tag where t.tag_id =: tagId")
+                .setParameter("tagId", tagId).getResultList();
+        if (tags.size() == 1) {
+            tag = tags.get(0);
+            tag.setUserId(userId);
+        } else {
+            tag = Tag.builder()
+                    .tagId(tagId)
+                    .userId(userId)
+                    .build();
+        }
+        entityManager.merge(tag);
+        return tag;
     }
 }

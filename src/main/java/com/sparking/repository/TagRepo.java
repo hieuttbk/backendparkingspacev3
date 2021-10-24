@@ -1,6 +1,7 @@
 package com.sparking.repository;
 
 import com.sparking.entities.data.Tag;
+import com.sparking.entities.payloadReq.RegisterTagsPayload;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface TagRepo {
     List<Tag> findAll();
 
     Tag findByTagId(String id);
+
+    Tag registerTagForUser(RegisterTagsPayload registerTagsPayload);
 }

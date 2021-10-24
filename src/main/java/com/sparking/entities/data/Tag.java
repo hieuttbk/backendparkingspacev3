@@ -1,11 +1,13 @@
 package com.sparking.entities.data;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Builder
 @Table(name = "tag")
 @Data
 public class Tag {
