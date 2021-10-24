@@ -73,7 +73,7 @@ public class TagRepo_Impl implements TagRepo {
 
         User user = userRepo.findByEmail(email);
         int userId = user.getId();
-        List<Tag> tags = entityManager.createQuery("select t from Tag where t.tag_id =: tagId")
+        List<Tag> tags = entityManager.createQuery("select t from Tag t where t.tagId =: tagId")
                 .setParameter("tagId", tagId).getResultList();
         if (tags.size() == 1) {
             tag = tags.get(0);

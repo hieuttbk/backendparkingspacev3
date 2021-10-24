@@ -1,7 +1,9 @@
 package com.sparking.entities.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,6 +12,8 @@ import java.sql.Timestamp;
 @Builder
 @Table(name = "tag")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tag {
 
     @Id
