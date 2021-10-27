@@ -13,9 +13,9 @@ public interface FieldService {
 
     List<FieldJson> findAll();
 
-    List<Field> managerFind(String phone);
+    List<FieldJson> managerFind(String phone);
 
-    Field managerUpdate(Field field, String phone);
+    FieldJson managerUpdate(Field field, String phone);
 
     boolean managerDelete(int id, String phone);
 

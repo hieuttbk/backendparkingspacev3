@@ -45,21 +45,21 @@ public class FieldService_Impl implements FieldService {
     }
 
     @Override
-    public List<Field> managerFind(String email) {
+    public List<FieldJson> managerFind(String email) {
         Manager manager = managerRepo.findByEmail(email);
         if(manager == null){
             return null;
         }
-        return fieldRepo.managerFind(manager);
+        return fieldRepo.managerFind(manager).stream().map(this::data2Json).collect(Collectors.toList());
     }
 
     @Override
-    public Field managerUpdate(Field field, String phone) {
+    public FieldJson managerUpdate(Field field, String phone) {
         Manager manager = managerRepo.findByEmail(phone);
         if(manager == null){
             return null;
         }
-        return fieldRepo.managerUpdate(field, manager);
+        return data2Json(fieldRepo.managerUpdate(field, manager));
     }
 
     @Override
@@ -70,6 +70,7 @@ public class FieldService_Impl implements FieldService {
         }
         return fieldRepo.managerDelete(id, manager);
     }
+
     @Override
     public FieldJson data2Json(Field field) {
         return FieldJson.builder()
