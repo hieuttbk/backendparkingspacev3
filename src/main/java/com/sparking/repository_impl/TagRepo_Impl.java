@@ -1,10 +1,14 @@
 package com.sparking.repository_impl;
 
 import com.sparking.entities.data.Tag;
+import com.sparking.entities.data.TagPackage;
 import com.sparking.entities.data.User;
+import com.sparking.entities.payloadReq.GetNewsTagPayload;
 import com.sparking.entities.payloadReq.RegisterTagsPayload;
+import com.sparking.getData.HandleTimeToSecond;
 import com.sparking.repository.TagRepo;
 import com.sparking.repository.UserRepo;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
@@ -86,5 +92,35 @@ public class TagRepo_Impl implements TagRepo {
         }
         entityManager.merge(tag);
         return tag;
+    }
+
+    @Override
+    public List<TagPackage> getAllNewsTag() {
+        return entityManager.createQuery("select t from TagPackage t").getResultList();
+    }
+
+    @Override
+    public List<TagPackage> filterNewsTag(GetNewsTagPayload getNewsTagPayload) {
+        // Handle FormatTime to Second
+        double timeStart = HandleTimeToSecond.handleTimeToSecond(getNewsTagPayload.getTimeStart());
+        double timeEnd = HandleTimeToSecond.handleTimeToSecond(getNewsTagPayload.getTimeEnd());
+
+        // Logging to check time format
+//        System.out.print(timeStart);
+//        System.out.print(timeEnd);
+
+        ArrayList<TagPackage> newsList = new ArrayList<>();
+        List<TagPackage> newsTagList = entityManager.createQuery("select t from TagPackage t").getResultList();
+        for (TagPackage news: newsTagList) {
+            double tagTime = HandleTimeToSecond.handleTimeToSecond(news.getTime());
+            if (tagTime >= timeStart && tagTime <= timeEnd) {
+                newsList.add(news);
+            }
+            continue;
+        }
+        if (newsList.size() == 0) {
+            return null;
+        }
+        return newsList;
     }
 }
