@@ -4,6 +4,7 @@ import com.sparking.BackendParkingSpaceV2Application;
 import com.sparking.common.Utils;
 import com.sparking.entities.data.Contract;
 import com.sparking.entities.data.Field;
+import com.sparking.entities.jsonResp.FieldJson;
 import com.sparking.entities.payloadReq.ContractPayload;
 import com.sparking.repository.ContractRepo;
 import com.sparking.repository.FieldRepo;
@@ -146,13 +147,13 @@ public class ContractService_Impl implements ContractService {
 
     @Override
     public List<Contract> managerFind(String email) {
-        List<Field> fieldsOfThisManager = fieldService.managerFind(email);
+        List<FieldJson> fieldsOfThisManager = fieldService.managerFind(email);
         if(fieldsOfThisManager == null){
             return null;
         }
         List<Contract> rs = new ArrayList<>();
 
-        for (Field field: fieldsOfThisManager) {
+        for (FieldJson field: fieldsOfThisManager) {
             List<Contract> contracts = contractRepo.findAll().stream()
                     .filter(contract -> contract.getFieldId().equals(field.getId()))
                     .collect(Collectors.toList());

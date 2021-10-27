@@ -200,7 +200,7 @@ public class UserRepo_Impl implements UserRepo {
         String code = getRandomCode();
         boolean b = sendMailService.sendMail(email
                 , "Parking space reset password"
-                , "To verify reset pass, please enter this code to reset page: " + code);
+                , "To verify reset pass,  please enter this code to reset page: " + code);
         if(b) entityManager.merge(CodeResetPass.builder()
                 .code(code)
                 .email(email)
