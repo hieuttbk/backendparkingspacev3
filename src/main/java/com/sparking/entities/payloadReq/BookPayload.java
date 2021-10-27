@@ -11,8 +11,8 @@ public class BookPayload {
     private Integer fieldId;
     private String carNumber;
 //    vì default timezone đang là GMT+7 rồi nên không viết timezone = "GMT+7" cũng vẫn được
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone = "GMT+7")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm", timezone = "GMT+7")
     private Timestamp timeInBook;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private Timestamp timeOutBook;
 }
