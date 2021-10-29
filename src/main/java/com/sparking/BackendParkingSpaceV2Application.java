@@ -159,9 +159,12 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
     void deleteExpiredContract() {
         for(Contract contract: contractRepo.findAll()){
-            if (new Timestamp(new Date().getTime()).getTime() - contract.getTimeInBook().getTime() >= Integer.parseInt(timeExpiredContract)
-                    && contract.getTimeCarIn() == null){
-                contractRepo.delete(contract.getId());
+
+            if (contract.getTimeInBook()!=null) {
+                if (new Timestamp(new Date().getTime()).getTime() - contract.getTimeInBook().getTime() >= Integer.parseInt(timeExpiredContract)
+                        && contract.getTimeCarIn() == null) {
+                    contractRepo.delete(contract.getId());
+                }
             }
         }
     }
