@@ -22,6 +22,8 @@ public interface ContractService {
 
     List<Contract> findByTime(String t1, String t2) throws ParseException;
 
+    List<Contract> findByTime(Timestamp t1, Timestamp t2) throws ParseException;
+
     List<Contract> managerFind(String email);
 
 }

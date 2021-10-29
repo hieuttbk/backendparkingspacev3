@@ -112,16 +112,19 @@ public class ContractService_Impl implements ContractService {
     }
 
     public List<Contract> findByTime(String tt1, String tt2) throws ParseException {
-
-        List<Contract> contracts = findAll();
         Timestamp t1 = Utils.getTime(tt1);
         Timestamp t2 = Utils.getTime(tt2);
+        return findByTime(t1, t2);
+    }
+
+    @Override
+    public List<Contract> findByTime(Timestamp t1, Timestamp t2) {
+        List<Contract> contracts = findAll();
         return contracts.stream().filter(contract -> {
             Timestamp ti = contract.getTimeCarIn();
             Timestamp to = contract.getTimeCarOut();
             long dt = t2.getTime() - t1.getTime();
             double b = 0;
-
 
             if((!contract.getStatus().equals("R"))||(null==ti)||(null==to)) { // ti, to may be null in contracts
                 return false;
@@ -129,12 +132,10 @@ public class ContractService_Impl implements ContractService {
             if(t1.after(to)||t2.before(ti)){ // ti-to is out of t1-t2
                 return false;
             }
-
 //            logger.info("t1 " + t1);
 //            logger.info("t2 " + t2);
 //            logger.info("ti " + ti);
 //            logger.info("to " + to);
-
             if(t1.before(ti)){
                 b = (to.getTime()-ti.getTime())  * 1.0 / dt; //  * 1.0 de no tinh theo double
             }

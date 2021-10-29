@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+
 @RestController
 public class FieldController {
 
@@ -20,6 +22,13 @@ public class FieldController {
     @PostMapping("api/ad/field/create_and_update")
     public ResponseEntity<Object> createAndUpdate(@RequestBody Field field){
         return ResponseEntity.ok(MyResponse.success(fieldService.createAndUpdate(field)));
+    }
+
+//    /api/ad/analysis?field=1&since=3454764&util=45647564&unit=hour
+    @PostMapping("api/ad/analysis")
+    public ResponseEntity<Object> analysis(@RequestParam int field, @RequestParam int since,
+                                           @RequestParam int until, String unit) throws ParseException {
+        return ResponseEntity.ok(MyResponse.success(fieldService.analysis(field, since, until, unit)));
     }
 
     @GetMapping(value = {"api/public/field/find_all","api/ad/field/find_all"})// can multiple mapping
