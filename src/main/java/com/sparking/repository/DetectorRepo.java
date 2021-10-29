@@ -1,6 +1,5 @@
 package com.sparking.repository;
 
-import com.sparking.entities.data.Admin;
 import com.sparking.entities.data.Detector;
 import com.sparking.entities.data.Manager;
 import com.sparking.entities.payloadReq.UpdateSlotIdPayload;

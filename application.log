@@ -1,5 +1,5 @@
-2021-10-27 15:32:34.154  INFO 13796 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HONGDATCHY with PID 13796 (E:\BackendSpaceV3_anhHieu\add-filer\target\classes started by Microsoft Windows in E:\BackendSpaceV3_anhHieu\add-filer)
-2021-10-27 15:32:34.201  INFO 13796 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2021-10-27 15:32:38.121  WARN 13796 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2021-10-27 15:32:43.855  INFO 13796 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 10.569 seconds (JVM running for 12.829)
-2021-10-27 15:32:43.870  INFO 13796 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-10-29 23:47:22.087  INFO 712 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HONGDATCHY with PID 712 (E:\BackendSpaceV3_anhHieu\add-filer\target\classes started by Microsoft Windows in E:\BackendSpaceV3_anhHieu\add-filer)
+2021-10-29 23:47:22.127  INFO 712 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-10-29 23:47:28.355  WARN 712 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-29 23:47:33.392  INFO 712 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 12.083 seconds (JVM running for 15.057)
+2021-10-29 23:47:33.399  INFO 712 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED

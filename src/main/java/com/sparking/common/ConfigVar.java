@@ -5,4 +5,5 @@ public class ConfigVar {
     public static int portIN = 8080;
     public static int portGetData = 1600;
     public static int portTag = 5529;
+
 }
