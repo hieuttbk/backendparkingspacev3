@@ -218,8 +218,8 @@ INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `eq
 INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('2', '6025d18fe48abd45168528f18a82e265dd98d421a7084aa09f61b341703901a3', '0', 'user2@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
 INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('3', '5860faf02b6bc6222ba5aca523560f0e364ccd8b67bee486fe8bf7c01d492ccb', '0', 'user3@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
 
-INSERT INTO `parking_space_2021`.`tag_package` (`sign`, `seq`, `mty`, `tag_id`, `lat`, `log`, `tag_date`, `tag_time`, `state`) VALUES ('@V2X', '1', '1', '000000000000001', '21.19254315', '105.82550243', '2021-5-10', '06:27:49', '1');
-INSERT INTO `parking_space_2021`.`tag` (`id`, `user_id`, `tag_id`, `time_car_in`, `time_car_out`) VALUES (1 , 23, '000000000000001', '2021-10-5 02:25:13', '2021-10-5 02:11:26');
+--INSERT INTO `parking_space_2021`.`tag_package` (`sign`, `seq`, `mty`, `tag_id`, `lat`, `log`, `tag_date`, `tag_time`, `state`) VALUES ('@V2X', '1', '1', '000000000000001', '21.19254315', '105.82550243', '2021-5-10', '06:27:49', '1');
+--INSERT INTO `parking_space_2021`.`tag` (`id`, `user_id`, `tag_id`, `time_car_in`, `time_car_out`) VALUES (1 , 23, '000000000000001', '2021-10-5 02:25:13', '2021-10-5 02:11:26');
 
 ALTER TABLE tag MODIFY id varchar(50);
 -- phai init data trong be xong ms dc chay cac dong ben duoi
