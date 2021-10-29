@@ -52,4 +52,9 @@ public class ManagerController {
         return ResponseEntity.ok(MyResponse.success(managerService.delete(id)));
     }
 
+//    @PostMapping("api/mn/tags")
+//    public ResponseEntity<Object> managerRegisterTagForUser(@RequestBody RegisterTagsPayload registerTagsPayload) {
+//        //
+//    }
+
 }

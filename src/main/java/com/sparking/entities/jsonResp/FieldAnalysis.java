@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class FieldAnalysis {
-    int time;
+    long time;
     int totalSlot;
     int freq;
     int cost;
