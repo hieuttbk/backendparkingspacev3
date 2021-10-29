@@ -5,10 +5,9 @@ import com.sparking.entities.data.TagPackage;
 import com.sparking.entities.data.User;
 import com.sparking.entities.payloadReq.GetNewsTagPayload;
 import com.sparking.entities.payloadReq.RegisterTagsPayload;
-import com.sparking.getData.HandleTimeToSecond;
+import com.sparking.helper.HandleTimeToSecond;
 import com.sparking.repository.TagRepo;
 import com.sparking.repository.UserRepo;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +16,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
@@ -122,5 +120,11 @@ public class TagRepo_Impl implements TagRepo {
             return null;
         }
         return newsList;
+    }
+
+    @Override
+    public void createNewsFromTag(TagPackage tagPackage) {
+        entityManager.merge(tagPackage);
+        System.out.print(tagPackage);
     }
 }

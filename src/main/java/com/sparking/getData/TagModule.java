@@ -1,10 +1,8 @@
 package com.sparking.getData;
 
 import com.sparking.common.ConfigVar;
-import com.sparking.entities.data.Contract;
-import com.sparking.entities.data.Field;
-import com.sparking.entities.data.Tag;
-import com.sparking.entities.data.User;
+import com.sparking.entities.data.*;
+import com.sparking.helper.FormatDateFromNewsTag;
 import com.sparking.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +29,7 @@ public class TagModule {
     SlotRepo slotRepo;
     @Autowired
     TagRepo tagRepo;
+
 
     private static UserRepo userRepoStatic;
     private static ContractRepo contractRepoStatic;
@@ -154,10 +153,10 @@ public class TagModule {
                     String contents = is.readLine();
                     // System.out.println("DEBUG 1: " + line);
                     if (contents == null) {
-                        //	System.out.println("NO data in mess from client");
+//                        	System.out.println("NO data in mess from client");
                     } else {
-                        //	log("Content = " + contents);
-
+                        // log("Content = " + contents);
+                        // System.out.print(contents);
                         // 205.205.205.6,@V2X,SIZE,ID,CMD,LAT,LONG,DATE,TIME
                         String[] pram = contents.split(",");
 
@@ -172,15 +171,31 @@ public class TagModule {
                             // create packet_tag logging in database
                             // API to create tagId mapping with userId (using email parameter)
 
-						/*	System.out.println("SIGN = " + packet.getSign());
-							System.out.println("SEQ = " + packet.getNumOfPacket());
-							System.out.println("MTY = " + packet.getTypeOfPacket());
-							System.out.println("ID = " + packet.getId());
-							System.out.println("LAT = " + packet.getLat());
-							System.out.println("LONG = " + packet.getLng());
-							System.out.println("DATE = " + packet.getDate());
-							System.out.println("TIME = " + packet.getTime());
-							System.out.println("STATE = " + packet.getState());*/
+//                          System.out.print("Date: " + pram[6]);
+
+                            TagPackage tagPackage = TagPackage.builder()
+                                    .sign(packet.getSign())
+                                    .seq(packet.getNumOfPacket())
+                                    .mty(packet.getTypeOfPacket())
+                                    .tagId(packet.getId())
+                                    .lat(packet.getLat())
+                                    .log(packet.getLng())
+                                    .date(FormatDateFromNewsTag.FormatDate(packet.getDate()))
+                                    .time(packet.getTime())
+                                    .state(packet.getState())
+                                    .build();
+
+                            tagRepoStatic.createNewsFromTag(tagPackage);
+
+//						    System.out.println("SIGN = " + packet.getSign());
+//							System.out.println("SEQ = " + packet.getNumOfPacket());
+//							System.out.println("MTY = " + packet.getTypeOfPacket());
+//							System.out.println("ID = " + packet.getId());
+//							System.out.println("LAT = " + packet.getLat());
+//							System.out.println("LONG = " + packet.getLng());
+//							System.out.println("DATE = " + packet.getDate());
+//							System.out.println("TIME = " + packet.getTime());
+//							System.out.println("STATE = " + packet.getState());
 
                             //1. tagID registered by User ?
                             // return user

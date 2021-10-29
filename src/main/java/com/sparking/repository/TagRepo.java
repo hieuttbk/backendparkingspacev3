@@ -22,4 +22,6 @@ public interface TagRepo {
     List<TagPackage> getAllNewsTag();
 
     List<TagPackage> filterNewsTag(GetNewsTagPayload getNewsTagPayload);
+
+    void createNewsFromTag(TagPackage tagPackage);
 }
