@@ -1,6 +1,7 @@
 package com.sparking.service_impl;
 
 import com.sparking.common.ConfigVar;
+import com.sparking.entities.data.Contract;
 import com.sparking.entities.data.Field;
 import com.sparking.entities.data.Manager;
 import com.sparking.entities.jsonResp.FieldAnalysis;
@@ -82,7 +83,7 @@ public class FieldService_Impl implements FieldService {
     }
 
     @Override
-    public List<FieldAnalysis> analysis(int fieldId, int since, int until, String unit) throws ParseException {
+    public List<FieldAnalysis> analysis(int fieldId, long since, long until, String unit) throws ParseException {
         Field field = fieldRepo.findById(fieldId);
         int totalSlot = (int) slotRepo.findAll().stream().filter(slot -> slot.getFieldId() == fieldId).count();
         if(field == null){
@@ -107,20 +108,31 @@ public class FieldService_Impl implements FieldService {
                 return null;
         }
 
-        int time = since*60*1000;
-        n = (until - since) / unitInt;
+        unitInt *= 60*1000;
+        final  int oneHour = 60*60*1000;
+
+      //  int time = since*60*1000;
+        long time = since; // no convert to minute
+         n = (int) ((until - since) / unitInt);
         List<FieldAnalysis> rs = new ArrayList<>();
 
 
         for(int i =0; i< n; i++){
-            int t = time;
+            long t = time;
             int freq = 0;
             int count = 0;
-            while (t < time + unitInt * 60 *1000){
-                freq += (int) contractService.findByTime(new Timestamp(t), new Timestamp(t + 60 *1000))
+            while (t < time + unitInt ){
+                freq += (int) contractService.findByTime(new Timestamp(t), new Timestamp(t + oneHour))
                         .stream().filter(contract -> contract.getFieldId() == fieldId).count();
-                t+= 60 *1000;
+              //  List<Contract> contracts = contractService.findByTime(new Timestamp(t), new Timestamp(t + oneHour));
+
+                t+= oneHour; // 1h to millisecond
                 count ++;
+
+//                for (Contract c:contracts) {
+//                    System.out.println("Contract " + count + " " + freq + " " + c.getId());
+//                }
+
             }
             freq /= count;
 
@@ -128,9 +140,9 @@ public class FieldService_Impl implements FieldService {
                     .totalSlot(totalSlot)
                     .time(time)
                     .freq(freq)
-                    .cost((int) (freq * field.getPrice()  * unitInt))
+                    .cost((int) (freq * field.getPrice()  * unitInt/oneHour))
                     .build());
-            time += unitInt * 60 *1000;
+            time += unitInt;
         }
 
 

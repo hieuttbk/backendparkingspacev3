@@ -230,7 +230,7 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public Contract park(ParkPayload parkPayload, User user) {
-     //   System.out.println("UserRepo_Impl.park" + parkPayload);
+        System.out.println("UserRepo_Impl.park" + parkPayload);
         return contractRepo.createAndUpdate(Contract.builder()
                 .fieldId(parkPayload.getFieldId())
                 .timeInBook(null)

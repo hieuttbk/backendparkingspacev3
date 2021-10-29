@@ -24,10 +24,10 @@ public class FieldController {
         return ResponseEntity.ok(MyResponse.success(fieldService.createAndUpdate(field)));
     }
 
-//    /api/ad/analysis?field=1&since=3454764&util=45647564&unit=hour
-    @PostMapping("api/ad/analysis")
-    public ResponseEntity<Object> analysis(@RequestParam int field, @RequestParam int since,
-                                           @RequestParam int until, String unit) throws ParseException {
+//    /api/ad/analysis?field=1&since=3454764&until=45647564&unit=hour
+    @GetMapping("api/ad/analysis")
+    public ResponseEntity<Object> analysis(@RequestParam int field, @RequestParam long since,
+                                           @RequestParam long until, @RequestParam String unit) throws ParseException {
         return ResponseEntity.ok(MyResponse.success(fieldService.analysis(field, since, until, unit)));
     }
 
