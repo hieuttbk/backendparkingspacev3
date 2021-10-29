@@ -1,16 +1,23 @@
 package com.sparking.service_impl;
 
+import com.sparking.common.ConfigVar;
 import com.sparking.entities.data.Field;
 import com.sparking.entities.data.Manager;
+import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.entities.jsonResp.FieldJson;
 import com.sparking.repository.ContractRepo;
 import com.sparking.repository.FieldRepo;
 import com.sparking.repository.ManagerRepo;
 import com.sparking.repository.SlotRepo;
+import com.sparking.service.ContractService;
 import com.sparking.service.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +35,9 @@ public class FieldService_Impl implements FieldService {
 
     @Autowired
     ContractRepo contractRepo;
+
+    @Autowired
+    ContractService contractService;
 
     @Override
     public FieldJson createAndUpdate(Field field) {
@@ -69,6 +79,63 @@ public class FieldService_Impl implements FieldService {
             return false;
         }
         return fieldRepo.managerDelete(id, manager);
+    }
+
+    @Override
+    public List<FieldAnalysis> analysis(int fieldId, int since, int until, String unit) throws ParseException {
+        Field field = fieldRepo.findById(fieldId);
+        int totalSlot = (int) slotRepo.findAll().stream().filter(slot -> slot.getFieldId() == fieldId).count();
+        if(field == null){
+            return null;
+        }
+        int  n, unitInt;
+
+        switch (unit){
+            case "hour":
+                unitInt = 60;
+                break;
+            case "day":
+                unitInt = 60*24;
+                break;
+            case "week":
+                unitInt = 60*24*7;
+                break;
+            case "mouth":
+                unitInt = 60*24*12;
+                break;
+            default:
+                return null;
+        }
+
+        int time = since*60*1000;
+        n = (until - since) / unitInt;
+        List<FieldAnalysis> rs = new ArrayList<>();
+
+
+        for(int i =0; i< n; i++){
+            int t = time;
+            int freq = 0;
+            int count = 0;
+            while (t < time + unitInt * 60 *1000){
+                freq += (int) contractService.findByTime(new Timestamp(t), new Timestamp(t + 60 *1000))
+                        .stream().filter(contract -> contract.getFieldId() == fieldId).count();
+                t+= 60 *1000;
+                count ++;
+            }
+            freq /= count;
+
+            rs.add(FieldAnalysis.builder()
+                    .totalSlot(totalSlot)
+                    .time(time)
+                    .freq(freq)
+                    .cost((int) (freq * field.getPrice()  * unitInt))
+                    .build());
+            time += unitInt * 60 *1000;
+        }
+
+
+
+        return rs;
     }
 
     @Override
