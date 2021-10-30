@@ -10,6 +10,7 @@ import com.sparking.repository.ContractRepo;
 import com.sparking.repository.FieldRepo;
 import com.sparking.repository.ManagerRepo;
 import com.sparking.repository.SlotRepo;
+import com.sparking.security.JWTService;
 import com.sparking.service.ContractService;
 import com.sparking.service.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class FieldService_Impl implements FieldService {
 
     @Autowired
     ContractService contractService;
+
+    @Autowired
+    JWTService jwtService;
 
     @Override
     public FieldJson createAndUpdate(Field field) {
@@ -144,10 +148,20 @@ public class FieldService_Impl implements FieldService {
                     .build());
             time += unitInt;
         }
-
-
-
         return rs;
+    }
+
+    @Override
+    public List<FieldAnalysis> mnAnalysis(int fieldId, long since, long until, String unit, String token) throws ParseException {
+        String email = jwtService.decode(token);
+        Manager manager = managerRepo.findByEmail(email);
+        List<Field> fieldsOfThisMn = fieldRepo.managerFind(manager);
+        for(Field field : fieldsOfThisMn){
+            if(field.getId().equals(fieldId)){
+                return analysis(fieldId, since, until, unit);
+            }
+        }
+        return null;
     }
 
     @Override
