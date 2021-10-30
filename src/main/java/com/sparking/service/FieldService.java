@@ -22,6 +22,7 @@ public interface FieldService {
     boolean managerDelete(int id, String phone);
 
     List<FieldAnalysis>analysis(int fieldId, long since, long until, String unit) throws ParseException;
+    List<FieldAnalysis>mnAnalysis(int fieldId, long since, long until, String unit, String token) throws ParseException;
 
     FieldJson data2Json(Field field);
 
