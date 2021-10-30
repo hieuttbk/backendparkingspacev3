@@ -27,8 +27,14 @@ public class FieldController {
 //    /api/ad/analysis?field=1&since=3454764&until=45647564&unit=hour
     @GetMapping("api/ad/analysis")
     public ResponseEntity<Object> analysis(@RequestParam int field, @RequestParam long since,
-                                           @RequestParam long until, @RequestParam String unit) throws ParseException {
+                                           @RequestParam long until, @RequestParam String unit) throws ParseException{
         return ResponseEntity.ok(MyResponse.success(fieldService.analysis(field, since, until, unit)));
+    }
+
+    @GetMapping("api/mn/analysis")
+    public ResponseEntity<Object> mnAnalysis(@RequestParam int field, @RequestParam long since, @RequestParam long until,
+                                             @RequestParam String unit, @RequestHeader String token) throws ParseException {
+        return ResponseEntity.ok(MyResponse.success(fieldService.mnAnalysis(field, since, until, unit, token)));
     }
 
     @GetMapping(value = {"api/public/field/find_all","api/ad/field/find_all"})// can multiple mapping
