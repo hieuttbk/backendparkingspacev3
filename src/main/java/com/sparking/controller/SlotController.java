@@ -33,9 +33,14 @@ public class SlotController {
         return ResponseEntity.ok(MyResponse.success(slotService.managerCreateAndUpdate(email, slot)));
     }
 
-    @GetMapping(value = {"api/public/slot/find_all","api/ad/slot/find_all"})
+    @GetMapping(value = {"api/ad/slot/find_all"})
     public ResponseEntity<Object> findAll(){
         return ResponseEntity.ok(MyResponse.success(slotService.findAll()));
+    }
+
+    @GetMapping(value = {"api/mn/slot/find_all"})
+    public ResponseEntity<Object> mnFindAll(@RequestHeader String token){
+        return ResponseEntity.ok(MyResponse.success(slotService.mnFindAll(token)));
     }
 
     @DeleteMapping("api/ad/slot/delete/{id}")
