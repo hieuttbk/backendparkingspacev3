@@ -13,6 +13,8 @@ public interface SlotService {
 
     List<SlotJson> findAll();
 
+    List<SlotJson> mnFindAll(String email);
+
     SlotJson findById(int id);
 
     SlotJson managerCreateAndUpdate(String email, Slot slot);

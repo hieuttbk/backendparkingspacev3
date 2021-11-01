@@ -1,12 +1,16 @@
 package com.sparking.service_impl;
 
 import com.sparking.entities.data.*;
+import com.sparking.entities.jsonResp.FieldJson;
 import com.sparking.entities.jsonResp.SlotJson;
 import com.sparking.repository.*;
+import com.sparking.security.JWTService;
+import com.sparking.service.FieldService;
 import com.sparking.service.SlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +32,12 @@ public class SlotService_Impl implements SlotService {
     @Autowired
     ManagerRepo managerRepo;
 
+    @Autowired
+    FieldService fieldService;
+
+    @Autowired
+    JWTService jwtService;
+
     @Override
     public SlotJson createAndUpdate(Slot slot) {
         Slot newSlot = slotRepo.createAndUpdate(slot);
@@ -42,6 +52,24 @@ public class SlotService_Impl implements SlotService {
     @Override
     public List<SlotJson> findAll() {
         return slotRepo.findAll().stream().map(this::data2Json).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SlotJson> mnFindAll(String token) {
+        List<SlotJson> slotJsons = new ArrayList<>();
+        String email = jwtService.decode(token);
+        Manager manager = managerRepo.findByEmail(email);
+        if(manager == null){
+            return null;
+        }
+        List<Slot> slots = slotRepo.findAll();
+        List <FieldJson> fieldJsons = fieldService.managerFind(email);
+        for(FieldJson fieldJson : fieldJsons){
+            slotJsons.addAll(
+                    slots.stream().filter(slot -> slot.getFieldId() == fieldJson.getId()).map(this::data2Json).collect(Collectors.toList())
+            );
+        }
+        return slotJsons;
     }
 
     @Override
@@ -67,8 +95,6 @@ public class SlotService_Impl implements SlotService {
         }
         return slotRepo.managerDelete(manager,id);
     }
-
-
 
     public SlotJson data2Json(Slot slot){
         List<Detector> detectors = detectorRepo.findBySlotId(slot.getId());
