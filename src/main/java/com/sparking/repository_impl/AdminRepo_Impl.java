@@ -26,6 +26,7 @@ public class AdminRepo_Impl implements AdminRepo {
                 .getResultList();
         return admins.size() != 0;
     }
+
     @Override
     public Admin findByEmail(String email) {
         List<Admin> admins = entityManager
