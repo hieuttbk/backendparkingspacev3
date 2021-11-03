@@ -22,8 +22,18 @@ public class TagService_Impl implements TagService {
     }
 
     @Override
-    public List<TagPackage> getAllNewsTag() {
-        return tagRepo.getAllNewsTag();
+    public List<TagPackage> getNewsTag(Integer id) {
+        return tagRepo.getNewsTag(id);
+    }
+
+    @Override
+    public boolean deleteTag(int id, String pathRequest) {
+        return tagRepo.delete(id, pathRequest);
+    }
+
+    @Override
+    public TagPackage updateTag(TagPackage tagPackage, Integer id) {
+        return tagRepo.updateTag(tagPackage, id);
     }
 
     @Override

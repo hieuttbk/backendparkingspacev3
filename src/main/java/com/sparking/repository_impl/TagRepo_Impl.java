@@ -5,6 +5,7 @@ import com.sparking.entities.data.TagPackage;
 import com.sparking.entities.data.User;
 import com.sparking.entities.payloadReq.GetNewsTagPayload;
 import com.sparking.entities.payloadReq.RegisterTagsPayload;
+import com.sparking.helper.CheckPathContainsHandler;
 import com.sparking.helper.HandleTimeToSecond;
 import com.sparking.repository.TagRepo;
 import com.sparking.repository.UserRepo;
@@ -39,10 +40,21 @@ public class TagRepo_Impl implements TagRepo {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(int id, String pathRequest) {
+        boolean pathContainTags = CheckPathContainsHandler.checkPathContainsHandler(pathRequest);
+        if (pathContainTags) {
+            TagPackage tagPackage = entityManager.find(TagPackage.class, id);
+            if(tagPackage != null){
+                entityManager.createQuery("delete from TagPackage t where t.newsId =:newsId")
+                        .setParameter("newsId", id).executeUpdate();
+                return true;
+            }
+            return false;
+        }
         Tag tag = entityManager.find(Tag.class, id);
         if(tag != null){
-            entityManager.detach(tag);
+            entityManager.createQuery("delete from Tag t where t.id =:id")
+                    .setParameter("id", id).executeUpdate();
             return true;
         }
         return false;
@@ -60,8 +72,6 @@ public class TagRepo_Impl implements TagRepo {
         Query query = entityManager
                 .createQuery("select t from Tag t where t.tagId=:tagId");
         List<Tag> tags = query.setParameter("tagId", id).getResultList();
-
-
 
         if(tags.size() == 1){
             return tags.get(0);
@@ -93,8 +103,24 @@ public class TagRepo_Impl implements TagRepo {
     }
 
     @Override
-    public List<TagPackage> getAllNewsTag() {
-        return entityManager.createQuery("select t from TagPackage t").getResultList();
+    public List<TagPackage> getNewsTag(Integer id) {
+        if (id != null) {
+            return entityManager
+                    .createQuery("select t from TagPackage t where t.newsId =: newsId").setParameter("newsId", id)
+                    .getResultList();
+        }
+        return entityManager
+                .createQuery("select t from TagPackage t").getResultList();
+    }
+
+    @Override
+    public TagPackage updateTag(TagPackage tagPackage, Integer id) {
+        TagPackage tag = entityManager.find(TagPackage.class, id);
+        if (tag.equals(tagPackage)) {
+            return null;
+        }
+        entityManager.merge(tagPackage);
+        return tagPackage;
     }
 
     @Override

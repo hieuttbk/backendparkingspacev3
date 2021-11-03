@@ -1,36 +1,65 @@
 package com.sparking.controller;
 
+import com.sparking.entities.data.TagPackage;
 import com.sparking.entities.jsonResp.MyResponse;
 import com.sparking.entities.payloadReq.GetNewsTagPayload;
 import com.sparking.entities.payloadReq.RegisterTagsPayload;
+import com.sparking.helper.GetPathRequestHandler;
+//import com.sparking.repository.ManagerRepo;
+import com.sparking.security.JWTService;
 import com.sparking.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 public class TagController {
     @Autowired
     TagService tagService;
 
-    @PostMapping("api/ad/tags")
+//    @Autowired
+//    ManagerRepo managerRepo;
+
+    @Autowired
+    JWTService jwtService;
+
+    @PostMapping("api/ad/tags/register")
     public ResponseEntity<Object> registerTagForUser(@RequestBody RegisterTagsPayload registerTagsPayload) {
         return ResponseEntity.ok(
                 MyResponse.success(tagService.registerTagForUser(registerTagsPayload))
         );
     }
 
-    @GetMapping("api/ad/all-news-tag")
-    public ResponseEntity<Object> getAllNewsTag() {
+    // Params {id} to getAll or getOne
+    @GetMapping("api/ad/tag/find/{id}")
+    public ResponseEntity<Object> getNewsTag(@PathVariable Integer id) {
         return ResponseEntity.ok(
-                MyResponse.success(tagService.getAllNewsTag())
+                MyResponse.success(tagService.getNewsTag(id))
         );
     }
 
-    @PostMapping("api/ad/filter-news-tag")
+    @DeleteMapping("api/ad/tags/delete/{id}")
+    public ResponseEntity<Object> deleteTag(@PathVariable int id) throws Exception {
+        String pathRequest = GetPathRequestHandler.getPathRequest();
+
+//        System.out.print(pathRequest);
+        return ResponseEntity.ok(
+                MyResponse.success(tagService.deleteTag(id, pathRequest))
+        );
+    }
+
+    @PostMapping(value = {"api/mn/tags/update/{id}", "api/ad/tags/update/{id}"})
+    public ResponseEntity<Object> updateTag(@RequestBody TagPackage tagPackage, @PathVariable Integer id) {
+        if (id == null) {
+            return null;
+        }
+        return ResponseEntity.ok(
+                MyResponse.success(tagService.updateTag(tagPackage, id))
+        );
+    }
+
+    @PostMapping("api/ad/tags/filter")
     public ResponseEntity<Object> filterNewsTag(@RequestBody GetNewsTagPayload getNewsTagPayload) {
         return ResponseEntity.ok(
           MyResponse.success(tagService.filterNewsTag(getNewsTagPayload))

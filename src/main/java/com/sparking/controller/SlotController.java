@@ -21,7 +21,7 @@ public class SlotController {
     }
 
     @PostMapping("api/mn/slot/create")
-    public ResponseEntity<Object> createeMan(@RequestBody Slot slot){
+    public ResponseEntity<Object> createMan(@RequestBody Slot slot){
         logger.info(slot.toString());
         return ResponseEntity.ok(MyResponse.success(slotService.createAndUpdate(slot)));
     }

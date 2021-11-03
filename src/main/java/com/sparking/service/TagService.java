@@ -10,7 +10,11 @@ import java.util.List;
 public interface TagService {
     Tag registerTagForUser(RegisterTagsPayload registerTagsPayload);
 
-    List<TagPackage> getAllNewsTag();
+    List<TagPackage> getNewsTag(Integer id);
 
     List<TagPackage> filterNewsTag(GetNewsTagPayload getNewsTagPayload);
+
+    boolean deleteTag(int id, String pathRequest);
+
+    TagPackage updateTag(TagPackage tagPackage, Integer id);
 }

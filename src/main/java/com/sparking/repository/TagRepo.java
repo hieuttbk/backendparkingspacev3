@@ -11,7 +11,7 @@ public interface TagRepo {
 
     Tag createAndUpdate(Tag tag);
 
-    boolean delete(int id);
+    boolean delete(int id, String pathRequest);
 
     List<Tag> findAll();
 
@@ -19,9 +19,11 @@ public interface TagRepo {
 
     Tag registerTagForUser(RegisterTagsPayload registerTagsPayload);
 
-    List<TagPackage> getAllNewsTag();
+    List<TagPackage> getNewsTag(Integer id);
 
     List<TagPackage> filterNewsTag(GetNewsTagPayload getNewsTagPayload);
 
     void createNewsFromTag(TagPackage tagPackage);
+
+    TagPackage updateTag(TagPackage tagPackage, Integer id);
 }
