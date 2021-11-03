@@ -71,20 +71,18 @@ public class ManagerService_Impl implements ManagerService {
 
         //TODO
                 //Confg Manager in DB and update info
-//        return managerRepo.createAndUpdate(Manager.builder()
-//                .id(man.getId())
-//                .birth(manUpdateInfo.getBirth())
-//                .image(manUpdateInfo.getImage())
-//                .sex(manUpdateInfo.getSex())
-//                .phone(manUpdateInfo.getPhone())
-//                .address(manUpdateInfo.getAddress())
-//                .idNumber(manUpdateInfo.getIdNumber())
-//                .email(man.getEmail())
-//                .password(man.getPass())
-//                .equipment(manUpdateInfo.getEquipment())
-//                .lastTimeAccess(man.getLastTimeAccess())
-//                .build());
-        return null;
+        return managerRepo.createAndUpdate(Manager.builder()
+                .id(man.getId())
+                .birth(manUpdateInfo.getBirth())
+                .image(manUpdateInfo.getImage())
+                .sex(manUpdateInfo.getSex())
+                .phone(manUpdateInfo.getPhone())
+                .address(manUpdateInfo.getAddress())
+                .idNumber(manUpdateInfo.getIdNumber())
+                .email(man.getEmail())
+                .pass(man.getPass())
+                .lastTimeAccess(man.getLastTimeAccess())
+                .build());
     }
 
 
@@ -94,6 +92,12 @@ public class ManagerService_Impl implements ManagerService {
                 .email(managerPayload.getEmail())
                 .acp(managerPayload.getAcp())
                 .pass(managerPayload.getPass())
+                .address(managerPayload.getAddress())
+                .birth(managerPayload.getBirth())
+                .image(managerPayload.getImage())
+                .phone(managerPayload.getPhone())
+                .sex(managerPayload.getSex())
+                .idNumber(managerPayload.getIdNumber())
                 .lastTimeAccess(null)
                 .build();
     }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Data
@@ -33,7 +34,22 @@ public class Manager {
     @Column(name = "acp", nullable = false)
     private Boolean acp;
 
+    @Column(name = "address", nullable = false)
+    private String address ;
 
+    @Column(name = "phone", nullable = false)
+    private String phone;
 
-    //TODO: Change manger to same user with email, icon, ...
+    @Column(name = "image", nullable = false)
+    private String image;
+
+    @Column(name = "sex", nullable = false)
+    private String sex;
+
+    @Column(name = "birth", nullable = false)
+    private Date birth;
+
+    @Column(name = "id_number", nullable = false)
+    private int idNumber;
+
 }
