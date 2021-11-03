@@ -202,6 +202,18 @@ INSERT INTO `parking_space_v3`.`user` (`id`, `pass`, `id_number`, `email`, `equi
 
 ALTER TABLE tag MODIFY id varchar(50);
 
+
+
+ALTER TABLE manager
+ADD address varchar(120),
+ADD	phone varchar(45),
+ADD image varchar(200) default null,
+ADD sex varchar(1),
+ADD birth date,
+ADD id_number int;
+
+
+
 -- phai init data trong be xong ms dc chay cac dong ben duoi
 -- INSERT INTO `detector` VALUES ("0","255.255.0.100","22","1","015","Communication Level","20210422123247","2021-04-22 12:25:54");
 -- INSERT INTO `detector` VALUES ("1","255.255.0.101","23","1","015","Communication Level","20210422123247","2021-04-22 13:25:54");
