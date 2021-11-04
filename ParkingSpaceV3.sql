@@ -203,7 +203,7 @@ INSERT INTO `parking_space_v3`.`user` (`id`, `pass`, `id_number`, `email`, `equi
 ALTER TABLE tag MODIFY id varchar(50);
 
 
-
+-- update manager table --- 4/11
 ALTER TABLE manager
 ADD address varchar(120),
 ADD	phone varchar(45),
@@ -211,6 +211,23 @@ ADD image varchar(200) default null,
 ADD sex varchar(1),
 ADD birth date,
 ADD id_number int;
+
+-- create tag_package ---- 4/11
+CREATE TABLE tag_package(
+                        news_id int not null AUTO_INCREMENT,
+                        sign varchar(10) not null,
+                        seq varchar(20) not null,
+                        mty varchar(2) not null,
+                        tag_id varchar(20) not null,
+                        lat varchar(20) not null,
+                        log varchar(20) not null,
+                        tag_date varchar(20) not null,
+                        tag_time varchar(20) not null,
+                        state varchar (1) not null,
+                        primary key (news_id),
+                        UNIQUE KEY `id_UNIQUE` (`news_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 
