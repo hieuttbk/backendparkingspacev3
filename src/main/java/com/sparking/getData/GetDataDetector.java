@@ -313,6 +313,8 @@ public class GetDataDetector {
             String time = map.get("Time");
 
 //                        fake field cho detector
+            //TODO
+                // detector in field 2 !?
             int fieldId = 1;
 
             List<Slot> slots = slotRepoStatic.findAll().stream()
@@ -320,6 +322,12 @@ public class GetDataDetector {
                     .collect(Collectors.toList());
 
             Detector oldDetector = detectorRepoStatic.findById(Integer.parseInt(map.get("ID")));
+
+            // update detector with data in message from physical device
+            //TODO
+                // when changing slotId in FE, BE will no update info from message
+                // if {oldDetector.getSlotId() != slots.get(Integer.parseInt(map.get("Location"))-1).getId()}
+                // if slotID in DB != slotID in message > choose slotID in DB
             Detector detector = Detector.builder()
                     .id(Integer.parseInt(map.get("ID")))
                     .addressDetector(map.get("Node Address"))
