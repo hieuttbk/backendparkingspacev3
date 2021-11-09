@@ -32,14 +32,21 @@ public class TagController {
     }
 
     // Params {id} to getAll or getOne
-    @GetMapping("api/ad/tag/find/{id}")
+    @GetMapping("api/ad/tags/{id}")
     public ResponseEntity<Object> getNewsTag(@PathVariable Integer id) {
         return ResponseEntity.ok(
                 MyResponse.success(tagService.getNewsTag(id))
         );
     }
 
-    @DeleteMapping("api/ad/tags/delete/{id}")
+    @GetMapping("api/ad/tags")
+    public ResponseEntity<Object> getAllNewsTag() {
+        return ResponseEntity.ok(
+                MyResponse.success(tagService.getAllNewsTag())
+        );
+    }
+
+    @DeleteMapping(value = { "api/ad/tags/{id}", "api/ad/tag/{id}" })
     public ResponseEntity<Object> deleteTag(@PathVariable int id) throws Exception {
         String pathRequest = GetPathRequestHandler.getPathRequest();
 
@@ -49,7 +56,7 @@ public class TagController {
         );
     }
 
-    @PostMapping(value = {"api/mn/tags/update/{id}", "api/ad/tags/update/{id}"})
+    @PostMapping(value = {"api/mn/tags/{id}", "api/ad/tags/{id}"})
     public ResponseEntity<Object> updateTag(@RequestBody TagPackage tagPackage, @PathVariable Integer id) {
         if (id == null) {
             return null;

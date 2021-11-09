@@ -19,7 +19,9 @@ public interface TagRepo {
 
     Tag registerTagForUser(RegisterTagsPayload registerTagsPayload);
 
-    List<TagPackage> getNewsTag(Integer id);
+    TagPackage getNewsTag(Integer id);
+
+    List<TagPackage> getAllNewsTag();
 
     List<TagPackage> filterNewsTag(GetNewsTagPayload getNewsTagPayload);
 

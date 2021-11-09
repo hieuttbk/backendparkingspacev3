@@ -41,7 +41,7 @@ public class TagRepo_Impl implements TagRepo {
 
     @Override
     public boolean delete(int id, String pathRequest) {
-        boolean pathContainTags = CheckPathContainsHandler.checkPathContainsHandler(pathRequest);
+        boolean pathContainTags = CheckPathContainsHandler.checkPathContainsHandler(pathRequest, "tags");
         if (pathContainTags) {
             TagPackage tagPackage = entityManager.find(TagPackage.class, id);
             if(tagPackage != null){
@@ -103,14 +103,20 @@ public class TagRepo_Impl implements TagRepo {
     }
 
     @Override
-    public List<TagPackage> getNewsTag(Integer id) {
-        if (id != null) {
-            return entityManager
-                    .createQuery("select t from TagPackage t where t.newsId =: newsId").setParameter("newsId", id)
-                    .getResultList();
+    public TagPackage getNewsTag(Integer id) {
+        List<TagPackage> tagPackages = entityManager
+                .createQuery("select t from TagPackage t where t.newsId =: newsId").setParameter("newsId", id)
+                .getResultList();
+        if (tagPackages.size() == 1) {
+            return tagPackages.get(0);
+        } else {
+            return null;
         }
-        return entityManager
-                .createQuery("select t from TagPackage t").getResultList();
+    }
+
+    @Override
+    public List<TagPackage> getAllNewsTag() {
+        return entityManager.createQuery("select t from TagPackage t").getResultList();
     }
 
     @Override
