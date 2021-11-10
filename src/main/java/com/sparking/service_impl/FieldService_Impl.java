@@ -4,6 +4,7 @@ import com.sparking.common.ConfigVar;
 import com.sparking.entities.data.Contract;
 import com.sparking.entities.data.Field;
 import com.sparking.entities.data.Manager;
+import com.sparking.entities.data.Slot;
 import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.entities.jsonResp.FieldJson;
 import com.sparking.repository.ContractRepo;
@@ -16,6 +17,7 @@ import com.sparking.service.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -46,7 +48,11 @@ public class FieldService_Impl implements FieldService {
 
     @Override
     public FieldJson createAndUpdate(Field field) {
-        return data2Json(fieldRepo.createAndUpdate(field));
+        FieldJson fieldJson = data2Json(fieldRepo.createAndUpdate(field));
+        for(int i = 0; i < fieldJson.getSpace().intValue(); i++){
+            slotRepo.createAndUpdate(slotRepo.createAndUpdate(new Slot(0, field.getId(), false, false)));
+        }
+        return fieldJson;
     }
 
     @Override

@@ -19,7 +19,7 @@ CREATE TABLE gateway(
     address_gateway varchar(20) not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`)
+    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE slot(
@@ -29,7 +29,7 @@ CREATE TABLE slot(
     status_cam bit(1),
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`)
+    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE detector(
@@ -43,8 +43,8 @@ CREATE TABLE detector(
     last_time_setup datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`slot_id`) REFERENCES `slot` (`id`),
-    CONSTRAINT FOREIGN KEY (`gateway_id`) REFERENCES `gateway` (`id`)
+    CONSTRAINT FOREIGN KEY (`slot_id`) REFERENCES `slot` (`id`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`gateway_id`) REFERENCES `gateway` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE user(
@@ -70,7 +70,7 @@ CREATE TABLE tag(
     time_car_out datetime,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE manager(
@@ -97,8 +97,8 @@ CREATE TABLE contract(
     status varchar(1) not null, 
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE manager_field(
@@ -108,8 +108,8 @@ CREATE TABLE manager_field(
     last_time_setup datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-	CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`),
-    CONSTRAINT FOREIGN KEY (`manager_id`) REFERENCES `manager` (`id`)
+	CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`manager_id`) REFERENCES `manager` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE admin(

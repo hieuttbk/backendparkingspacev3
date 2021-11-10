@@ -55,8 +55,7 @@ private static Logger logger = LoggerFactory.getLogger(ManagerRepo_Impl.class);
     public boolean delete(int id) {
         Manager manager = entityManager.find(Manager.class, id);
         if(manager != null){
-            entityManager.createQuery("delete from ManagerField x where x.managerId =:id")
-            .setParameter("id", id).executeUpdate();
+
             entityManager.remove(manager);
             return true;
         }
