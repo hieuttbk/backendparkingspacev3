@@ -483,3 +483,8 @@ java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child 
 2021-11-11 00:21:03.381  WARN 14028 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 2021-11-11 00:21:04.933  INFO 14028 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 5.041 seconds (JVM running for 6.855)
 2021-11-11 00:21:04.949  INFO 14028 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-11-11 00:44:16.143  INFO 17440 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on HONGDATCHY with PID 17440 (E:\BackendSpaceV3_anhHieu\backendparkingspacev3\target\classes started by Microsoft Windows in E:\BackendSpaceV3_anhHieu\backendparkingspacev3)
+2021-11-11 00:44:16.159  INFO 17440 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-11-11 00:44:18.649  WARN 17440 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-11-11 00:44:20.293  INFO 17440 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.798 seconds (JVM running for 6.372)
+2021-11-11 00:44:20.307  INFO 17440 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
