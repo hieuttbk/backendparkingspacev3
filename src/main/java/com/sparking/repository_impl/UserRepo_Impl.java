@@ -130,7 +130,11 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public List<User> findAll() {
-        return entityManager.createQuery("select x from User x").getResultList();
+        List<User> users = entityManager.createQuery("select x from User x").getResultList();
+        for (User user: users) {
+            
+        }
+        return users;
     }
 
     @Override

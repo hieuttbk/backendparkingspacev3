@@ -54,7 +54,7 @@ public class ContractRepo_Impl implements ContractRepo {
 
     @Override
     public List<Contract> findByUser(User user) {
-        Integer userId=user.getId();
+        Integer userId = user.getId();
         Query query = entityManager
                 .createQuery("select u from Contract u where u.userId= :userId");
         List<Contract> contracts = query.setParameter("userId", userId).getResultList();
