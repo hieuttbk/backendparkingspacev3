@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -22,7 +23,7 @@ public class Tag {
     private int id;
 
     @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    private int userId;
 
     @Column(name = "time_car_in")
     private Timestamp timeCarIn;

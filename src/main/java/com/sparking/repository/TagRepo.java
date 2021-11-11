@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface TagRepo {
 
-    Tag createAndUpdate(Tag tag);
-
-    boolean delete(int id);
+//    Tag createAndUpdate(Tag tag);
+//
+//    boolean delete(int id);
 
     List<Tag> findAll();
 
@@ -19,7 +19,13 @@ public interface TagRepo {
 
     Tag registerTagForUser(RegisterTagsPayload registerTagsPayload);
 
+    Tag updateTagForUser(Tag tag);
+
+    boolean deleteTagForUser(String id);
+
     List<TagPackage> getAllNewsTag();
+
+    TagPackage getNewsTag(String id);
 
     List<TagPackage> filterNewsTag(GetNewsTagPayload getNewsTagPayload);
 

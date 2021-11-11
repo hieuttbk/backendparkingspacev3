@@ -28,25 +28,25 @@ public class TagRepo_Impl implements TagRepo {
     @Autowired
     UserRepo userRepo;
 
-    @Override
-    public Tag createAndUpdate(Tag tag) {
-        List<Tag> tags = entityManager.createQuery("select x from Tag x where x.userId = :id")
-                .setParameter("id", tag.getUserId()).getResultList();
-        if(tags.size() == 0){
-            return entityManager.merge(tag);
-        }
-        return null;
-    }
+//    @Override
+//    public Tag createAndUpdate(Tag tag) {
+//        List<Tag> tags = entityManager.createQuery("select x from Tag x where x.userId = :id")
+//                .setParameter("id", tag.getUserId()).getResultList();
+//        if(tags.size() == 0){
+//            return entityManager.merge(tag);
+//        }
+//        return null;
+//    }
 
-    @Override
-    public boolean delete(int id) {
-        Tag tag = entityManager.find(Tag.class, id);
-        if(tag != null){
-            entityManager.detach(tag);
-            return true;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean delete(int id) {
+//        Tag tag = entityManager.find(Tag.class, id);
+//        if(tag != null){
+//            entityManager.detach(tag);
+//            return true;
+//        }
+//        return false;
+//    }
 
     @Override
     public List<Tag> findAll() {
@@ -77,24 +77,65 @@ public class TagRepo_Impl implements TagRepo {
 
         User user = userRepo.findByEmail(email);
         int userId = user.getId();
-        List<Tag> tags = entityManager.createQuery("select t from Tag t where t.tagId =: tagId")
-                .setParameter("tagId", tagId).getResultList();
+        List<Tag> tags = entityManager.createQuery("select t from Tag t where t.userId =: userId")
+                .setParameter("userId", userId).getResultList();
         if (tags.size() == 1) {
             tag = tags.get(0);
-            tag.setUserId(userId);
+            tag.setTagId(tagId);
         } else {
             tag = Tag.builder()
                     .tagId(tagId)
                     .userId(userId)
                     .build();
+            entityManager.merge(tag);
         }
-        entityManager.merge(tag);
         return tag;
     }
 
     @Override
+    public Tag updateTagForUser(Tag tag) {
+        int userId = tag.getUserId();
+        List<Tag> tags = entityManager.createQuery("select t from Tag t where t.userId =: userId")
+                .setParameter("userId", userId).getResultList();
+        if (tags.size() == 1) {
+            Tag tagCurrent = tags.get(0);
+            tagCurrent.setTagId(tag.getTagId());
+            return tagCurrent;
+        }
+        return null;
+    }
+
+    @Override
+    public boolean deleteTagForUser(String id) {
+        Tag tag = findByTagId(id);
+        if (tag != null) {
+            entityManager.createQuery("delete from Tag t where t.tagId =: tagId")
+                    .setParameter("tagId", tag.getTagId()).executeUpdate();
+
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+
+    // Tag_Package (News Tag)
+
+    @Override
     public List<TagPackage> getAllNewsTag() {
         return entityManager.createQuery("select t from TagPackage t").getResultList();
+    }
+
+    @Override
+    public TagPackage getNewsTag(String id) {
+        List<TagPackage> tagPackages = entityManager.createQuery("select t from TagPackage t where t.id =: id")
+                .setParameter("id", Integer.parseInt(id)).getResultList();
+        if (tagPackages != null) {
+            return tagPackages.get(0);
+        }
+        return null;
     }
 
     @Override

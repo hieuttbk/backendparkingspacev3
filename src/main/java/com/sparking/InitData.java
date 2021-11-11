@@ -32,17 +32,17 @@ public class InitData {
 
     @PostConstruct
     public void init(){
-        if(slotRepo.findAll().size() < 100){
-            System.out.println("Init 100 slot");
-            gatewayRepo.createAndUpdate(new Gateway(1,1,"1.1.1.1"));
-            gatewayRepo.createAndUpdate(new Gateway(2,2,"2.2.2.2"));
-            for (int i = 0; i < 50; i++) {
-                slotRepo.createAndUpdate(new Slot(i+1, 1, false, false));
-            }
-            for (int i = 0; i < 50; i++) {
-                slotRepo.createAndUpdate(new Slot(i+51, 2, false, false));
-            }
-            System.out.println("Init data end");
-        }
+//        if(slotRepo.findAll().size() < 100){
+//            System.out.println("Init 100 slot");
+//            gatewayRepo.createAndUpdate(new Gateway(1,1,"1.1.1.1"));
+//            gatewayRepo.createAndUpdate(new Gateway(2,2,"2.2.2.2"));
+//            for (int i = 0; i < 50; i++) {
+//                slotRepo.createAndUpdate(new Slot(i+1, 1, false, false));
+//            }
+//            for (int i = 0; i < 50; i++) {
+//                slotRepo.createAndUpdate(new Slot(i+51, 2, false, false));
+//            }
+//            System.out.println("Init data end");
+//        }
     }
 }
