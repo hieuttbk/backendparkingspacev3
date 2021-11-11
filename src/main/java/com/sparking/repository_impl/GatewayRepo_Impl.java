@@ -34,8 +34,7 @@ public class GatewayRepo_Impl implements GatewayRepo {
     public boolean delete(int id) {
         Gateway gateway = entityManager.find(Gateway.class, id);
         if(gateway != null){
-            entityManager.createQuery("delete from Detector x where x.gatewayId =:id")
-            .setParameter("id", id).executeUpdate();
+
             entityManager.remove(gateway);
             return true;
         }else {

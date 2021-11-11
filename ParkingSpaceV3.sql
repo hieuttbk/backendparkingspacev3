@@ -19,7 +19,7 @@ CREATE TABLE gateway(
     address_gateway varchar(20) not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`)
+    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE slot(
@@ -29,7 +29,7 @@ CREATE TABLE slot(
     status_cam bit(1),
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`)
+    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE detector(
@@ -43,8 +43,8 @@ CREATE TABLE detector(
     last_time_setup datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`slot_id`) REFERENCES `slot` (`id`),
-    CONSTRAINT FOREIGN KEY (`gateway_id`) REFERENCES `gateway` (`id`)
+    CONSTRAINT FOREIGN KEY (`slot_id`) REFERENCES `slot` (`id`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`gateway_id`) REFERENCES `gateway` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE user(
@@ -70,7 +70,7 @@ CREATE TABLE tag(
     time_car_out datetime,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE manager(
@@ -97,8 +97,8 @@ CREATE TABLE contract(
     status varchar(1) not null, 
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE manager_field(
@@ -108,8 +108,8 @@ CREATE TABLE manager_field(
     last_time_setup datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-	CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`),
-    CONSTRAINT FOREIGN KEY (`manager_id`) REFERENCES `manager` (`id`)
+	CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`manager_id`) REFERENCES `manager` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE admin(
@@ -176,7 +176,7 @@ CREATE TABLE code_reset_pass(
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `parking_space_2021`.`admin` (`id`, `email`, `pass`) VALUES ('0', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+INSERT INTO `parking_space_v3`.`admin` (`id`, `email`, `pass`) VALUES ('0', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 
 INSERT INTO `field` VALUES ('1', 'C9', '20.960377427559497', '105.79658800934396', "Đại học BKHN", "", '50000', 'O', 50, "Bãi đồ xe C9");
 INSERT INTO `field` VALUES ('2', 'C3', '21.0066272', '105.8416806', "Đại học BKHN", "", '50000', 'O', 40, "Bãi đồ xe C3");
@@ -196,14 +196,14 @@ INSERT INTO `field` VALUES ('14', 'Điểm đỗ xe Vạn Phúc, Ba Đình', 'H�
 INSERT INTO `gateway` VALUES("1","1","255.255.0.0");
 INSERT INTO `gateway` VALUES("2","2","255.255.0.8");
 
-INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('1', '0a041b9462caa4a31bac3567e0b6e6fd9100787db2ab433d96f6d178cabfce90', '0', 'user1@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
-INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('2', '6025d18fe48abd45168528f18a82e265dd98d421a7084aa09f61b341703901a3', '0', 'user2@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
-INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('3', '5860faf02b6bc6222ba5aca523560f0e364ccd8b67bee486fe8bf7c01d492ccb', '0', 'user3@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
+INSERT INTO `parking_space_v3`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('1', '0a041b9462caa4a31bac3567e0b6e6fd9100787db2ab433d96f6d178cabfce90', '0', 'user1@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
+INSERT INTO `parking_space_v3`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('2', '6025d18fe48abd45168528f18a82e265dd98d421a7084aa09f61b341703901a3', '0', 'user2@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
+INSERT INTO `parking_space_v3`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('3', '5860faf02b6bc6222ba5aca523560f0e364ccd8b67bee486fe8bf7c01d492ccb', '0', 'user3@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
 
 ALTER TABLE tag MODIFY id varchar(50);
 
 
--- update manager table --- 4/11
+
 ALTER TABLE manager
 ADD address varchar(120),
 ADD	phone varchar(45),
@@ -211,23 +211,6 @@ ADD image varchar(200) default null,
 ADD sex varchar(1),
 ADD birth date,
 ADD id_number int;
-
--- create tag_package ---- 4/11
-CREATE TABLE tag_package(
-                        news_id int not null AUTO_INCREMENT,
-                        sign varchar(10) not null,
-                        seq varchar(20) not null,
-                        mty varchar(2) not null,
-                        tag_id varchar(20) not null,
-                        lat varchar(20) not null,
-                        log varchar(20) not null,
-                        tag_date varchar(20) not null,
-                        tag_time varchar(20) not null,
-                        state varchar (1) not null,
-                        primary key (news_id),
-                        UNIQUE KEY `id_UNIQUE` (`news_id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 
 

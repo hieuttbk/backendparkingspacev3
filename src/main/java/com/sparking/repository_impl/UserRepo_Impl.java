@@ -118,10 +118,6 @@ public class UserRepo_Impl implements UserRepo {
     public boolean delete(int id) {
         User user = entityManager.find(User.class, id);
         if(user != null){
-            entityManager.createQuery("select x from Contract x where x.userId =:id")
-                    .setParameter("id", user.getId());
-            entityManager.createQuery("select x from Tag x where x.userId =:id")
-                    .setParameter("id", user.getId());
             entityManager.remove(user);
             return true;
         }

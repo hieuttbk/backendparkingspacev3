@@ -17,10 +17,10 @@ public class ManagerFieldController {
         return ResponseEntity.ok(MyResponse.success(managerFieldService.createAndUpdate(managerFieldPayload)));
     }
 
-    @PostMapping("api/mn/managerField/create_and_update")
-    public ResponseEntity<Object> createAndUpdateMan(@RequestBody ManagerFieldPayload managerFieldPayload){
-        return ResponseEntity.ok(MyResponse.success(managerFieldService.createAndUpdate(managerFieldPayload)));
-    }
+//    @PostMapping("api/mn/managerField/create_and_update")
+//    public ResponseEntity<Object> createAndUpdateMan(@RequestBody ManagerFieldPayload managerFieldPayload){
+//        return ResponseEntity.ok(MyResponse.success(managerFieldService.createAndUpdate(managerFieldPayload)));
+//    }
 
     @GetMapping("api/ad/managerField/find_all")
     public ResponseEntity<Object> findAll(){

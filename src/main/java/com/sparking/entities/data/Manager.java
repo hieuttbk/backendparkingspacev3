@@ -1,6 +1,5 @@
 package com.sparking.entities.data;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,31 +26,30 @@ public class Manager {
     private String email;
 
     @Column(name = "pass", nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String pass;
 
     @Column(name = "last_time_access")
     private Timestamp lastTimeAccess;
 
-    @Column(name = "acp", nullable = true)
+    @Column(name = "acp", nullable = false)
     private Boolean acp;
 
-    @Column(name = "address", nullable = true)
+    @Column(name = "address", nullable = false)
     private String address ;
 
-    @Column(name = "phone", nullable = true)
+    @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "image", nullable = true)
+    @Column(name = "image", nullable = false)
     private String image;
 
-    @Column(name = "sex", nullable = true)
+    @Column(name = "sex", nullable = false)
     private String sex;
 
-    @Column(name = "birth", nullable = true)
+    @Column(name = "birth", nullable = false)
     private Date birth;
 
-    @Column(name = "id_number", nullable = true)
-    private Integer idNumber;
+    @Column(name = "id_number", nullable = false)
+    private int idNumber;
 
 }
