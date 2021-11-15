@@ -8,6 +8,8 @@ import com.sparking.entities.payloadReq.RegisterTagsPayload;
 import java.util.List;
 
 public interface TagService {
+    List<Tag> getAllTags();
+
     Tag registerTagForUser(RegisterTagsPayload registerTagsPayload);
 
     TagPackage getNewsTag(String id);

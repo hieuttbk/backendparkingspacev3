@@ -11,9 +11,8 @@ public class DetectorPayload {
     private String addressDetector;
     private Integer slotId;
     private Integer gatewayId;
-    private String batteryLevel;
-    private String loracomLevel;
-    private String operatingMode;
-
-
+//    private String batteryLevel;
+//    private String loracomLevel;
+//    private String operatingMode;
+    private String lastTimeSetup;
 }

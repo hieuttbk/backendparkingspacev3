@@ -8,6 +8,10 @@ import java.util.List;
 
 public interface DetectorService {
 
+    Detector createDetector(DetectorPayload detectorPayload);
+
+    boolean deleteDetector(Integer id);
+
     Detector createAndUpdate(DetectorPayload detectorPayload);
 
     boolean delete(int id);

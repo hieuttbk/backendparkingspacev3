@@ -36,6 +36,16 @@ public class DetectorService_Impl implements DetectorService {
     }
 
     @Override
+    public boolean deleteDetector(Integer id) {
+        return detectorRepo.deleteDetector(id);
+    }
+
+    @Override
+    public Detector createDetector(DetectorPayload detectorPayload) {
+        return detectorRepo.createDetector(detectorPayload);
+    }
+
+    @Override
     public boolean delete(int id) {
 //        return detectorRepo.delete(id);
         return false;

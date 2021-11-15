@@ -43,8 +43,8 @@ CREATE TABLE detector(
     last_time_setup datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`slot_id`) REFERENCES `slot` (`id`),
-    CONSTRAINT FOREIGN KEY (`gateway_id`) REFERENCES `gateway` (`id`)
+    CONSTRAINT FOREIGN KEY (`slot_id`) REFERENCES `slot` (`id`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`gateway_id`) REFERENCES `gateway` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE user(
@@ -201,6 +201,18 @@ INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `eq
 INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('3', '5860faf02b6bc6222ba5aca523560f0e364ccd8b67bee486fe8bf7c01d492ccb', '0', 'user3@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
 
 ALTER TABLE tag MODIFY id varchar(50);
+
+-- Update detector table -- 13/11
+ALTER TABLE detector
+MODIFY gateway_id int not null,
+MODIFY battery_level varchar(20),
+MODIFY communication_level varchar(20),
+MODIFY last_time_update datetime;
+
+-- after alter table detector
+--INSERT INTO `parking_space_2021`.`slot` (`field_id`, `status_detector`, `status_cam`) VALUES (1, 1, 1);
+--INSERT INTO `parking_space_2021`.`slot` (`field_id`, `status_detector`, `status_cam`) VALUES (2, 1, 0);
+--INSERT INTO `parking_space_2021`.`slot` (`field_id`, `status_detector`, `status_cam`) VALUES (3, 0, 1);
 
 
 -- update manager table --- 4/11

@@ -49,7 +49,7 @@ public class TagRepo_Impl implements TagRepo {
 //    }
 
     @Override
-    public List<Tag> findAll() {
+    public List<Tag> getAllTags() {
         return entityManager.createQuery("select x from Tag x").getResultList();
     }
 

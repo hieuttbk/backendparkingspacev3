@@ -5,6 +5,7 @@ import com.sparking.entities.jsonResp.MyResponse;
 import com.sparking.entities.payloadReq.GetNewsTagPayload;
 import com.sparking.entities.payloadReq.RegisterTagsPayload;
 import com.sparking.service.TagService;
+import org.apache.http.client.fluent.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,14 +37,16 @@ public class TagController {
         );
     }
 
+    @GetMapping("api/ad/tags")
+    public ResponseEntity<Object> getAllTags() {
+        return ResponseEntity.ok(
+                MyResponse.success(tagService.getAllTags())
+        );
+    }
+
 
     @GetMapping("api/ad/tag_packages")
-    public ResponseEntity<Object> getAllNewsTag(@RequestParam String id) {
-        if (id != null) {
-            return ResponseEntity.ok(
-                    MyResponse.success(tagService.getNewsTag(id))
-            );
-        }
+    public ResponseEntity<Object> getAllNewsTag() {
         return ResponseEntity.ok(
                 MyResponse.success(tagService.getAllNewsTag())
         );

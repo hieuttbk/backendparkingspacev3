@@ -1,6 +1,7 @@
 package com.sparking.controller;
 
 import com.sparking.entities.jsonResp.MyResponse;
+import com.sparking.entities.payloadReq.DetectorPayload;
 import com.sparking.entities.payloadReq.UpdateSlotIdPayload;
 import com.sparking.entities.payloadReq.UpdateSlotIdPayload;
 import com.sparking.security.JWTService;
@@ -64,9 +65,22 @@ public class DetectorController {
     }
 
     @PostMapping("api/ad/detector")
+    public ResponseEntity<Object> createDetector(@RequestBody DetectorPayload detectorPayload) {
+        return ResponseEntity.ok(MyResponse.success(detectorService.createDetector(detectorPayload)));
+    }
+
+    @PutMapping("api/ad/detector")
     public ResponseEntity<Object> UpdateSlotId(
             @RequestBody UpdateSlotIdPayload updateSlotIdPayload
     ) {
         return ResponseEntity.ok(MyResponse.success(detectorService.updateSlotId(updateSlotIdPayload)));
+    }
+
+    @DeleteMapping("api/ad/detector/{id}")
+    public ResponseEntity<Object> deleteDetector(@PathVariable Integer id) {
+        if (id == null) {
+            return ResponseEntity.ok(MyResponse.fail("Invalid Detector"));
+        }
+        return ResponseEntity.ok(MyResponse.success(detectorService.deleteDetector(id)));
     }
 }

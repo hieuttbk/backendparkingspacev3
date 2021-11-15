@@ -13,7 +13,7 @@ public interface TagRepo {
 //
 //    boolean delete(int id);
 
-    List<Tag> findAll();
+    List<Tag> getAllTags();
 
     Tag findByTagId(String id);
 
