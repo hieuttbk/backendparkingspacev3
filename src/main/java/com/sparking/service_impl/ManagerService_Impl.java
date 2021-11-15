@@ -82,7 +82,6 @@ public class ManagerService_Impl implements ManagerService {
                 .email(man.getEmail())
                 .pass(man.getPass())
                 .lastTimeAccess(man.getLastTimeAccess())
-                .acp(true)
                 .build());
     }
 
