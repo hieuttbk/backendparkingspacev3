@@ -82,6 +82,7 @@ public class ManagerService_Impl implements ManagerService {
                 .email(man.getEmail())
                 .pass(man.getPass())
                 .lastTimeAccess(man.getLastTimeAccess())
+                .acp(true) // always set true for active manager
                 .build());
     }
 
@@ -99,6 +100,7 @@ public class ManagerService_Impl implements ManagerService {
                 .sex(managerPayload.getSex())
                 .idNumber(managerPayload.getIdNumber())
                 .lastTimeAccess(null)
+                .acp(true) // always set true with active manager
                 .build();
     }
 }
