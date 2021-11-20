@@ -42,7 +42,7 @@ public class ManagerController {
         return ResponseEntity.ok(MyResponse.success(managerService.createAndUpdate(managerPayload)));
     }
 
-    @GetMapping("api/ad/manager/find_all")
+    @GetMapping(value = {"api/ad/manager/find_all", "api/mn/info"})
     public ResponseEntity<Object> findAll(){
         return ResponseEntity.ok(MyResponse.success(managerService.findAll()));
     }
