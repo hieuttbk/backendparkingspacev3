@@ -2,6 +2,7 @@ package com.sparking.repository;
 
 import com.sparking.entities.data.Field;
 import com.sparking.entities.data.Manager;
+import com.sparking.entities.jsonResp.FieldJson;
 
 import java.util.List;
 
