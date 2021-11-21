@@ -50,8 +50,9 @@ public class FieldService_Impl implements FieldService {
     public FieldJson createAndUpdate(Field field) {
         Field oldField = fieldRepo.findById(field.getId());
 
-        FieldJson fieldJson = data2Json(fieldRepo.createAndUpdate(field));
-        if(oldField == null){ // chi tao slot theo so space khi dang them moi field
+        FieldJson fieldJson = data2Json(field);
+        fieldRepo.createAndUpdate(field);
+        if(oldField != null){ // chi tao slot theo so space khi dang them moi field
             for(int i = 0; i < fieldJson.getSpace().intValue(); i++){
                 slotRepo.createAndUpdate(slotRepo.createAndUpdate(new Slot(0, field.getId(), false, false)));
             }
