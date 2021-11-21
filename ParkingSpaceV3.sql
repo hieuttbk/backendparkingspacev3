@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 CREATE TABLE field(
 	id int NOT NULL AUTO_INCREMENT,
     name varchar(120) not null,
@@ -176,6 +178,7 @@ CREATE TABLE code_reset_pass(
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+BEGIN;
 INSERT INTO `parking_space_2021`.`admin` (`id`, `email`, `pass`) VALUES ('0', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 
 INSERT INTO `field` VALUES ('1', 'C9', '20.960377427559497', '105.79658800934396', "Đại học BKHN", "", '50000', 'O', 50, "Bãi đồ xe C9");
@@ -241,3 +244,6 @@ ADD id_number int;
 
 INSERT INTO `manager` VALUES (1,'man1@gmail.com','58e02d8635563de1a93c43573ef8af294e96e023bb67adccf4d97b4b95b41bee','2021-11-09 16:59:22',_binary '','Số 1 Đại Cồ Việt','0123456789','url avatar','M','1990-10-10',123);
 INSERT INTO `manager` VALUES (2,'man@gmail.com','48b676e2b107da679512b793d5fd4cc4329f0c7c17a97cf6e0e3d1005b600b03','2021-11-09 17:13:54',_binary '',NULL,NULL,NULL,NULL,NULL,0);
+COMMIT;
+
+SET FOREIGN_KEY_CHECKS = 1;
