@@ -1,5 +1,7 @@
 package com.sparking.entities.data;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +25,7 @@ public class Tag {
     private int id;
 
     @Column(name = "user_id", nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int userId;
 
     @Column(name = "time_car_in")
@@ -34,4 +37,7 @@ public class Tag {
     @Column(name = "tag_id", nullable = false)
     private String tagId;
 
+    @Transient
+    @JsonSerialize
+    private Object user;
 }
