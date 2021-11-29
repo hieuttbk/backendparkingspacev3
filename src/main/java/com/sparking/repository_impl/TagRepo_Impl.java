@@ -6,8 +6,10 @@ import com.sparking.entities.data.User;
 import com.sparking.entities.payloadReq.GetNewsTagPayload;
 import com.sparking.entities.payloadReq.RegisterTagsPayload;
 import com.sparking.helper.HandleTimeToSecond;
+import com.sparking.helper.ResponseForTags;
 import com.sparking.repository.TagRepo;
 import com.sparking.repository.UserRepo;
+import org.apache.http.client.fluent.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
@@ -50,7 +53,15 @@ public class TagRepo_Impl implements TagRepo {
 
     @Override
     public List<Tag> getAllTags() {
-        return entityManager.createQuery("select x from Tag x").getResultList();
+//        System.out.print(user); Logging User
+        List<Tag> tags = entityManager.createQuery("select x from Tag x").getResultList();
+        for (Tag tag: tags) {
+            User user = userRepo.findById(tag.getUserId());
+            ResponseForTags responseForTags = new ResponseForTags(user.getEmail(), tag.getUserId());
+            HashMap<String, String> map = responseForTags.response();
+            tag.setUser(map);
+        }
+        return tags;
     }
 
     @Override
@@ -124,8 +135,8 @@ public class TagRepo_Impl implements TagRepo {
     // Tag_Package (News Tag)
 
     @Override
-    public List<TagPackage> getAllNewsTag() {
-        return entityManager.createQuery("select t from TagPackage t").getResultList();
+    public List<TagPackage> getAllNewsTag(String quantity) {
+        return entityManager.createQuery("select t from TagPackage t").setMaxResults(Integer.parseInt(quantity)).getResultList();
     }
 
     @Override

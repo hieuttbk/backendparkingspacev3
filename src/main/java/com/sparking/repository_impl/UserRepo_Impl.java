@@ -69,6 +69,17 @@ public class UserRepo_Impl implements UserRepo {
     }
 
     @Override
+    public User findById(int id) {
+        Query query = entityManager
+                .createQuery("select u from User u where u.id =: id");
+        List<User> users = query.setParameter("id", id).getResultList();
+        if(users.size() == 1){
+            return users.get(0);
+        }
+        return null;
+    }
+
+    @Override
     public User findByEmail(String email) {
         Query query = entityManager
                 .createQuery("select u from User u where u.email= :email");

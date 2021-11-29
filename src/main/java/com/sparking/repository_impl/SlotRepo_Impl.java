@@ -41,6 +41,12 @@ public class SlotRepo_Impl implements SlotRepo {
     }
 
     @Override
+    public List<Slot> getAll(String field) {
+        return entityManager.createQuery("select s from Slot s where s.fieldId =: fieldId")
+                .setParameter("fieldId", Integer.parseInt(field)).getResultList();
+    }
+
+    @Override
     public List<Slot> findAll() {
         return entityManager.createQuery("select s from Slot s").getResultList();
     }

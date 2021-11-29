@@ -50,19 +50,24 @@ public class SlotService_Impl implements SlotService {
     }
 
     @Override
+    public List<SlotJson> getAll(String field) {
+        return slotRepo.getAll(field).stream().map(this::data2Json).collect(Collectors.toList());
+    }
+
+    @Override
     public List<SlotJson> findAll() {
         return slotRepo.findAll().stream().map(this::data2Json).collect(Collectors.toList());
     }
 
     @Override
-    public List<SlotJson> mnFindAll(String token) {
+    public List<SlotJson> mnFindAll(String token, String field) {
         List<SlotJson> slotJsons = new ArrayList<>();
         String email = jwtService.decode(token);
         Manager manager = managerRepo.findByEmail(email);
         if(manager == null){
             return null;
         }
-        List<Slot> slots = slotRepo.findAll();
+        List<Slot> slots = slotRepo.getAll(field);
         List <FieldJson> fieldJsons = fieldService.managerFind(email);
         for(FieldJson fieldJson : fieldJsons){
             slotJsons.addAll(

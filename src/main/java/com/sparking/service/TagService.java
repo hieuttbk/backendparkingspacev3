@@ -14,7 +14,7 @@ public interface TagService {
 
     TagPackage getNewsTag(String id);
 
-    List<TagPackage> getAllNewsTag();
+    List<TagPackage> getAllNewsTag(String quantity);
 
     List<TagPackage> filterNewsTag(GetNewsTagPayload getNewsTagPayload);
 

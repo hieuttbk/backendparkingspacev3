@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MyPackageController {
@@ -14,7 +15,7 @@ public class MyPackageController {
     PackageRepo packageRepo;
 
     @GetMapping(value = {"api/ad/package/find_all"})
-    public ResponseEntity<Object> findAll(){
-        return ResponseEntity.ok(MyResponse.success(packageRepo.findAll()));
+    public ResponseEntity<Object> findAll(@RequestParam String quantity){
+        return ResponseEntity.ok(MyResponse.success(packageRepo.findAll(quantity)));
     }
 }

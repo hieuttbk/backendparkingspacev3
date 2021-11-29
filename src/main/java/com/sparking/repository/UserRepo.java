@@ -14,6 +14,8 @@ public interface UserRepo {
 
     boolean register(RegisterForm registerForm);
 
+    User findById(int id);
+
     User findByEmail(String email);
 
     User createAndUpdate(User user);

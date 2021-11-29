@@ -23,7 +23,7 @@ public interface TagRepo {
 
     boolean deleteTagForUser(String id);
 
-    List<TagPackage> getAllNewsTag();
+    List<TagPackage> getAllNewsTag(String quantity);
 
     TagPackage getNewsTag(String id);
 

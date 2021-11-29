@@ -22,7 +22,7 @@ public class PackageRepo_Impl implements PackageRepo {
     }
 
     @Override
-    public List<MyPackage> findAll() {
-        return entityManager.createQuery("select x from MyPackage x").getResultList();
+    public List<MyPackage> findAll(String quantity) {
+        return entityManager.createQuery("select x from MyPackage x").setMaxResults(Integer.parseInt(quantity)).getResultList();
     }
 }

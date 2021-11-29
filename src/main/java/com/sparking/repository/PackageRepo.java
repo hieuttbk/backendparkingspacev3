@@ -7,5 +7,5 @@ import java.util.List;
 public interface PackageRepo {
     MyPackage create(MyPackage myPackage);
 
-    List<MyPackage> findAll();
+    List<MyPackage> findAll(String quantity);
 }

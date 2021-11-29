@@ -11,9 +11,11 @@ public interface SlotService {
 
     boolean delete(int id);
 
+    List<SlotJson> getAll(String field);
+
     List<SlotJson> findAll();
 
-    List<SlotJson> mnFindAll(String email);
+    List<SlotJson> mnFindAll(String email, String field);
 
     SlotJson findById(int id);
 

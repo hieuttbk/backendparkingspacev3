@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 public class SlotController {
 
@@ -34,13 +36,16 @@ public class SlotController {
     }
 
     @GetMapping(value = {"api/ad/slot/find_all"})
-    public ResponseEntity<Object> findAll(){
+    public ResponseEntity<Object> findAll(@RequestParam(value = "field", required = false) final String field){
+        if (field != null && Integer.parseInt(field) > 0) {
+            return ResponseEntity.ok(MyResponse.success(slotService.getAll(field)));
+        }
         return ResponseEntity.ok(MyResponse.success(slotService.findAll()));
     }
 
     @GetMapping(value = {"api/mn/slot/find_all"})
-    public ResponseEntity<Object> mnFindAll(@RequestHeader String token){
-        return ResponseEntity.ok(MyResponse.success(slotService.mnFindAll(token)));
+    public ResponseEntity<Object> mnFindAll(@RequestHeader String token, @RequestParam String field){
+        return ResponseEntity.ok(MyResponse.success(slotService.mnFindAll(token, field)));
     }
 
     @DeleteMapping("api/ad/slot/delete/{id}")
