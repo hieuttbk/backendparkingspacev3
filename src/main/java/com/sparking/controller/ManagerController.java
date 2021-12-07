@@ -4,6 +4,7 @@ import com.sparking.entities.jsonResp.MyResponse;
 import com.sparking.entities.payloadReq.*;
 import com.sparking.security.JWTService;
 import com.sparking.service.ManagerService;
+import org.apache.http.client.fluent.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +43,15 @@ public class ManagerController {
         return ResponseEntity.ok(MyResponse.success(managerService.createAndUpdate(managerPayload)));
     }
 
-    @GetMapping(value = {"api/ad/manager/find_all", "api/mn/info"})
+    @GetMapping(value = {"api/ad/manager/find_all"})
     public ResponseEntity<Object> findAll(){
         return ResponseEntity.ok(MyResponse.success(managerService.findAll()));
+    }
+
+    @GetMapping("api/mn/info")
+    public ResponseEntity<Object> currentManager(@RequestHeader String token) {
+        String email = jwtService.decode(token);
+        return ResponseEntity.ok(MyResponse.success(managerService.currentManager(email)));
     }
 
     @DeleteMapping("api/ad/manager/delete/{id}")

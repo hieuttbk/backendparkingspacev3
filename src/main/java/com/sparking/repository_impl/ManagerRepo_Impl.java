@@ -68,6 +68,12 @@ private static Logger logger = LoggerFactory.getLogger(ManagerRepo_Impl.class);
     }
 
     @Override
+    public Manager currentManager(String email) {
+        Manager manager = findByEmail(email);
+        return manager;
+    }
+
+    @Override
     public Manager login(LoginForm loginForm) {
         List<Manager> managers = entityManager
                 .createQuery("select m from Manager m where m.email= :email and m.pass = :password")

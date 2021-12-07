@@ -13,6 +13,8 @@ public interface ManagerService {
 
     List<Manager> findAll();
 
+    Manager currentManager(String email);
+
     Manager login(LoginForm loginForm);
 
     Manager findById(int id);

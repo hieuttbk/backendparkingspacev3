@@ -16,28 +16,28 @@ public class TagController {
     @Autowired
     TagService tagService;
 
-    @PostMapping("api/ad/tags")
+    @PostMapping(value = {"api/ad/tags", "api/mn/tags"})
     public ResponseEntity<Object> registerTagForUser(@RequestBody RegisterTagsPayload registerTagsPayload) {
         return ResponseEntity.ok(
                 MyResponse.success(tagService.registerTagForUser(registerTagsPayload))
         );
     }
 
-    @PutMapping("api/ad/tags")
+    @PutMapping(value = {"api/ad/tags", "api/mn/tags"})
     public ResponseEntity<Object> updateTagForUser(@RequestBody Tag tag) {
         return ResponseEntity.ok(
                 MyResponse.success(tagService.updateTagForUser(tag))
         );
     }
 
-    @DeleteMapping("api/ad/tags")
+    @DeleteMapping(value = {"api/ad/tags", "api/mn/tags"})
     public ResponseEntity<Object> deleteTagForUser(@RequestParam String id) {
         return ResponseEntity.ok(
                 MyResponse.success(tagService.deleteTagForUser(id))
         );
     }
 
-    @GetMapping("api/ad/tags")
+    @GetMapping(value = {"api/ad/tags", "api/mn/tags"})
     public ResponseEntity<Object> getAllTags() {
         return ResponseEntity.ok(
                 MyResponse.success(tagService.getAllTags())
@@ -45,7 +45,7 @@ public class TagController {
     }
 
 
-    @GetMapping("api/ad/tag_packages")
+    @GetMapping(value = {"api/ad/tag_packages", "api/mn/tag_packages"})
     public ResponseEntity<Object> getAllNewsTag(@RequestParam String quantity) {
         return ResponseEntity.ok(
                 MyResponse.success(tagService.getAllNewsTag(quantity))

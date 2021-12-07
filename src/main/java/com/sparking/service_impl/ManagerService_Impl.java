@@ -39,6 +39,11 @@ public class ManagerService_Impl implements ManagerService {
     }
 
     @Override
+    public Manager currentManager(String email) {
+        return managerRepo.currentManager(email);
+    }
+
+    @Override
     public Manager login(LoginForm loginForm) {
         return managerRepo.login(loginForm);
     }
