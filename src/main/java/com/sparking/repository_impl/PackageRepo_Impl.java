@@ -25,4 +25,9 @@ public class PackageRepo_Impl implements PackageRepo {
     public List<MyPackage> findAll(String quantity) {
         return entityManager.createQuery("select x from MyPackage x").setMaxResults(Integer.parseInt(quantity)).getResultList();
     }
+
+    @Override
+    public List<MyPackage> getAll() {
+        return entityManager.createQuery("Select x from MyPackage x").getResultList();
+    }
 }

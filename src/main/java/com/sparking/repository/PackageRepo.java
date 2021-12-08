@@ -8,4 +8,6 @@ public interface PackageRepo {
     MyPackage create(MyPackage myPackage);
 
     List<MyPackage> findAll(String quantity);
+
+    List<MyPackage> getAll();
 }

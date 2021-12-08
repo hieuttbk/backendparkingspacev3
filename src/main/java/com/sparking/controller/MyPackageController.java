@@ -15,7 +15,10 @@ public class MyPackageController {
     PackageRepo packageRepo;
 
     @GetMapping(value = {"api/ad/package/find_all", "api/mn/package/find_all"})
-    public ResponseEntity<Object> findAll(@RequestParam String quantity){
-        return ResponseEntity.ok(MyResponse.success(packageRepo.findAll(quantity)));
+    public ResponseEntity<Object> findAll(@RequestParam(required = false) String quantity){
+        if (quantity != null) {
+            return ResponseEntity.ok(MyResponse.success(packageRepo.findAll(quantity)));
+        }
+        return ResponseEntity.ok(MyResponse.success(packageRepo.getAll()));
     }
 }
