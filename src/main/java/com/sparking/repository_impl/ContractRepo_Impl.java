@@ -53,6 +53,11 @@ public class ContractRepo_Impl implements ContractRepo {
     }
 
     @Override
+    public List<Contract> findByQuantity(String quantity) {
+        return entityManager.createQuery("Select c from Contract c").setMaxResults(Integer.parseInt(quantity)).getResultList();
+    }
+
+    @Override
     public List<Contract> findByUser(User user) {
         Integer userId = user.getId();
         Query query = entityManager

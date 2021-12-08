@@ -16,6 +16,8 @@ public interface ContractService {
 
     List<Contract> findAll();
 
+    List<Contract> findByQuantity(String quantity);
+
     Contract payload2data(ContractPayload contractPayload);
 
     double getCost(Timestamp timeCarin, Timestamp timeCarOut, Timestamp timeBookIn, Timestamp timeBookOut, double price);

@@ -63,6 +63,11 @@ public class ContractService_Impl implements ContractService {
     }
 
     @Override
+    public List<Contract> findByQuantity(String quantity) {
+        return contractRepo.findByQuantity(quantity);
+    }
+
+    @Override
     public Contract payload2data(ContractPayload contractPayload){
         double cost;
         if(contractPayload.getTimeCarIn() == null || contractPayload.getTimeCarOut() == null){
