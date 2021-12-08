@@ -10,6 +10,8 @@ import java.util.List;
 public interface TagService {
     List<Tag> getAllTags();
 
+    List<TagPackage> allNewsTag();
+
     Tag registerTagForUser(RegisterTagsPayload registerTagsPayload);
 
     TagPackage getNewsTag(String id);

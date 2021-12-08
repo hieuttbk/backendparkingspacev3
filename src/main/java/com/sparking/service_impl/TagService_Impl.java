@@ -42,6 +42,11 @@ public class TagService_Impl implements TagService {
     }
 
     @Override
+    public List<TagPackage> allNewsTag() {
+        return tagRepo.allNewsTag();
+    }
+
+    @Override
     public TagPackage getNewsTag(String id) {
         return tagRepo.getNewsTag(id);
     }

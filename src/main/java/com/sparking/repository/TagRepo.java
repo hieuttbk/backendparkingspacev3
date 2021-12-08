@@ -25,6 +25,8 @@ public interface TagRepo {
 
     List<TagPackage> getAllNewsTag(String quantity);
 
+    List<TagPackage> allNewsTag();
+
     TagPackage getNewsTag(String id);
 
     List<TagPackage> filterNewsTag(GetNewsTagPayload getNewsTagPayload);

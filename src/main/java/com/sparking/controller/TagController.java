@@ -46,10 +46,13 @@ public class TagController {
 
 
     @GetMapping(value = {"api/ad/tag_packages", "api/mn/tag_packages"})
-    public ResponseEntity<Object> getAllNewsTag(@RequestParam String quantity) {
-        return ResponseEntity.ok(
-                MyResponse.success(tagService.getAllNewsTag(quantity))
-        );
+    public ResponseEntity<Object> getAllNewsTag(@RequestParam(required = false) String quantity) {
+        if (quantity != null) {
+            return ResponseEntity.ok(
+                    MyResponse.success(tagService.getAllNewsTag(quantity))
+            );
+        }
+        return ResponseEntity.ok(MyResponse.success(tagService.allNewsTag()));
     }
 
     @PostMapping("api/ad/filter-news-tag")

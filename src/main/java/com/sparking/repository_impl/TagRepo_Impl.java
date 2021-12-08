@@ -140,6 +140,11 @@ public class TagRepo_Impl implements TagRepo {
     }
 
     @Override
+    public List<TagPackage> allNewsTag() {
+        return entityManager.createQuery("Select t from TagPackage t").getResultList();
+    }
+
+    @Override
     public TagPackage getNewsTag(String id) {
         List<TagPackage> tagPackages = entityManager.createQuery("select t from TagPackage t where t.id =: id")
                 .setParameter("id", Integer.parseInt(id)).getResultList();

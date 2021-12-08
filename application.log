@@ -8,3 +8,14 @@
 2021-12-08 20:32:56.672  WARN 4900 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 2021-12-08 20:32:58.156  INFO 4900 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 5.265 seconds (JVM running for 5.884)
 2021-12-08 20:32:58.158  INFO 4900 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-12-08 20:45:33.661  INFO 12120 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 12120 (C:\Users\Hyacinth\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\backendparkingspacev3)
+2021-12-08 20:45:33.664  INFO 12120 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-12-08 20:45:36.385  WARN 12120 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-12-08 20:45:37.727  INFO 12120 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.478 seconds (JVM running for 4.98)
+2021-12-08 20:45:37.736  INFO 12120 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2021-12-08 20:46:01.853  WARN 12120 --- [http-nio-6969-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter 'quantity' is not present]
+2021-12-08 20:49:16.438  INFO 6972 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 6972 (C:\Users\Hyacinth\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\backendparkingspacev3)
+2021-12-08 20:49:16.441  INFO 6972 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-12-08 20:49:18.876  WARN 6972 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-12-08 20:49:19.999  INFO 6972 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.946 seconds (JVM running for 4.421)
+2021-12-08 20:49:20.001  INFO 6972 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
