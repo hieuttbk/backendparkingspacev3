@@ -228,6 +228,11 @@ ADD birth date,
 ADD id_number int;
 
 
+ALTER TABLE field
+MODIFY latitude varchar(120),
+MODIFY longitude varchar(120);
+
+
 
 -- phai init data trong be xong ms dc chay cac dong ben duoi
 -- INSERT INTO `detector` VALUES ("0","255.255.0.100","22","1","015","Communication Level","20210422123247","2021-04-22 12:25:54");
