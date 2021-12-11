@@ -11,11 +11,15 @@ public interface SlotService {
 
     boolean delete(int id);
 
+    List<SlotJson> getByQuantity(String field, String quantity);
+
     List<SlotJson> getAll(String field);
 
     List<SlotJson> findAll();
 
-    List<SlotJson> mnFindAll(String email, String field);
+    List<SlotJson> mnGetByQuantity(String token, String field, String quantity);
+
+    List<SlotJson> mnGetAll(String email, String field);
 
     SlotJson findById(int id);
 

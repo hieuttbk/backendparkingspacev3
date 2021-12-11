@@ -27,7 +27,7 @@ public class ContractController {
     @GetMapping("api/ad/contract/find_all")
     public ResponseEntity<Object> findAll(@RequestParam(required = false) String t1,
                                           @RequestParam(required = false) String t2,
-                                          @RequestParam String quantity) throws ParseException {
+                                          @RequestParam(value = "quantity", required = false) String quantity) throws ParseException {
         if(t1!= null && t2 != null){
             return ResponseEntity.ok(MyResponse.success(contractService.findByTime(t1, t2)));
         }

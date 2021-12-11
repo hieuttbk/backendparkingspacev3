@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,6 +51,11 @@ public class SlotService_Impl implements SlotService {
     }
 
     @Override
+    public List<SlotJson> getByQuantity(String field, String quantity) {
+        return slotRepo.getByQuantity(field, quantity).stream().map(this::data2Json).collect(Collectors.toList());
+    }
+
+    @Override
     public List<SlotJson> getAll(String field) {
         return slotRepo.getAll(field).stream().map(this::data2Json).collect(Collectors.toList());
     }
@@ -60,7 +66,25 @@ public class SlotService_Impl implements SlotService {
     }
 
     @Override
-    public List<SlotJson> mnFindAll(String token, String field) {
+    public List<SlotJson> mnGetByQuantity(String token, String field, String quantity) {
+        List<SlotJson> slotJsons = new ArrayList<>();
+        String email = jwtService.decode(token);
+        Manager manager = managerRepo.findByEmail(email);
+        if(manager == null){
+            return null;
+        }
+        List<Slot> slots = slotRepo.getByQuantity(field, quantity);
+        List <FieldJson> fieldJsons = fieldService.managerFind(email);
+        for(FieldJson fieldJson : fieldJsons){
+            slotJsons.addAll(
+                    slots.stream().filter(slot -> slot.getFieldId() == fieldJson.getId()).map(this::data2Json).collect(Collectors.toList())
+            );
+        }
+        return slotJsons;
+    }
+
+    @Override
+    public List<SlotJson> mnGetAll(String token, String field) {
         List<SlotJson> slotJsons = new ArrayList<>();
         String email = jwtService.decode(token);
         Manager manager = managerRepo.findByEmail(email);

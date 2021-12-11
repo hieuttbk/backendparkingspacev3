@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
@@ -41,9 +42,24 @@ public class SlotRepo_Impl implements SlotRepo {
     }
 
     @Override
+    public List<Slot> getByQuantity(String field, String quantity) {
+        int query = Integer.parseInt(quantity);
+        List<Slot> slots = entityManager.createQuery("Select s from Slot s where s.fieldId =: fieldId")
+                .setParameter("fieldId", Integer.parseInt(field)).setMaxResults(query).getResultList();
+        return slots;
+    }
+
+    @Override
     public List<Slot> getAll(String field) {
-        return entityManager.createQuery("select s from Slot s where s.fieldId =: fieldId")
+//        Date date = new Date();
+//        System.out.println("PrevDate - " + date);
+        List<Slot> slots = entityManager.createQuery("select s from Slot s where s.fieldId =: fieldId")
                 .setParameter("fieldId", Integer.parseInt(field)).getResultList();
+//        if (slots.size() > 0) {
+//            Date newDate = new Date();
+//            System.out.println("NextDate - " + newDate);
+//        }
+        return slots;
     }
 
     @Override

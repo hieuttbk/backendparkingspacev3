@@ -16,21 +16,21 @@ public class ContractPayload {
 
     private Integer fieldId;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private Timestamp timeInBook;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private Timestamp timeOutBook;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private Timestamp timeCarIn;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private Timestamp timeCarOut;
 
     private String carNumber;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private Timestamp dtCreate;
 
     private String status;

@@ -14,7 +14,7 @@ public class ManUpdateInfoPayload {
     private String address;
     private String sex;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="YYYY-MM-DD")
     private Date birth;
 
 }

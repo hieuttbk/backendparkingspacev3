@@ -12,6 +12,8 @@ public interface SlotRepo {
 
     boolean delete(int id);
 
+    List<Slot> getByQuantity(String field, String quantity);
+
     List<Slot> getAll(String field);
 
     List<Slot> findAll();

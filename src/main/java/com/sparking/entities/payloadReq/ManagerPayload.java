@@ -1,5 +1,6 @@
 package com.sparking.entities.payloadReq;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -20,6 +21,7 @@ public class ManagerPayload {
 
     private String sex;
 
+    @JsonFormat(pattern = "YYYY-MM-DD")
     private Date birth;
 
     int idNumber;

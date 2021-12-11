@@ -36,16 +36,29 @@ public class SlotController {
     }
 
     @GetMapping(value = {"api/ad/slot/find_all"})
-    public ResponseEntity<Object> findAll(@RequestParam(value = "field", required = false) final String field){
+    public ResponseEntity<Object> findAll(
+            @RequestParam(value = "field", required = false) final String field,
+            @RequestParam(value = "quantity", required = false) final String quantity){
         if (field != null && Integer.parseInt(field) > 0) {
+            if (quantity != null) {
+                return ResponseEntity.ok(MyResponse.success(slotService.getByQuantity(field, quantity)));
+            }
             return ResponseEntity.ok(MyResponse.success(slotService.getAll(field)));
         }
         return ResponseEntity.ok(MyResponse.success(slotService.findAll()));
     }
 
     @GetMapping(value = {"api/mn/slot/find_all"})
-    public ResponseEntity<Object> mnFindAll(@RequestHeader String token, @RequestParam String field){
-        return ResponseEntity.ok(MyResponse.success(slotService.mnFindAll(token, field)));
+    public ResponseEntity<Object> mnFindAll(@RequestHeader String token,
+                                            @RequestParam(value = "field", required = false) final String field,
+                                            @RequestParam(value = "quantity", required = false) final String quantity){
+        if (field != null && Integer.parseInt(field) > 0) {
+            if (quantity != null && Integer.parseInt(quantity) > 0) {
+                return ResponseEntity.ok(MyResponse.success(slotService.mnGetByQuantity(token, field, quantity)));
+            }
+            return ResponseEntity.ok(MyResponse.success(slotService.mnGetAll(token, field)));
+        }
+        return null;
     }
 
     @DeleteMapping("api/ad/slot/delete/{id}")
