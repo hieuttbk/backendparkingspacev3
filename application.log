@@ -1706,3 +1706,8 @@ java.lang.NullPointerException: null
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
 	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
 
+2021-12-17 21:00:49.293  INFO 6516 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 6516 (C:\Users\Hyacinth\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\backendparkingspacev3)
+2021-12-17 21:00:49.296  INFO 6516 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2021-12-17 21:00:52.036  WARN 6516 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-12-17 21:00:53.613  INFO 6516 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.824 seconds (JVM running for 5.458)
+2021-12-17 21:00:53.617  INFO 6516 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
