@@ -7,6 +7,7 @@ import com.sparking.entities.data.Manager;
 import com.sparking.entities.data.Slot;
 import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.entities.jsonResp.FieldJson;
+import com.sparking.helper.HandleSlotID;
 import com.sparking.repository.ContractRepo;
 import com.sparking.repository.FieldRepo;
 import com.sparking.repository.ManagerRepo;
@@ -53,10 +54,16 @@ public class FieldService_Impl implements FieldService {
         FieldJson fieldJson = data2Json(field);
         fieldRepo.createAndUpdate(field);
         if(oldField != null){ // chi tao slot theo so space khi dang them moi field
+//            System.out.println("OldField");
+//            System.out.println(fieldJson.getSpace().intValue());
             for(int i = 0; i < fieldJson.getSpace().intValue(); i++){
-                slotRepo.createAndUpdate(slotRepo.createAndUpdate(new Slot(0, field.getId(), false, false)));
+                System.out.println("Field Service - " + i);
+                slotRepo.createAndUpdate(
+                        new Slot(i, field.getId(), false, false)
+                );
             }
         }
+//        System.out.println("Return FieldJson");
         return fieldJson;
     }
 

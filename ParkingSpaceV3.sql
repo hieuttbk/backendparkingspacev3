@@ -25,14 +25,15 @@ CREATE TABLE gateway(
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE slot(
-	id int NOT NULL AUTO_INCREMENT,
+	id int NOT NULL,
     field_id int not null,
     status_detector bit(1),
     status_cam bit(1),
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
     CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=INNODB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 CREATE TABLE detector(
 	id int NOT NULL,

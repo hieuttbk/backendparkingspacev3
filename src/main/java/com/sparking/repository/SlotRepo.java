@@ -3,6 +3,7 @@ package com.sparking.repository;
 import com.sparking.entities.data.Manager;
 import com.sparking.entities.data.Slot;
 import com.sparking.entities.jsonResp.SlotJson;
+import com.sparking.entities.payloadReq.CreateNewSlotPayload;
 
 import java.util.List;
 
@@ -12,11 +13,35 @@ public interface SlotRepo {
 
     boolean delete(int id);
 
-    List<Slot> getByQuantity(String field, String quantity);
+    // -------------- Admin ---------------
 
-    List<Slot> getAll(String field);
+    List<Slot> getByQuantityAndField(String field, String quantity);
+
+    List<Slot> getByField(String field);
 
     List<Slot> findAll();
+
+    List<Slot> getSlotByQuantity(String quantity);
+
+    Slot createNewSlot(CreateNewSlotPayload createNewSlotPayload);
+
+    Slot updateSlot(Slot slot);
+
+    // --------------- Manager ---------------
+
+    List<Slot> mnGetSlotByQuery(String email, String field, String quantity);
+
+    List<Slot> mnGetSlotByField(String email, String field);
+
+    List<Slot> mnGetSlotByQuantity(String email, String quantity);
+
+    List<Slot> mnGetAllSlot(String email);
+
+    Slot mnCreateNewSlot(String email, CreateNewSlotPayload createNewSlotPayload);
+
+    Slot mnUpdateSlot(Slot slot);
+
+    // ----------------------------------------
 
     Slot findById(int id);
 
