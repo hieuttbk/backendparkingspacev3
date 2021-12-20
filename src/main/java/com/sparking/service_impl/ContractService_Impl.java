@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -124,8 +125,12 @@ public class ContractService_Impl implements ContractService {
 
     @Override
     public List<Contract> findByTime(Timestamp t1, Timestamp t2) {
+     //   Timestamp t_1= new Timestamp(System.currentTimeMillis());
+
         List<Contract> contracts = findAll();
-        return contracts.stream().filter(contract -> {
+      //  Timestamp t_2= new Timestamp(System.currentTimeMillis());
+
+        List<Contract> rt = contracts.stream().filter(contract -> {
             Timestamp ti = contract.getTimeCarIn();
             Timestamp to = contract.getTimeCarOut();
             long dt = t2.getTime() - t1.getTime();
@@ -148,7 +153,38 @@ public class ContractService_Impl implements ContractService {
                 b=(to.getTime()-t1.getTime()) * 1.0 / dt;
             }
             return b >0.6;
-        }).collect(Collectors.toList());
+        } ).collect(Collectors.toList());
+
+      //  Timestamp t_3= new Timestamp(System.currentTimeMillis());
+
+       // logger.info("t2-t1: " + (t_2.getTime()-t_1.getTime()) + "t3-t2: " + (t_3.getTime()-t_2.getTime()));
+        return rt;
+//        return contracts.stream().filter(contract -> {
+//            Timestamp ti = contract.getTimeCarIn();
+//            Timestamp to = contract.getTimeCarOut();
+//            long dt = t2.getTime() - t1.getTime();
+//            double b = 0;
+//
+//            if((!contract.getStatus().equals("R"))||(null==ti)||(null==to)) { // ti, to may be null in contracts
+//                return false;
+//            }
+//            if(t1.after(to)||t2.before(ti)){ // ti-to is out of t1-t2
+//                return false;
+//            }
+////            logger.info("t1 " + t1);
+////            logger.info("t2 " + t2);
+////            logger.info("ti " + ti);
+////            logger.info("to " + to);
+//            if(t1.before(ti)){
+//                b = (to.getTime()-ti.getTime())  * 1.0 / dt; //  * 1.0 de no tinh theo double
+//            }
+//            if(ti.before(t1) && t1.before(to)){
+//                b=(to.getTime()-t1.getTime()) * 1.0 / dt;
+//            }
+//            return b >0.6;
+//        } ).collect(Collectors.toList());
+
+
     }
 
     @Override
@@ -166,5 +202,48 @@ public class ContractService_Impl implements ContractService {
             rs.addAll(contracts);
         }
         return rs;
+    }
+
+    @Override
+    public List<Contract> findByField(int fieldId) {
+        return contractRepo.findByField(fieldId);
+    }
+
+    @Override
+    public List<Contract> findByFieldTime(Timestamp t1, Timestamp t2, int fieldId) {
+           Timestamp t_1= new Timestamp(System.currentTimeMillis());
+
+        List<Contract> contracts = findByField(fieldId);
+          Timestamp t_2= new Timestamp(System.currentTimeMillis());
+
+        List<Contract> rt = contracts.stream().filter(contract -> {
+            Timestamp ti = contract.getTimeCarIn();
+            Timestamp to = contract.getTimeCarOut();
+            long dt = t2.getTime() - t1.getTime();
+            double b = 0;
+
+            if((!contract.getStatus().equals("R"))||(null==ti)||(null==to)) { // ti, to may be null in contracts
+                return false;
+            }
+            if(t1.after(to)||t2.before(ti)){ // ti-to is out of t1-t2
+                return false;
+            }
+//            logger.info("t1 " + t1);
+//            logger.info("t2 " + t2);
+//            logger.info("ti " + ti);
+//            logger.info("to " + to);
+            if(t1.before(ti)){
+                b = (to.getTime()-ti.getTime())  * 1.0 / dt; //  * 1.0 de no tinh theo double
+            }
+            if(ti.before(t1) && t1.before(to)){
+                b=(to.getTime()-t1.getTime()) * 1.0 / dt;
+            }
+            return b >0.6;
+        } ).collect(Collectors.toList());
+
+          Timestamp t_3= new Timestamp(System.currentTimeMillis());
+
+         logger.info("t2-t1: " + (t_2.getTime()-t_1.getTime()) + " | t3-t2: " + (t_3.getTime()-t_2.getTime()));
+        return rt;
     }
 }

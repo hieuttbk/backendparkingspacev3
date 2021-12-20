@@ -138,14 +138,30 @@ public class FieldService_Impl implements FieldService {
          n = (int) ((until - since) / unitInt);
         List<FieldAnalysis> rs = new ArrayList<>();
 
+        //TODO
+        //optimize analysis
 
         for(int i =0; i< n; i++){
             long t = time;
             int freq = 0;
             int count = 0;
             while (t < time + unitInt ){
-                freq += (int) contractService.findByTime(new Timestamp(t), new Timestamp(t + oneHour))
-                        .stream().filter(contract -> contract.getFieldId() == fieldId).count();
+             //   Timestamp t_1= new Timestamp(System.currentTimeMillis());
+//                List<Contract> contractsByTime= contractService.findByTime(new Timestamp(t), new Timestamp(t + oneHour));
+//                Timestamp t_2= new Timestamp(System.currentTimeMillis());
+//                int c = (int) contractsByTime.stream().filter(contract -> contract.getFieldId() == fieldId).count();
+
+                int c1 = (int) contractService.findByFieldTime(new Timestamp(t), new Timestamp(t + oneHour),fieldId).stream().count();
+                //try querry fieldid before
+              //  List<Contract> contractsByField= contractService.findByField(fieldId);
+
+
+               // Timestamp t_3= new Timestamp(System.currentTimeMillis());
+               // System.out.println("t2-t1: " + (t_2.getTime()-t_1.getTime()) + " | t3-t2: " + (t_3.getTime()-t_2.getTime()));
+
+                freq +=c1;
+//                freq += (int) contractService.findByTime(new Timestamp(t), new Timestamp(t + oneHour))
+//                        .stream().filter(contract -> contract.getFieldId() == fieldId).count();
               //  List<Contract> contracts = contractService.findByTime(new Timestamp(t), new Timestamp(t + oneHour));
 
                 t+= oneHour; // 1h to millisecond
