@@ -68,5 +68,13 @@ public class ContractRepo_Impl implements ContractRepo {
 
     }
 
+    @Override
+    public List<Contract> findByField(int fieldId) {
+        Query query = entityManager
+                .createQuery("select u from Contract u where u.fieldId= :fieldId");
+        List<Contract> contracts = query.setParameter("fieldId", fieldId).getResultList();
+        return contracts;
+    }
+
 
 }

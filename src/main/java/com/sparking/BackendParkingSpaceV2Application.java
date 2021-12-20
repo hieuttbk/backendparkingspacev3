@@ -5,17 +5,16 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.sparking.entities.data.Contract;
-import com.sparking.entities.data.DataCamAndDetector;
-import com.sparking.entities.data.Slot;
+import com.sparking.entities.data.*;
+import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.getData.GetTime;
 import com.sparking.getData.TagModule;
-import com.sparking.repository.ContractRepo;
-import com.sparking.repository.DataCamAndDetectorRepo;
-import com.sparking.repository.SlotRepo;
+import com.sparking.repository.*;
+import com.sparking.service.FieldService;
 import com.sparking.service_impl.GoogleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +32,8 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import static org.hibernate.internal.CoreLogging.logger;
+
 
 @SpringBootApplication
 @EnableSwagger2
@@ -44,6 +45,9 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     SlotRepo slotRepo;
 
     @Autowired
+    FieldRepo fieldRepo;
+
+    @Autowired
     ContractRepo contractRepo;
 
     @Autowired
@@ -51,6 +55,13 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
     @Autowired
     DataCamAndDetectorRepo dataCamAndDetectorRepo;
+
+    @Autowired
+    FieldService fieldService;
+
+    @Autowired
+    StatsFieldRepo statsFieldRepoRepo;
+
 
     List<String> rows = new ArrayList<>();
 
@@ -86,19 +97,25 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 //        set timezone cho controller
         objectMapper.setTimeZone(TimeZone.getDefault());
 
-        update();
+        //TODO
+        // using Thread or sthg else !!!!!!!
+        logger.info("DELETE EXPIRED CONTRACT");
+     //   update();
 //        GetDataDetector.main(args);
-        TagModule.start();
 
+        logger.info("START TAG MODULE");
+     //   TagModule.start();
+
+        logger.info("UPDATE STATS FIELD");
+        updateStatsField();
+
+        logger.info("UPDATE STATS FIELD FREQ");
+        updateStatsFieldFreq();
     }
 
     public void update() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException {
         while (true){
             deleteExpiredContract();
-//            if(!getDataCam()){
-//                System.out.println("file data cam does not exist");
-//            }
-//            writeDataDetector();
             Thread.sleep(5000);
         }
     }
@@ -166,6 +183,99 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
                     contractRepo.delete(contract.getId());
                 }
             }
+        }
+    }
+
+    // auto update statistic field
+    void updateStatsField() throws ParseException {
+        List<StatsField> s = statsFieldRepoRepo.getLatest();
+       // logger.info("Test null " + s.size());
+        if (s.size()==0){
+            logger.info("UPDATE STATS FIELD");
+            List<Contract> contracts=contractRepo.findAll();
+            List<Field> fields = fieldRepo.findAll();
+            Timestamp until = new Timestamp(new Date().getTime());
+            Timestamp since = until;
+
+
+            for(Contract contract: contracts){
+                if (contract.getTimeInBook()!=null) {
+                    if (contract.getTimeInBook().before(since))
+                        since = contract.getTimeInBook();
+                }
+
+            }
+            long millisInDay = 60 * 60 * 24 * 1000;
+            //long currentTime = new Date().getTime();
+            long sinceDateOnly = (since.getTime() / millisInDay) * millisInDay;
+            long untilDateOnly = (until.getTime() / millisInDay) * millisInDay;
+            //  Date clearDate = new Date(dateOnly);
+           // logger.info("since " + sinceDateOnly );
+           // logger.info("until " + untilDateOnly );
+
+            for (Field f : fields) {
+                List<FieldAnalysis> fieldAnalyses = fieldService.analysis(f.getId(), sinceDateOnly, untilDateOnly, "day");
+
+                for(FieldAnalysis fa: fieldAnalyses) {
+                   // logger.info("fieldAnalyses " + fa.getFreq());
+                    statsFieldRepoRepo.createAndUpdate(StatsField.builder().
+                            id(-1).
+                            fieldId(f.getId()).
+                            day(new Timestamp(fa.getTime())).
+                            freq(fa.getFreq()).
+                            cost(fa.getCost()).
+                            build());
+                }
+            }
+        }
+
+    }
+
+    void updateStatsFieldFreq() throws ParseException {
+        List<StatsField> s = statsFieldRepoRepo.getLatest();
+        if (s.size()!=0){
+         //   logger.info("Size of s" + s.size());
+
+
+            List<Field> fields = fieldRepo.findAll();
+            Timestamp until = new Timestamp(new Date().getTime());
+            Timestamp since = until;
+
+            for(StatsField sf: s){
+                if (sf.getDay()!=null) {
+                    if (sf.getDay().before(since))
+                        since = sf.getDay();
+                }
+
+            }
+
+            long millisInDay = 60 * 60 * 24 * 1000;
+            //long currentTime = new Date().getTime();
+            long sinceDateOnly = (since.getTime() / millisInDay) * millisInDay;
+            long untilDateOnly = (until.getTime() / millisInDay) * millisInDay;
+            //  Date clearDate = new Date(dateOnly);
+
+            for (Field f : fields) {
+                List<FieldAnalysis> fieldAnalyses = fieldService.analysis(f.getId(), since.getTime(), until.getTime(), "day");
+                for(FieldAnalysis fa: fieldAnalyses) {
+                    statsFieldRepoRepo.createAndUpdate(StatsField.builder().
+                            id(0).
+                            fieldId(f.getId()).
+                            day(new Timestamp(fa.getTime())).
+                            freq(fa.getFreq()).
+                            cost(fa.getCost()).
+                            build());
+                }
+            }
+        }
+
+    }
+
+    public void updateStatsFieldFreqTime() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException, ParseException {
+        while (true){
+            updateStatsFieldFreq();
+            long millisInDay = 60 * 60 * 24 * 1000;
+            Thread.sleep(millisInDay);
         }
     }
 

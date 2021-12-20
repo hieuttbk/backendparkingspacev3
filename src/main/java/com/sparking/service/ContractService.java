@@ -1,6 +1,7 @@
 package com.sparking.service;
 
 import com.sparking.entities.data.Contract;
+import com.sparking.entities.data.Field;
 import com.sparking.entities.payloadReq.ContractPayload;
 
 import java.sql.Timestamp;
@@ -28,4 +29,7 @@ public interface ContractService {
 
     List<Contract> managerFind(String email);
 
+    List<Contract> findByField(int fieldId);
+
+    List<Contract> findByFieldTime(Timestamp timestamp, Timestamp timestamp1, int fieldId);
 }

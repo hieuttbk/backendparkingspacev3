@@ -32,6 +32,10 @@ public class InitData {
 
     @PostConstruct
     public void init(){
+
+
+
+
 //        if(slotRepo.findAll().size() < 100){
 //            System.out.println("Init 100 slot");
 //            gatewayRepo.createAndUpdate(new Gateway(1,1,"1.1.1.1"));
