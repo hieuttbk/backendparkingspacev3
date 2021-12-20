@@ -1,17 +1,11 @@
 package com.sparking.service_impl;
 
 import com.sparking.common.ConfigVar;
-import com.sparking.entities.data.Contract;
-import com.sparking.entities.data.Field;
-import com.sparking.entities.data.Manager;
-import com.sparking.entities.data.Slot;
+import com.sparking.entities.data.*;
 import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.entities.jsonResp.FieldJson;
 import com.sparking.helper.HandleSlotID;
-import com.sparking.repository.ContractRepo;
-import com.sparking.repository.FieldRepo;
-import com.sparking.repository.ManagerRepo;
-import com.sparking.repository.SlotRepo;
+import com.sparking.repository.*;
 import com.sparking.security.JWTService;
 import com.sparking.service.ContractService;
 import com.sparking.service.FieldService;
@@ -45,6 +39,9 @@ public class FieldService_Impl implements FieldService {
     ContractService contractService;
 
     @Autowired
+    StatsFieldRepo statsFieldRepo;
+
+    @Autowired
     JWTService jwtService;
 
     @Override
@@ -53,10 +50,10 @@ public class FieldService_Impl implements FieldService {
 
         FieldJson fieldJson = data2Json(field);
         fieldRepo.createAndUpdate(field);
-        if(oldField != null){ // chi tao slot theo so space khi dang them moi field
+        if (oldField != null) { // chi tao slot theo so space khi dang them moi field
 //            System.out.println("OldField");
 //            System.out.println(fieldJson.getSpace().intValue());
-            for(int i = 0; i < fieldJson.getSpace().intValue(); i++){
+            for (int i = 0; i < fieldJson.getSpace().intValue(); i++) {
                 System.out.println("Field Service - " + i);
                 slotRepo.createAndUpdate(
                         new Slot(i + 1, field.getId(), false, false)
@@ -80,7 +77,7 @@ public class FieldService_Impl implements FieldService {
     @Override
     public List<FieldJson> managerFind(String email) {
         Manager manager = managerRepo.findByEmail(email);
-        if(manager == null){
+        if (manager == null) {
             return null;
         }
         return fieldRepo.managerFind(manager).stream().map(this::data2Json).collect(Collectors.toList());
@@ -89,7 +86,7 @@ public class FieldService_Impl implements FieldService {
     @Override
     public FieldJson managerUpdate(Field field, String phone) {
         Manager manager = managerRepo.findByEmail(phone);
-        if(manager == null){
+        if (manager == null) {
             return null;
         }
         return data2Json(fieldRepo.managerUpdate(field, manager));
@@ -98,7 +95,7 @@ public class FieldService_Impl implements FieldService {
     @Override
     public boolean managerDelete(int id, String phone) {
         Manager manager = managerRepo.findByEmail(phone);
-        if(manager == null){
+        if (manager == null) {
             return false;
         }
         return fieldRepo.managerDelete(id, manager);
@@ -106,82 +103,113 @@ public class FieldService_Impl implements FieldService {
 
     @Override
     public List<FieldAnalysis> analysis(int fieldId, long since, long until, String unit) throws ParseException {
+        //System.out.println("analysis " + since + " " + fieldId );
         Field field = fieldRepo.findById(fieldId);
         int totalSlot = (int) slotRepo.findAll().stream().filter(slot -> slot.getFieldId() == fieldId).count();
-        if(field == null){
+        if (field == null) {
             return null;
         }
-        int  n, unitInt;
+        int n, unitInt;
 
-        switch (unit){
+        switch (unit) {
             case "hour":
                 unitInt = 60;
                 break;
             case "day":
-                unitInt = 60*24;
+                unitInt = 60 * 24;
                 break;
             case "week":
-                unitInt = 60*24*7;
+                unitInt = 60 * 24 * 7;
                 break;
-            case "mouth":
-                unitInt = 60*24*12;
+            case "month":
+                unitInt = 60 * 24 * 12;
                 break;
             default:
                 return null;
         }
 
-        unitInt *= 60*1000;
-        final  int oneHour = 60*60*1000;
+        unitInt *= 60 * 1000;
+        final int oneHour = 60 * 60 * 1000;
 
-      //  int time = since*60*1000;
+        //  int time = since*60*1000;
         long time = since; // no convert to minute
-         n = (int) ((until - since) / unitInt);
+        n = (int) ((until - since) / unitInt);
         List<FieldAnalysis> rs = new ArrayList<>();
 
         //TODO
         //optimize analysis
+        for (int i = 0; i < n; i++) {
+            long tt = time;
+            int f = 0;
+            int c = 0;
 
-        for(int i =0; i< n; i++){
-            long t = time;
-            int freq = 0;
-            int count = 0;
-            while (t < time + unitInt ){
-             //   Timestamp t_1= new Timestamp(System.currentTimeMillis());
+            while (tt < time + unitInt) {
+                List<StatsField> s = statsFieldRepo.findByTime(since, until);
+                f = (int) s.stream().count();
+
+                tt += oneHour * 24; // 1h to millisecond
+                c++;
+            }
+            f /= c;
+            rs.add(FieldAnalysis.builder()
+                    .totalSlot(totalSlot)
+                    .time(time)
+                    .freq(f)
+                    .cost((int) (f * field.getPrice() * unitInt / oneHour))
+                    .build());
+
+            time += unitInt;
+        }
+
+
+        if (unit.equals("hour")) {
+            for (int i = 0; i < n; i++) {
+                long t = time;
+                int freq = 0;
+                int count = 0;
+
+
+                while (t < time + unitInt) {
+                    //   Timestamp t_1= new Timestamp(System.currentTimeMillis());
 //                List<Contract> contractsByTime= contractService.findByTime(new Timestamp(t), new Timestamp(t + oneHour));
 //                Timestamp t_2= new Timestamp(System.currentTimeMillis());
 //                int c = (int) contractsByTime.stream().filter(contract -> contract.getFieldId() == fieldId).count();
 
-                int c1 = (int) contractService.findByFieldTime(new Timestamp(t), new Timestamp(t + oneHour),fieldId).stream().count();
-                //try querry fieldid before
-              //  List<Contract> contractsByField= contractService.findByField(fieldId);
+                    // old code, for hour in day
+                    int c1 = (int) contractService.findByFieldTime(new Timestamp(t), new Timestamp(t + oneHour), fieldId).stream().count();
+                    //try querry fieldid before
+                    //  List<Contract> contractsByField= contractService.findByField(fieldId);
 
+                    // Timestamp t_3= new Timestamp(System.currentTimeMillis());
+                    // System.out.println("t2-t1: " + (t_2.getTime()-t_1.getTime()) + " | t3-t2: " + (t_3.getTime()-t_2.getTime()));
 
-               // Timestamp t_3= new Timestamp(System.currentTimeMillis());
-               // System.out.println("t2-t1: " + (t_2.getTime()-t_1.getTime()) + " | t3-t2: " + (t_3.getTime()-t_2.getTime()));
-
-                freq +=c1;
+                    freq += c1;
 //                freq += (int) contractService.findByTime(new Timestamp(t), new Timestamp(t + oneHour))
 //                        .stream().filter(contract -> contract.getFieldId() == fieldId).count();
-              //  List<Contract> contracts = contractService.findByTime(new Timestamp(t), new Timestamp(t + oneHour));
+                    //  List<Contract> contracts = contractService.findByTime(new Timestamp(t), new Timestamp(t + oneHour));
 
-                t+= oneHour; // 1h to millisecond
-                count ++;
+                    t += oneHour; // 1h to millisecond
+                    count++;
 
 //                for (Contract c:contracts) {
 //                    System.out.println("Contract " + count + " " + freq + " " + c.getId());
 //                }
 
-            }
-            freq /= count;
+                }
 
-            rs.add(FieldAnalysis.builder()
-                    .totalSlot(totalSlot)
-                    .time(time)
-                    .freq(freq)
-                    .cost((int) (freq * field.getPrice()  * unitInt/oneHour))
-                    .build());
-            time += unitInt;
+                freq /= count;
+
+                rs.add(FieldAnalysis.builder()
+                        .totalSlot(totalSlot)
+                        .time(time)
+                        .freq(freq)
+                        .cost((int) (freq * field.getPrice() * unitInt / oneHour))
+                        .build());
+                time += unitInt;
+            }
         }
+
+
         return rs;
     }
 
@@ -190,8 +218,8 @@ public class FieldService_Impl implements FieldService {
         String email = jwtService.decode(token);
         Manager manager = managerRepo.findByEmail(email);
         List<Field> fieldsOfThisMn = fieldRepo.managerFind(manager);
-        for(Field field : fieldsOfThisMn){
-            if(field.getId().equals(fieldId)){
+        for (Field field : fieldsOfThisMn) {
+            if (field.getId().equals(fieldId)) {
                 return analysis(fieldId, since, until, unit);
             }
         }
@@ -205,7 +233,7 @@ public class FieldService_Impl implements FieldService {
                 .totalBook((int) contractRepo.findAll().stream()
                         .filter(contract -> (
                                 (contract.getStatus().equals("V"))
-                                && contract.getFieldId().equals(field.getId())
+                                        && contract.getFieldId().equals(field.getId())
                         ))
                         .count())
                 .busySlot((int) slotRepo.findAll().stream()

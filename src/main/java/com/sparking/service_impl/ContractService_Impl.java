@@ -211,10 +211,10 @@ public class ContractService_Impl implements ContractService {
 
     @Override
     public List<Contract> findByFieldTime(Timestamp t1, Timestamp t2, int fieldId) {
-           Timestamp t_1= new Timestamp(System.currentTimeMillis());
+       //    Timestamp t_1= new Timestamp(System.currentTimeMillis());
 
         List<Contract> contracts = findByField(fieldId);
-          Timestamp t_2= new Timestamp(System.currentTimeMillis());
+      //    Timestamp t_2= new Timestamp(System.currentTimeMillis());
 
         List<Contract> rt = contracts.stream().filter(contract -> {
             Timestamp ti = contract.getTimeCarIn();
@@ -241,9 +241,9 @@ public class ContractService_Impl implements ContractService {
             return b >0.6;
         } ).collect(Collectors.toList());
 
-          Timestamp t_3= new Timestamp(System.currentTimeMillis());
+        //  Timestamp t_3= new Timestamp(System.currentTimeMillis());
 
-         logger.info("t2-t1: " + (t_2.getTime()-t_1.getTime()) + " | t3-t2: " + (t_3.getTime()-t_2.getTime()));
+       //  logger.info("t2-t1: " + (t_2.getTime()-t_1.getTime()) + " | t3-t2: " + (t_3.getTime()-t_2.getTime()));
         return rt;
     }
 }
