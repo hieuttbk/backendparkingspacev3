@@ -53,7 +53,7 @@ public class FieldService_Impl implements FieldService {
 
         FieldJson fieldJson = data2Json(field);
         fieldRepo.createAndUpdate(field);
-        if(oldField != null){ // chi tao slot theo so space khi dang them moi field
+        if(oldField == null){ // chi tao slot theo so space khi dang them moi field
 //            System.out.println("OldField");
 //            System.out.println(fieldJson.getSpace().intValue());
             for(int i = 0; i < fieldJson.getSpace().intValue(); i++){

@@ -25,7 +25,10 @@ public class DetectorController {
 //    }
 
     @GetMapping("api/ad/detector/find_all")
-    public ResponseEntity<Object> findAll(){
+    public ResponseEntity<Object> findAll(@RequestParam(value = "gwid", required = false) final String gateway){
+        if (gateway != null && Integer.parseInt(gateway) > 0) {
+            return ResponseEntity.ok(MyResponse.success(detectorService.findByGateway(gateway)));
+        }
         return ResponseEntity.ok(MyResponse.success(detectorService.findAll()));
     }
 
@@ -35,9 +38,13 @@ public class DetectorController {
 //    }
 
     @GetMapping(value = {"api/mn/detector/find_all"})
-    public ResponseEntity<Object> managerFindAll(@RequestHeader String token){
-        String phone = jwtService.decode(token);
-        return ResponseEntity.ok(MyResponse.success(detectorService.managerFind(phone)));
+    public ResponseEntity<Object> managerFindAll(@RequestHeader String token,
+                                                 @RequestParam(value = "gwid", required = false) final String gateway){
+        String email = jwtService.decode(token);
+        if (gateway != null && Integer.parseInt(gateway) > 0) {
+            return ResponseEntity.ok(MyResponse.success(detectorService.managerGetByGateway(email, gateway)));
+        }
+        return ResponseEntity.ok(MyResponse.success(detectorService.managerFind(email)));
     }
 
 //    @PostMapping("api/mn/detector/create_and_update")

@@ -19,9 +19,13 @@ public interface DetectorRepo {
 
     List<Detector> findAll();
 
+    List<Detector> findByGateway(String gateway);
+
     List<Detector> findBySlotId(int id);
 
     List<Detector> managerFind(Manager manager);
+
+    List<Detector> managerGetByGateway(Manager manager, String gateway);
 
     Detector managerCreateAndUpdate(Detector detector, Manager manager);
 

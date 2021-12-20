@@ -18,7 +18,11 @@ public interface DetectorService {
 
     List<Detector> findAll();
 
-    List<Detector> managerFind(String phone);
+    List<Detector> findByGateway(String gateway);
+
+    List<Detector> managerFind(String email);
+
+    List<Detector> managerGetByGateway(String email, String gateway);
 
     Detector managerCreateAndUpdate(DetectorPayload detectorPayload, String phone);
 

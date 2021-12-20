@@ -87,6 +87,12 @@ public class DetectorRepo_Impl implements DetectorRepo {
     }
 
     @Override
+    public List<Detector> findByGateway(String gateway) {
+        return entityManager.createQuery("Select d from Detector d where d.gatewayId =: gwid")
+                .setParameter("gwid", Integer.parseInt(gateway)).getResultList();
+    }
+
+    @Override
     public List<Detector> findBySlotId(int id) {
         return entityManager.createQuery("select d from Detector d where d.slotId = :id")
         .setParameter("id", id).getResultList();
@@ -99,6 +105,19 @@ public class DetectorRepo_Impl implements DetectorRepo {
         for(Gateway gateway: gateways){
             detectors.addAll(entityManager.createQuery("select x from Detector x where x.gatewayId =:id")
                     .setParameter("id", gateway.getId()).getResultList());
+        }
+        return detectors;
+    }
+
+    @Override
+    public List<Detector> managerGetByGateway(Manager manager, String gateway) {
+        List<Gateway> gateways = gatewayRepo.managerFind(manager);
+        List<Detector> detectors = new ArrayList<>();
+        for(Gateway gw: gateways){
+            detectors.addAll(entityManager.createQuery("select x from Detector x where x.gatewayId =:id and x.gatewayId =: gwid")
+                    .setParameter("id", gw.getId())
+                    .setParameter("gwid", Integer.parseInt(gateway))
+                    .getResultList());
         }
         return detectors;
     }
