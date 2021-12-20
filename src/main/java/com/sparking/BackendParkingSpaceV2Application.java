@@ -189,7 +189,8 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
     // auto update statistic field
     void updateStatsField() throws ParseException {
         List<StatsField> s = statsFieldRepoRepo.getLatest();
-        if (s==null){
+       // logger.info("Test null " + s.size());
+        if (s.size()==0){
             logger.info("UPDATE STATS FIELD");
             List<Contract> contracts=contractRepo.findAll();
             List<Field> fields = fieldRepo.findAll();
@@ -232,29 +233,42 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
     void updateStatsFieldFreq() throws ParseException {
         List<StatsField> s = statsFieldRepoRepo.getLatest();
+        if (s.size()!=0){
+         //   logger.info("Size of s" + s.size());
 
-        List<Field> fields = fieldRepo.findAll();
-        Timestamp until = new Timestamp(new Date().getTime());
-        Timestamp since = s.get(s.size()-1).getDay();
 
-        long millisInDay = 60 * 60 * 24 * 1000;
-        //long currentTime = new Date().getTime();
-        long sinceDateOnly = (since.getTime() / millisInDay) * millisInDay;
-        long untilDateOnly = (until.getTime() / millisInDay) * millisInDay;
-        //  Date clearDate = new Date(dateOnly);
+            List<Field> fields = fieldRepo.findAll();
+            Timestamp until = new Timestamp(new Date().getTime());
+            Timestamp since = until;
 
-        for (Field f : fields) {
-            List<FieldAnalysis> fieldAnalyses = fieldService.analysis(f.getId(), since.getTime(), until.getTime(), "day");
-            for(FieldAnalysis fa: fieldAnalyses) {
-                statsFieldRepoRepo.createAndUpdate(StatsField.builder().
-                        id(0).
-                        fieldId(f.getId()).
-                        day(new Timestamp(fa.getTime())).
-                        freq(fa.getFreq()).
-                        cost(fa.getCost()).
-                        build());
+            for(StatsField sf: s){
+                if (sf.getDay()!=null) {
+                    if (sf.getDay().before(since))
+                        since = sf.getDay();
+                }
+
+            }
+
+            long millisInDay = 60 * 60 * 24 * 1000;
+            //long currentTime = new Date().getTime();
+            long sinceDateOnly = (since.getTime() / millisInDay) * millisInDay;
+            long untilDateOnly = (until.getTime() / millisInDay) * millisInDay;
+            //  Date clearDate = new Date(dateOnly);
+
+            for (Field f : fields) {
+                List<FieldAnalysis> fieldAnalyses = fieldService.analysis(f.getId(), since.getTime(), until.getTime(), "day");
+                for(FieldAnalysis fa: fieldAnalyses) {
+                    statsFieldRepoRepo.createAndUpdate(StatsField.builder().
+                            id(0).
+                            fieldId(f.getId()).
+                            day(new Timestamp(fa.getTime())).
+                            freq(fa.getFreq()).
+                            cost(fa.getCost()).
+                            build());
+                }
             }
         }
+
     }
 
     public void updateStatsFieldFreqTime() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException, ParseException {
