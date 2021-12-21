@@ -9,6 +9,7 @@ import com.sparking.repository.*;
 import com.sparking.security.JWTService;
 import com.sparking.service.ContractService;
 import com.sparking.service.FieldService;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,17 +49,22 @@ public class FieldService_Impl implements FieldService {
     public FieldJson createAndUpdate(Field field) {
         Field oldField = fieldRepo.findById(field.getId());
 
+
         FieldJson fieldJson = data2Json(field);
-        fieldRepo.createAndUpdate(field);
 
-        if(oldField == null){ // chi tao slot theo so space khi dang them moi field
+        if(oldField != null){ // chi tao slot theo so space khi dang them moi field
 
+        }
+
+        else {
+            Field newField = fieldRepo.createAndUpdate(field);
             for (int i = 0; i < fieldJson.getSpace().intValue(); i++) {
                 System.out.println("Field Service - " + i);
                 slotRepo.createAndUpdate(
-                        new Slot(i + 1, field.getId(), false, false)
+                        new Slot(i + 1, newField.getId(), false, false)
                 );
             }
+            fieldJson = data2Json(newField);
         }
 //        System.out.println("Return FieldJson");
         return fieldJson;
@@ -103,13 +109,14 @@ public class FieldService_Impl implements FieldService {
 
     @Override
     public List<FieldAnalysis> analysis(int fieldId, long since, long until, String unit) throws ParseException {
-        //System.out.println("analysis " + since + " " + fieldId );
+        System.out.println("analysis " + new Timestamp(since) + " " + new Timestamp(until)  + " " + fieldId);
         Field field = fieldRepo.findById(fieldId);
         int totalSlot = (int) slotRepo.findAll().stream().filter(slot -> slot.getFieldId() == fieldId).count();
         if (field == null) {
             return null;
         }
-        int n, unitInt;
+        int n;
+        long unitInt;
 
         switch (unit) {
             case "hour":
@@ -122,7 +129,7 @@ public class FieldService_Impl implements FieldService {
                 unitInt = 60 * 24 * 7;
                 break;
             case "month":
-                unitInt = 60 * 24 * 12;
+                unitInt = 60 * 24 * 28;
                 break;
             default:
                 return null;
@@ -134,33 +141,46 @@ public class FieldService_Impl implements FieldService {
         //  int time = since*60*1000;
         long time = since; // no convert to minute
         n = (int) ((until - since) / unitInt);
+//        System.out.println("until - since " + (until - since));
+//        System.out.println("unitInt " + unitInt);
         List<FieldAnalysis> rs = new ArrayList<>();
+
+//        System.out.println("Time Start " + new Timestamp(since));
+//        System.out.println("Time End " + new Timestamp(until));
+//        System.out.println("Number quantity " + n);
+
 
         //TODO
         //optimize analysis
-        for (int i = 0; i < n; i++) {
-            long tt = time;
-            int f = 0;
-            int c = 0;
+        if (!unit.equals("hour")) {
+            for (int i = 0; i < n; i++) {
+                long tt = time;
+                int f = 0;
+                int c = 0;
 
-            while (tt < time + unitInt) {
-                List<StatsField> s = statsFieldRepo.findByTime(since, until);
-                f = (int) s.stream().count();
+                while (tt < time + unitInt) {
+                    List<StatsField> s = statsFieldRepo.findByFiledTime(tt, tt+unitInt,fieldId);
+                    for (StatsField sft:s
+                         ) {
+                        f+=sft.getFreq();
+                    }
 
-                tt += oneHour * 24; // 1h to millisecond
-                c++;
+                    //f+= (int) s.stream().count();
+
+                    tt += oneHour*24; // 1h to millisecond
+                    c++;
+                }
+                //   f /= c;
+                rs.add(FieldAnalysis.builder()
+                        .totalSlot(totalSlot)
+                        .time(until)
+                        .freq(f)
+                        .cost((int) (f * field.getPrice()))
+                        .build());
+
+                time += unitInt;
             }
-         //   f /= c;
-            rs.add(FieldAnalysis.builder()
-                    .totalSlot(totalSlot)
-                    .time(time)
-                    .freq(f)
-                    .cost((int) (f * field.getPrice()))
-                    .build());
-
-            time += unitInt;
         }
-
 
         if (unit.equals("hour")) {
             for (int i = 0; i < n; i++) {
@@ -201,7 +221,7 @@ public class FieldService_Impl implements FieldService {
 
                 rs.add(FieldAnalysis.builder()
                         .totalSlot(totalSlot)
-                        .time(time)
+                        .time(until)
                         .freq(freq)
                         .cost((int) (freq * field.getPrice()))
                         .build());
@@ -257,12 +277,14 @@ public class FieldService_Impl implements FieldService {
 
     @Override
     public List<FieldAnalysis> analysisByHour(int fieldId, long since, long until, String unit) {
+
         Field field = fieldRepo.findById(fieldId);
         int totalSlot = (int) slotRepo.findAll().stream().filter(slot -> slot.getFieldId() == fieldId).count();
         if (field == null) {
             return null;
         }
-        int n, unitInt;
+        int n;
+        long unitInt;
 
         switch (unit) {
             case "hour":
@@ -275,7 +297,7 @@ public class FieldService_Impl implements FieldService {
                 unitInt = 60 * 24 * 7;
                 break;
             case "month":
-                unitInt = 60 * 24 * 12;
+                unitInt = 60 * 24 * 28;
                 break;
             default:
                 return null;
@@ -287,9 +309,12 @@ public class FieldService_Impl implements FieldService {
         //  int time = since*60*1000;
         long time = since; // no convert to minute
         n = (int) ((until - since) / unitInt);
+        System.out.println("analysisByHour running " + n + " with field" + fieldId);
+
         List<FieldAnalysis> rs = new ArrayList<>();
 
             for (int i = 0; i < n; i++) {
+              //  System.out.println("processing with " + new Timestamp(time));
                 long t = time;
                 int freq = 0;
                 int count = 0;
@@ -299,22 +324,21 @@ public class FieldService_Impl implements FieldService {
                     t += oneHour; // 1h to millisecond
                     count++;
 
-                    if (t == 1639882800000.0) System.out.println("DEBUG count contract: " + c1  + " " + count);
+               //     if (t == 1639882800000.0) System.out.println("DEBUG count contract: " + c1  + " " + count);
                 }
                // freq /= count;
 
                 rs.add(FieldAnalysis.builder()
                         .totalSlot(totalSlot)
-                        .time(time)
+                        .time(until)
                         .freq(freq)
-                        .cost((int) (freq * field.getPrice() * unitInt / oneHour))
+                        .cost((int) (freq * field.getPrice()))
                         .build());
 
                 time += unitInt;
             }
 
-
-
+        System.out.println("analysisByHour done");
         return rs;
     }
 

@@ -16,4 +16,6 @@ public interface StatsFieldRepo {
     List<StatsField> getLatest();
 
     List<StatsField> findByTime(long since, long until);
+
+    List<StatsField> findByFiledTime(long since, long until, int fieldId);
 }
