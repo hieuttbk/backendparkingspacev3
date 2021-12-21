@@ -1,10 +1,8 @@
 package com.sparking.service_impl;
 
-import com.sparking.common.ConfigVar;
 import com.sparking.entities.data.*;
 import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.entities.jsonResp.FieldJson;
-import com.sparking.helper.HandleSlotID;
 import com.sparking.repository.*;
 import com.sparking.security.JWTService;
 import com.sparking.service.ContractService;
@@ -12,11 +10,11 @@ import com.sparking.service.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
+
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,11 +48,8 @@ public class FieldService_Impl implements FieldService {
 
         FieldJson fieldJson = data2Json(field);
         fieldRepo.createAndUpdate(field);
-<<<<<<< HEAD
         if(oldField == null){ // chi tao slot theo so space khi dang them moi field
-=======
         if (oldField != null) { // chi tao slot theo so space khi dang them moi field
->>>>>>> aea30a3a1cb3449d37184dfae1c9d1458646b11c
 //            System.out.println("OldField");
 //            System.out.println(fieldJson.getSpace().intValue());
             for (int i = 0; i < fieldJson.getSpace().intValue(); i++) {
