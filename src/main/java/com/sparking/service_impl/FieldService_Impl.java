@@ -1,8 +1,10 @@
 package com.sparking.service_impl;
 
+import com.sparking.common.ConfigVar;
 import com.sparking.entities.data.*;
 import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.entities.jsonResp.FieldJson;
+import com.sparking.helper.HandleSlotID;
 import com.sparking.repository.*;
 import com.sparking.security.JWTService;
 import com.sparking.service.ContractService;
@@ -11,11 +13,11 @@ import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
-
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +51,7 @@ public class FieldService_Impl implements FieldService {
 
 
         FieldJson fieldJson = data2Json(field);
+
         if(oldField != null){ // chi tao slot theo so space khi dang them moi field
 
         }
@@ -158,7 +161,7 @@ public class FieldService_Impl implements FieldService {
                 while (tt < time + unitInt) {
                     List<StatsField> s = statsFieldRepo.findByFiledTime(tt, tt+unitInt,fieldId);
                     for (StatsField sft:s
-                         ) {
+                    ) {
                         f+=sft.getFreq();
                     }
 
@@ -170,7 +173,7 @@ public class FieldService_Impl implements FieldService {
                 //   f /= c;
                 rs.add(FieldAnalysis.builder()
                         .totalSlot(totalSlot)
-                        .time(until)
+                        .time(time+unitInt)
                         .freq(f)
                         .cost((int) (f * field.getPrice()))
                         .build());
@@ -218,7 +221,7 @@ public class FieldService_Impl implements FieldService {
 
                 rs.add(FieldAnalysis.builder()
                         .totalSlot(totalSlot)
-                        .time(until)
+                        .time(time+unitInt)
                         .freq(freq)
                         .cost((int) (freq * field.getPrice()))
                         .build());
@@ -310,30 +313,30 @@ public class FieldService_Impl implements FieldService {
 
         List<FieldAnalysis> rs = new ArrayList<>();
 
-            for (int i = 0; i < n; i++) {
-              //  System.out.println("processing with " + new Timestamp(time));
-                long t = time;
-                int freq = 0;
-                int count = 0;
-                while (t < time + unitInt) {
-                    int c1 = (int) contractService.findByFieldTime(new Timestamp(t), new Timestamp(t + oneHour), fieldId).stream().count();
-                    freq += c1;
-                    t += oneHour; // 1h to millisecond
-                    count++;
+        for (int i = 0; i < n; i++) {
+            //  System.out.println("processing with " + new Timestamp(time));
+            long t = time;
+            int freq = 0;
+            int count = 0;
+            while (t < time + unitInt) {
+                int c1 = (int) contractService.findByFieldTime(new Timestamp(t), new Timestamp(t + oneHour), fieldId).stream().count();
+                freq += c1;
+                t += oneHour; // 1h to millisecond
+                count++;
 
-               //     if (t == 1639882800000.0) System.out.println("DEBUG count contract: " + c1  + " " + count);
-                }
-               // freq /= count;
-
-                rs.add(FieldAnalysis.builder()
-                        .totalSlot(totalSlot)
-                        .time(until)
-                        .freq(freq)
-                        .cost((int) (freq * field.getPrice()))
-                        .build());
-
-                time += unitInt;
+                //     if (t == 1639882800000.0) System.out.println("DEBUG count contract: " + c1  + " " + count);
             }
+            // freq /= count;
+
+            rs.add(FieldAnalysis.builder()
+                    .totalSlot(totalSlot)
+                    .time(time+unitInt)
+                    .freq(freq)
+                    .cost((int) (freq * field.getPrice()))
+                    .build());
+
+            time += unitInt;
+        }
 
         System.out.println("analysisByHour done");
         return rs;
