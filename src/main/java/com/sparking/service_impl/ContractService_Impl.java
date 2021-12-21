@@ -238,7 +238,11 @@ public class ContractService_Impl implements ContractService {
             if(ti.before(t1) && t1.before(to)){
                 b=(to.getTime()-t1.getTime()) * 1.0 / dt;
             }
+            if(contract.getCarNumber().equals("debug")) logger.info("DEBUG b: " + b + " Time1 "  + t1 + " Time2 " + t2 + " TimeIn " + ti + " TimeOut " + to );
+
             return b >0.6;
+
+
         } ).collect(Collectors.toList());
 
         //  Timestamp t_3= new Timestamp(System.currentTimeMillis());

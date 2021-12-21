@@ -110,7 +110,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         updateStatsField();
 
         logger.info("UPDATE STATS FIELD FREQ");
-        updateStatsFieldFreq();
+        updateStatsFieldFreqTime();
     }
 
     public void update() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException {
@@ -191,7 +191,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         List<StatsField> s = statsFieldRepoRepo.getLatest();
        // logger.info("Test null " + s.size());
         if (s.size()==0){
-            logger.info("UPDATE STATS FIELD");
+            logger.info("RUNNING IN UPDATE STATS FIELD");
             List<Contract> contracts=contractRepo.findAll();
             List<Field> fields = fieldRepo.findAll();
             Timestamp until = new Timestamp(new Date().getTime());
@@ -214,17 +214,20 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
            // logger.info("until " + untilDateOnly );
 
             for (Field f : fields) {
-                List<FieldAnalysis> fieldAnalyses = fieldService.analysis(f.getId(), sinceDateOnly, untilDateOnly, "day");
+                logger.info("Working with field " +  f.getId());
+                List<FieldAnalysis> fieldAnalyses = fieldService.analysisByHour(f.getId(), sinceDateOnly, untilDateOnly, "day");
 
                 for(FieldAnalysis fa: fieldAnalyses) {
                    // logger.info("fieldAnalyses " + fa.getFreq());
-                    statsFieldRepoRepo.createAndUpdate(StatsField.builder().
-                            id(-1).
-                            fieldId(f.getId()).
-                            day(new Timestamp(fa.getTime())).
-                            freq(fa.getFreq()).
-                            cost(fa.getCost()).
-                            build());
+                    if(fa.getFreq()!=0){
+                        statsFieldRepoRepo.createAndUpdate(StatsField.builder().
+                                id(-1).
+                                fieldId(f.getId()).
+                                day(new Timestamp(fa.getTime())).
+                                freq(fa.getFreq()).
+                                cost(fa.getCost()).
+                                build());
+                    }
                 }
             }
         }
@@ -239,16 +242,16 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
             List<Field> fields = fieldRepo.findAll();
             Timestamp until = new Timestamp(new Date().getTime());
-            Timestamp since = until;
+            Timestamp since = new Timestamp(0);
 
             for(StatsField sf: s){
                 if (sf.getDay()!=null) {
-                    if (sf.getDay().before(since))
+                    if (sf.getDay().after(since))
                         since = sf.getDay();
                 }
 
             }
-
+            logger.info("Since in updateStatsFieldFreq " + since);
             long millisInDay = 60 * 60 * 24 * 1000;
             //long currentTime = new Date().getTime();
             long sinceDateOnly = (since.getTime() / millisInDay) * millisInDay;
@@ -258,13 +261,17 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
             for (Field f : fields) {
                 List<FieldAnalysis> fieldAnalyses = fieldService.analysis(f.getId(), since.getTime(), until.getTime(), "day");
                 for(FieldAnalysis fa: fieldAnalyses) {
-                    statsFieldRepoRepo.createAndUpdate(StatsField.builder().
-                            id(0).
-                            fieldId(f.getId()).
-                            day(new Timestamp(fa.getTime())).
-                            freq(fa.getFreq()).
-                            cost(fa.getCost()).
-                            build());
+                    if(fa.getFreq()!=0){
+                        statsFieldRepoRepo.createAndUpdate(StatsField.builder().
+                                id(-1).
+                                fieldId(f.getId()).
+                                day(new Timestamp(fa.getTime())).
+                                freq(fa.getFreq()).
+                                cost(fa.getCost()).
+                                build());
+
+                    }
+
                 }
             }
         }

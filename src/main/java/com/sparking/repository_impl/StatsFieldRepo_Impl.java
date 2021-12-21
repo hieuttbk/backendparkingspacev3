@@ -38,4 +38,17 @@ public class StatsFieldRepo_Impl implements StatsFieldRepo {
                 return true;
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public List<StatsField> findByFiledTime(long since, long until, int fieldId) {
+        List<StatsField> statsFields = getLatest();
+
+        return statsFields.stream().filter(statsField -> {
+            if((statsField.getDay().getTime()<since)||(statsField.getDay().getTime()>until)||(statsField.getFieldId()!=fieldId))
+                return false;
+            else{
+             //   System.out.println("DEBUG statsFields: " + statsField + " " + fieldId);
+                return true;}
+        }).collect(Collectors.toList());
+    }
 }
