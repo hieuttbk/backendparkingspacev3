@@ -27,4 +27,5 @@ public interface FieldService {
 
     FieldJson data2Json(Field field);
 
+    List<FieldAnalysis> analysisByHour(int fieldId, long since, long until, String unit);
 }

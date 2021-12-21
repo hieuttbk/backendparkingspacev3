@@ -110,7 +110,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         updateStatsField();
 
         logger.info("UPDATE STATS FIELD FREQ");
-        updateStatsFieldFreq();
+        updateStatsFieldFreqTime();
     }
 
     public void update() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException {
@@ -191,7 +191,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         List<StatsField> s = statsFieldRepoRepo.getLatest();
        // logger.info("Test null " + s.size());
         if (s.size()==0){
-            logger.info("UPDATE STATS FIELD");
+            logger.info("RUNNING IN UPDATE STATS FIELD");
             List<Contract> contracts=contractRepo.findAll();
             List<Field> fields = fieldRepo.findAll();
             Timestamp until = new Timestamp(new Date().getTime());
@@ -214,8 +214,8 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
            // logger.info("until " + untilDateOnly );
 
             for (Field f : fields) {
-                List<FieldAnalysis> fieldAnalyses = fieldService.analysis(f.getId(), sinceDateOnly, untilDateOnly, "day");
-
+                List<FieldAnalysis> fieldAnalyses = fieldService.analysisByHour(f.getId(), sinceDateOnly, untilDateOnly, "day");
+                logger.info("fieldAnalyses Response: " +  fieldAnalyses.size());
                 for(FieldAnalysis fa: fieldAnalyses) {
                    // logger.info("fieldAnalyses " + fa.getFreq());
                     statsFieldRepoRepo.createAndUpdate(StatsField.builder().

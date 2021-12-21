@@ -50,13 +50,9 @@ public class FieldService_Impl implements FieldService {
 
         FieldJson fieldJson = data2Json(field);
         fieldRepo.createAndUpdate(field);
-<<<<<<< HEAD
+
         if(oldField == null){ // chi tao slot theo so space khi dang them moi field
-=======
-        if (oldField != null) { // chi tao slot theo so space khi dang them moi field
->>>>>>> aea30a3a1cb3449d37184dfae1c9d1458646b11c
-//            System.out.println("OldField");
-//            System.out.println(fieldJson.getSpace().intValue());
+
             for (int i = 0; i < fieldJson.getSpace().intValue(); i++) {
                 System.out.println("Field Service - " + i);
                 slotRepo.createAndUpdate(
@@ -154,12 +150,12 @@ public class FieldService_Impl implements FieldService {
                 tt += oneHour * 24; // 1h to millisecond
                 c++;
             }
-            f /= c;
+         //   f /= c;
             rs.add(FieldAnalysis.builder()
                     .totalSlot(totalSlot)
                     .time(time)
                     .freq(f)
-                    .cost((int) (f * field.getPrice() * unitInt / oneHour))
+                    .cost((int) (f * field.getPrice()))
                     .build());
 
             time += unitInt;
@@ -201,13 +197,13 @@ public class FieldService_Impl implements FieldService {
 
                 }
 
-                freq /= count;
+                //freq /= count;
 
                 rs.add(FieldAnalysis.builder()
                         .totalSlot(totalSlot)
                         .time(time)
                         .freq(freq)
-                        .cost((int) (freq * field.getPrice() * unitInt / oneHour))
+                        .cost((int) (freq * field.getPrice()))
                         .build());
                 time += unitInt;
             }
@@ -257,6 +253,69 @@ public class FieldService_Impl implements FieldService {
                 .price(field.getPrice())
                 .space(field.getSpace())
                 .build();
+    }
+
+    @Override
+    public List<FieldAnalysis> analysisByHour(int fieldId, long since, long until, String unit) {
+        Field field = fieldRepo.findById(fieldId);
+        int totalSlot = (int) slotRepo.findAll().stream().filter(slot -> slot.getFieldId() == fieldId).count();
+        if (field == null) {
+            return null;
+        }
+        int n, unitInt;
+
+        switch (unit) {
+            case "hour":
+                unitInt = 60;
+                break;
+            case "day":
+                unitInt = 60 * 24;
+                break;
+            case "week":
+                unitInt = 60 * 24 * 7;
+                break;
+            case "month":
+                unitInt = 60 * 24 * 12;
+                break;
+            default:
+                return null;
+        }
+
+        unitInt *= 60 * 1000;
+        final int oneHour = 60 * 60 * 1000;
+
+        //  int time = since*60*1000;
+        long time = since; // no convert to minute
+        n = (int) ((until - since) / unitInt);
+        List<FieldAnalysis> rs = new ArrayList<>();
+
+            for (int i = 0; i < n; i++) {
+                long t = time;
+                int freq = 0;
+                int count = 0;
+                while (t < time + unitInt) {
+                    int c1 = (int) contractService.findByFieldTime(new Timestamp(t), new Timestamp(t + oneHour), fieldId).stream().count();
+                    freq += c1;
+                    t += oneHour; // 1h to millisecond
+                    count++;
+
+                    if (t == 1639882800000.0) System.out.println("DEBUG count contract: " + c1  + " " + count);
+                }
+               // freq /= count;
+
+                rs.add(FieldAnalysis.builder()
+                        .totalSlot(totalSlot)
+                        .time(time)
+                        .freq(freq)
+                        .cost((int) (freq * field.getPrice() * unitInt / oneHour))
+                        .build());
+
+                time += unitInt;
+            }
+
+
+
+        return rs;
     }
 
 }
