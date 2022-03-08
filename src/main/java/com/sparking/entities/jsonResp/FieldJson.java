@@ -1,14 +1,17 @@
 package com.sparking.entities.jsonResp;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Builder
-@Data
+
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
 public class FieldJson {
 
     private int id;

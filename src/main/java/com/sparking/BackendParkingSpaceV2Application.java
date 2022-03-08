@@ -1,9 +1,6 @@
 package com.sparking;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.*;
@@ -11,11 +8,14 @@ import java.util.stream.Collectors;
 
 import com.sparking.entities.data.*;
 import com.sparking.entities.jsonResp.FieldAnalysis;
+import com.sparking.getData.GetDataDetector;
 import com.sparking.getData.GetTime;
 import com.sparking.getData.TagModule;
 import com.sparking.repository.*;
 import com.sparking.service.FieldService;
 import com.sparking.service_impl.GoogleService;
+import com.sparking.tune.AnalysisFunction;
+import com.sparking.tune.ExpiredContract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,26 +99,52 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
         //TODO
         // using Thread or sthg else !!!!!!!
-        logger.info("DELETE EXPIRED CONTRACT");
-     //   update();
-//        GetDataDetector.main(args);
 
-        logger.info("START TAG MODULE");
-     //   TagModule.start();
+//        logger.info("DELETE EXPIRED CONTRACT");
+     //   update();
+        GetDataDetector.main(args);
+
+        new Thread("DETECTOR"){
+            @Override
+            public void run() {
+                logger.info("START TAG DETECTOR");
+                try {
+                    GetDataDetector.main(args);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
+
+        new Thread("TAG"){
+            @Override
+            public void run() {
+                logger.info("START TAG MODULE");
+                try {
+                    TagModule.start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
+
+
 
         logger.info("UPDATE STATS FIELD");
-        updateStatsField();
+        AnalysisFunction.updateStatsField();
 
-        logger.info("UPDATE STATS FIELD FREQ");
-        updateStatsFieldFreqTime();
+      //  logger.info("UPDATE STATS FIELD FREQ");
+      //  updateStatsFieldFreqTime();
     }
 
-    public void update() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException {
-        while (true){
-            deleteExpiredContract();
-            Thread.sleep(5000);
-        }
-    }
+//    public void update() throws FileNotFoundException, InterruptedException, UnsupportedEncodingException {
+//        while (true){
+//            deleteExpiredContract();
+//            Thread.sleep(5000);
+//        }
+//    }
 
     public boolean getDataCam() throws FileNotFoundException {
         File file = new File (pathDataCam);
@@ -174,17 +200,17 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         }
     }
 
-    void deleteExpiredContract() {
-        for(Contract contract: contractRepo.findAll()){
-
-            if (contract.getTimeInBook()!=null) {
-                if (new Timestamp(new Date().getTime()).getTime() - contract.getTimeInBook().getTime() >= Integer.parseInt(timeExpiredContract)
-                        && contract.getTimeCarIn() == null) {
-                    contractRepo.delete(contract.getId());
-                }
-            }
-        }
-    }
+//    void deleteExpiredContract() {
+//        for(Contract contract: contractRepo.findAll()){
+//
+//            if (contract.getTimeInBook()!=null) {
+//                if (new Timestamp(new Date().getTime()).getTime() - contract.getTimeInBook().getTime() >= Integer.parseInt(timeExpiredContract)
+//                        && contract.getTimeCarIn() == null) {
+//                    contractRepo.delete(contract.getId());
+//                }
+//            }
+//        }
+//    }
 
     // auto update statistic field
     void updateStatsField() throws ParseException {
