@@ -11,6 +11,8 @@ public interface SlotRepo {
 
     Slot createAndUpdate(Slot slot);
 
+    Slot updateSlotDataCam(Slot slot);
+
     boolean delete(int id);
 
     // -------------- Admin ---------------

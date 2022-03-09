@@ -27,4 +27,7 @@ public class Slot {
 
     @Column(name = "status_detector")
     private Boolean statusDetector;
+
+    @Column(name = "car_number")
+    private String carNumber;
 }

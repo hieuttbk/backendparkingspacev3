@@ -61,7 +61,7 @@ public class FieldService_Impl implements FieldService {
             for (int i = 0; i < fieldJson.getSpace().intValue(); i++) {
                 System.out.println("Field Service - " + i);
                 slotRepo.createAndUpdate(
-                        new Slot(i + 1, newField.getId(), false, false)
+                        new Slot(i + 1, newField.getId(), false, false, null)
                 );
             }
             fieldJson = data2Json(newField);

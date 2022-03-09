@@ -37,6 +37,11 @@ public class SlotRepo_Impl implements SlotRepo {
     }
 
     @Override
+    public Slot updateSlotDataCam(Slot slot) {
+        return entityManager.merge(slot);
+    }
+
+    @Override
     public boolean delete(int id) {
         Slot slot = entityManager.find(Slot.class, id);
         if(slot != null){

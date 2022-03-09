@@ -11,6 +11,7 @@ import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.getData.GetDataDetector;
 import com.sparking.getData.GetTime;
 import com.sparking.getData.TagModule;
+import com.sparking.helper.HandleSlotID;
 import com.sparking.repository.*;
 import com.sparking.service.FieldService;
 import com.sparking.service_impl.GoogleService;
@@ -135,6 +136,9 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         logger.info("UPDATE STATS FIELD");
         AnalysisFunction.updateStatsField();
 
+        logger.info("UPDATE DATABASE SLOT USING DATA FROM CAM");
+        getDataCam();
+
       //  logger.info("UPDATE STATS FIELD FREQ");
       //  updateStatsFieldFreqTime();
     }
@@ -162,27 +166,49 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
             System.out.println("Data cam has changed");
             rows.clear();
             rows.addAll(newRows);
-            for (int i = 1; i< rows.size(); i++){
-                boolean status = rows.get(i).split(" ")[1].equals("1");
-//                fake field cho slot
-                int fieldId = 1;
-//                so thu tu sua slot trong field
-                int stt = Integer.parseInt(rows.get(i).split(" ")[0]) - 1;
+
+//            System.out.println("Rows Size " + rows.size());
+            for (int i = 1; i < rows.size(); i++){
+                String rowChild = rows.get(i);
+                boolean status = rowChild.split(" ")[2].equals("1");
+
+                int fieldId = Integer.parseInt(rowChild.split(" ")[1]);
+
+                int slotID = HandleSlotID.handleSlotId(fieldId, Integer.parseInt(rowChild.split(" ")[0]));
                 Slot oldSlot = slotRepo.findAll().stream()
-                        .filter(slot -> slot.getFieldId() == fieldId)
+                        .filter(slot -> slot.getId() == slotID)
                         .collect(Collectors.toList())
-                        .get(stt);
-                oldSlot.setStatusCam(status);
-                slotRepo.createAndUpdate(oldSlot);
+                        .get(0);
+                if (oldSlot != null) {
+                    oldSlot.setStatusCam(status);
+                    if (rowChild.split(" ").length == 4) {
+                        String carNumber = rowChild.split(" ")[3];
+                        oldSlot.setCarNumber(carNumber);
+                    }
+                }
+
+                slotRepo.updateSlotDataCam(oldSlot);
+
                 //            dataCamAndDetector
-                dataCamAndDetectorRepo.createAndUpdate(DataCamAndDetector.builder()
-                        .statusCam(status)
-                        .slotId(stt)
-                        .time(GetTime.getTime(rows.get(0)))
-                        .build());
+                DataCamAndDetector dataCamAndDetector = dataCamAndDetectorRepo.findAll().stream()
+                        .filter(dataCam -> dataCam.getSlotId() == slotID)
+                        .collect(Collectors.toList())
+                        .get(0);
+                if (dataCamAndDetector != null) {
+                    dataCamAndDetector.setStatusCam(status);
+                    dataCamAndDetector.setTime(GetTime.getTime(rows.get(0)));
+                    dataCamAndDetectorRepo.createAndUpdate(dataCamAndDetector);
+                } else {
+                    dataCamAndDetectorRepo.createAndUpdate(DataCamAndDetector.builder()
+                            .statusCam(status)
+                            .slotId(slotID)
+                            .time(GetTime.getTime(rows.get(0)))
+                            .build());
+                }
             }
             System.out.println("Data cam has updated successfully");
         }
+
         myReader.close();
         return true;
     }
