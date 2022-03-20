@@ -2,7 +2,6 @@ package com.sparking.getData;
 
 import com.sparking.common.ConfigVar;
 import com.sparking.entities.data.*;
-import com.sparking.helper.FormatDateFromNewsTag;
 import com.sparking.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

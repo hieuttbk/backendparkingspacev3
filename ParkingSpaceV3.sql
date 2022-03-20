@@ -171,6 +171,22 @@ CREATE TABLE verify_table(
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE area (
+    id INT NOT NULL AUTO_INCREMENT,
+    area_name nvarchar(256) NOT NULL,
+    id_district INT NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY `id_UNIQUE` (`id`),
+    CONSTRAINT FOREIGN KEY (`id_district`) REFERENCES `district` (`id`) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE district (
+    id INT NOT NULL AUTO_INCREMENT,
+    district nvarchar(100) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE code_reset_pass(
 	id int not null AUTO_INCREMENT,
 	email varchar(40) not null,
@@ -203,6 +219,36 @@ INSERT INTO `gateway` VALUES("2","2","255.255.0.8");
 INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('1', '0a041b9462caa4a31bac3567e0b6e6fd9100787db2ab433d96f6d178cabfce90', '0', 'user1@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
 INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('2', '6025d18fe48abd45168528f18a82e265dd98d421a7084aa09f61b341703901a3', '0', 'user2@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
 INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('3', '5860faf02b6bc6222ba5aca523560f0e364ccd8b67bee486fe8bf7c01d492ccb', '0', 'user3@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
+
+-- District Insert
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('1', 'Ba Đình');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('2', 'Bắc Từ Liêm');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('3', 'Cầu Giấy');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('4', 'Đống Đa');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('5', 'Hai Bà Trưng');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('6', 'Hà Đông');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('7', 'Hoàn Kiếm');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('8', 'Hoàng Mai');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('9', 'Long Biên');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('10', 'Nam Từ Liêm');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('11', 'Tây Hồ');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('12', 'Thanh Xuân');
+
+-- Area Insert
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('1', 'Trường Đại học Bách Khoa Hà Nội', '5');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('2', 'Phường Ngã Tư Sở', '4');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('3', 'Phường Nguyễn Du & Lê Đại Hành', '5');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('4', 'Phường Phúc La', '6');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('5', 'Phường Ngọc Hà & Cống Vị', '1');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('6', 'Phường Trung Tự', '4');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('7', 'Phường Thụy Khuê', '1');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('8', 'Phường Quảng An', '11');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('9', 'Khu đô thị Văn Phú', '6');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('10', 'Phường Trần Hưng Đạo', '7');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('11', 'Phường Tràng Tiền', '7');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('12', 'Phường Liễu Giai', '1');
+
+
 
 ALTER TABLE tag MODIFY id varchar(50);
 

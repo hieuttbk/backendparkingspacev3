@@ -1,23 +1,18 @@
 package com.sparking.service_impl;
 
-import com.sparking.common.ConfigVar;
 import com.sparking.entities.data.*;
 import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.entities.jsonResp.FieldJson;
-import com.sparking.helper.HandleSlotID;
 import com.sparking.repository.*;
 import com.sparking.security.JWTService;
 import com.sparking.service.ContractService;
 import com.sparking.service.FieldService;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,6 +76,22 @@ public class FieldService_Impl implements FieldService {
     }
 
     @Override
+    public List<FieldJson> filterByDistrictAndArea(String district, String area) {
+        return fieldRepo.filterByDistrictAndArea(district, area).stream().map(this::data2Json).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FieldJson> filterByDistrict(String district) {
+        return fieldRepo.filterByDistrict(district).stream().map(this::data2Json).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FieldJson> filterByArea(String area) {
+        return fieldRepo.filterByArea(area).stream().map(this::data2Json).collect(Collectors.toList());
+    }
+
+
+   @Override
     public List<FieldJson> managerFind(String email) {
         Manager manager = managerRepo.findByEmail(email);
         if (manager == null) {

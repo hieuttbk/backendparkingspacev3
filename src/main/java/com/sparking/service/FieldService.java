@@ -6,12 +6,19 @@ import com.sparking.entities.jsonResp.FieldJson;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 public interface FieldService {
 
     FieldJson createAndUpdate(Field field);
 
     boolean delete(int id);
+
+    List<FieldJson> filterByDistrictAndArea(String district, String area);
+
+    List<FieldJson> filterByDistrict(String district);
+
+    List<FieldJson> filterByArea(String area);
 
     List<FieldJson> findAll();
 

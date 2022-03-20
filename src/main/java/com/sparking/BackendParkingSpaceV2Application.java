@@ -9,14 +9,12 @@ import java.util.stream.Collectors;
 import com.sparking.entities.data.*;
 import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.getData.GetDataDetector;
-import com.sparking.getData.GetTime;
 import com.sparking.getData.TagModule;
-import com.sparking.helper.HandleSlotID;
+import com.sparking.helpers.HandleSlotID;
 import com.sparking.repository.*;
 import com.sparking.service.FieldService;
 import com.sparking.service_impl.GoogleService;
 import com.sparking.tune.AnalysisFunction;
-import com.sparking.tune.ExpiredContract;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -167,7 +165,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
             rows.clear();
             rows.addAll(newRows);
 
-//            System.out.println("Rows Size " + rows.size());
+            System.out.println("Rows Size " + rows.size());
             for (int i = 1; i < rows.size(); i++){
                 String rowChild = rows.get(i);
                 boolean status = rowChild.split(" ")[2].equals("1");
@@ -179,6 +177,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
                         .filter(slot -> slot.getId() == slotID)
                         .collect(Collectors.toList())
                         .get(0);
+                System.out.println("Debug - " + oldSlot);
                 if (oldSlot != null) {
                     oldSlot.setStatusCam(status);
                     if (rowChild.split(" ").length == 4) {
@@ -190,21 +189,21 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
                 slotRepo.updateSlotDataCam(oldSlot);
 
                 //            dataCamAndDetector
-                DataCamAndDetector dataCamAndDetector = dataCamAndDetectorRepo.findAll().stream()
-                        .filter(dataCam -> dataCam.getSlotId() == slotID)
-                        .collect(Collectors.toList())
-                        .get(0);
-                if (dataCamAndDetector != null) {
-                    dataCamAndDetector.setStatusCam(status);
-                    dataCamAndDetector.setTime(GetTime.getTime(rows.get(0)));
-                    dataCamAndDetectorRepo.createAndUpdate(dataCamAndDetector);
-                } else {
-                    dataCamAndDetectorRepo.createAndUpdate(DataCamAndDetector.builder()
-                            .statusCam(status)
-                            .slotId(slotID)
-                            .time(GetTime.getTime(rows.get(0)))
-                            .build());
-                }
+//                DataCamAndDetector dataCamAndDetector = dataCamAndDetectorRepo.findAll().stream()
+//                        .filter(dataCam -> dataCam.getSlotId() == slotID)
+//                        .collect(Collectors.toList())
+//                        .get(0);
+//                if (dataCamAndDetector != null) {
+//                    dataCamAndDetector.setStatusCam(status);
+//                    dataCamAndDetector.setTime(GetTime.getTime(rows.get(0)));
+//                    dataCamAndDetectorRepo.createAndUpdate(dataCamAndDetector);
+//                } else {
+//                    dataCamAndDetectorRepo.createAndUpdate(DataCamAndDetector.builder()
+//                            .statusCam(status)
+//                            .slotId(slotID)
+//                            .time(GetTime.getTime(rows.get(0)))
+//                            .build());
+//                }
             }
             System.out.println("Data cam has updated successfully");
         }

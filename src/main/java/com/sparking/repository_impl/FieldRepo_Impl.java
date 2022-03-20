@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
 @Repository
@@ -46,6 +47,18 @@ public class FieldRepo_Impl implements FieldRepo {
     @Override
     public List<Field> findAll() {
         return entityManager.createQuery("select x from Field x").getResultList();
+    }
+
+    @Override List<Field> filterByDistrictAndArea(String district, String area) {
+        return null;
+    }
+
+    @Override List<Field> filterByDistrict(String district) {
+        return null;
+    }
+
+    @Override List<Field> filterByArea(String area) {
+        return null;
     }
 
     @Override

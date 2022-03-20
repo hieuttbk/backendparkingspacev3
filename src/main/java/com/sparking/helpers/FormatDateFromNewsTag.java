@@ -1,6 +1,4 @@
-package com.sparking.helper;
-
-import java.util.Arrays;
+package com.sparking.helpers;
 
 public class FormatDateFromNewsTag {
     public static String FormatDate(String date) {

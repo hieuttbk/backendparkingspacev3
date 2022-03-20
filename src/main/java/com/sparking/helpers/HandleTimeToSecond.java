@@ -1,4 +1,4 @@
-package com.sparking.helper;
+package com.sparking.helpers;
 
 import java.util.Arrays;
 

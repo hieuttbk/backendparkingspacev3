@@ -4,11 +4,13 @@ import com.sparking.entities.data.Field;
 import com.sparking.entities.jsonResp.MyResponse;
 import com.sparking.security.JWTService;
 import com.sparking.service.FieldService;
+import org.apache.http.client.fluent.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.Map;
 
 @RestController
 public class FieldController {
@@ -38,7 +40,19 @@ public class FieldController {
     }
 
     @GetMapping(value = {"api/public/field/find_all","api/ad/field/find_all"})// can multiple mapping
-    public ResponseEntity<Object> findAll(){
+    public ResponseEntity<Object> findAll(
+                @RequestParam(value = "district", required = false) final String district,
+                @RequestParam(value = "area", required = false) final String area
+            ) {
+        if (district != null) {
+            if (area != null) {
+                return ResponseEntity.ok(MyResponse.success(fieldService.filterByDistrictAndArea(district, area)));
+            } else {
+                return ResponseEntity.ok(MyResponse.success(fieldService.filterByDistrict(district)));
+            }
+        } else if (area != null) {
+            return ResponseEntity.ok(MyResponse.success(fieldService.filterByArea(area)));
+        }
         return ResponseEntity.ok(MyResponse.success(fieldService.findAll()));
     }
 

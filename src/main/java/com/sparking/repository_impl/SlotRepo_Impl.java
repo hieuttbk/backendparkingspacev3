@@ -5,7 +5,7 @@ import com.sparking.entities.data.Manager;
 import com.sparking.entities.data.ManagerField;
 import com.sparking.entities.data.Slot;
 import com.sparking.entities.payloadReq.CreateNewSlotPayload;
-import com.sparking.helper.HandleSlotID;
+import com.sparking.helpers.HandleSlotID;
 import com.sparking.repository.FieldRepo;
 import com.sparking.repository.SlotRepo;
 import org.springframework.beans.factory.annotation.Autowired;

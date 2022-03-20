@@ -46,4 +46,6 @@ public class Field  {
     @Column(name = "details", nullable = false, columnDefinition = "longtext")
     private String details;
 
+    @Column(name = "id_area", nullable = false)
+    private Integer idArea;
 }
