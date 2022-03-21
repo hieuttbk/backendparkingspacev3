@@ -15,11 +15,9 @@ public interface FieldRepo{
 
     List<Field> findAll();
 
-    List<Field> filterByDistrictAndArea(String district, String area);
+    List<Field> filterByDistrict(int district);
 
-    List<Field> filterByDistrict(String district);
-
-    List<Field> filterByArea(String area);
+    List<Field> filterByArea(int area);
 
     List<Field> managerFind(Manager manager);
 

@@ -45,13 +45,9 @@ public class FieldController {
                 @RequestParam(value = "area", required = false) final String area
             ) {
         if (district != null) {
-            if (area != null) {
-                return ResponseEntity.ok(MyResponse.success(fieldService.filterByDistrictAndArea(district, area)));
-            } else {
-                return ResponseEntity.ok(MyResponse.success(fieldService.filterByDistrict(district)));
-            }
+            return ResponseEntity.ok(MyResponse.success(fieldService.filterByDistrict(Integer.parseInt(district))));
         } else if (area != null) {
-            return ResponseEntity.ok(MyResponse.success(fieldService.filterByArea(area)));
+            return ResponseEntity.ok(MyResponse.success(fieldService.filterByArea(Integer.parseInt(area))));
         }
         return ResponseEntity.ok(MyResponse.success(fieldService.findAll()));
     }

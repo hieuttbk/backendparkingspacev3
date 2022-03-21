@@ -1,8 +1,10 @@
 package com.sparking.service_impl;
 
 import com.sparking.entities.data.*;
+import com.sparking.entities.jsonResp.AreaJson;
 import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.entities.jsonResp.FieldJson;
+import com.sparking.entities.jsonResp.MetaJson;
 import com.sparking.repository.*;
 import com.sparking.security.JWTService;
 import com.sparking.service.ContractService;
@@ -10,6 +12,8 @@ import com.sparking.service.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -18,24 +22,29 @@ import java.util.stream.Collectors;
 
 @Service
 public class FieldService_Impl implements FieldService {
+    @Autowired
+    private AreaRepo areaRepo;
 
     @Autowired
-    FieldRepo fieldRepo;
+    private DistrictRepo districtRepo;
 
     @Autowired
-    SlotRepo slotRepo;
+    private FieldRepo fieldRepo;
 
     @Autowired
-    ManagerRepo managerRepo;
+    private SlotRepo slotRepo;
 
     @Autowired
-    ContractRepo contractRepo;
+    private ManagerRepo managerRepo;
 
     @Autowired
-    ContractService contractService;
+    private ContractRepo contractRepo;
 
     @Autowired
-    StatsFieldRepo statsFieldRepo;
+    private ContractService contractService;
+
+    @Autowired
+    private StatsFieldRepo statsFieldRepo;
 
     @Autowired
     JWTService jwtService;
@@ -71,23 +80,21 @@ public class FieldService_Impl implements FieldService {
     }
 
     @Override
-    public List<FieldJson> findAll() {
-        return fieldRepo.findAll().stream().map(this::data2Json).collect(Collectors.toList());
+    public MetaJson findAll() {
+        List<FieldJson> fieldJsons = fieldRepo.findAll().stream().map(this::data2Json).collect(Collectors.toList());
+        return formatMetaJson(fieldJsons);
     }
 
     @Override
-    public List<FieldJson> filterByDistrictAndArea(String district, String area) {
-        return fieldRepo.filterByDistrictAndArea(district, area).stream().map(this::data2Json).collect(Collectors.toList());
+    public MetaJson filterByDistrict(int district) {
+        List<FieldJson> fieldJsons = fieldRepo.filterByDistrict(district).stream().map(this::data2Json).collect(Collectors.toList());
+        return formatMetaJson(fieldJsons);
     }
 
     @Override
-    public List<FieldJson> filterByDistrict(String district) {
-        return fieldRepo.filterByDistrict(district).stream().map(this::data2Json).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<FieldJson> filterByArea(String area) {
-        return fieldRepo.filterByArea(area).stream().map(this::data2Json).collect(Collectors.toList());
+    public MetaJson filterByArea(int area) {
+        List<FieldJson> fieldJsons = fieldRepo.filterByArea(area).stream().map(this::data2Json).collect(Collectors.toList());
+        return formatMetaJson(fieldJsons);
     }
 
 
@@ -259,6 +266,17 @@ public class FieldService_Impl implements FieldService {
 
     @Override
     public FieldJson data2Json(Field field) {
+        Area area = areaRepo.getAreaById(field.getIdArea());
+        int idDistrict = area.getIdDistrict();
+
+        District oneDistrict = districtRepo.getDistrictByID(idDistrict);
+
+        AreaJson areaJson = AreaJson.builder()
+                .id(area.getId())
+                .areaName(area.getAreaName())
+                .district(oneDistrict)
+                .build();
+
         return FieldJson.builder()
                 .id(field.getId())
                 .totalBook((int) contractRepo.findAll().stream()
@@ -283,6 +301,7 @@ public class FieldService_Impl implements FieldService {
                 .openstatus(field.getOpenstatus())
                 .price(field.getPrice())
                 .space(field.getSpace())
+                .area(areaJson)
                 .build();
     }
 
@@ -351,6 +370,32 @@ public class FieldService_Impl implements FieldService {
 
         System.out.println("analysisByHour done");
         return rs;
+    }
+
+    private static MetaJson formatMetaJson(List<FieldJson> fieldJsons) {
+        int totalSlot = 0;
+        int totalBooking = 0;
+        int totalBusy = 0;
+        int totalEmpty = 0;
+
+        if (fieldJsons.size() > 0) {
+            for (int i = 0; i < fieldJsons.size(); i++) {
+                FieldJson fieldJson = fieldJsons.get(i);
+                totalSlot += fieldJson.getTotalSlot();
+                totalBooking += fieldJson.getTotalBook();
+                totalBusy += fieldJson.getBusySlot();
+            }
+            totalEmpty = (totalSlot - totalBooking - totalBusy);
+        }
+        MetaJson metaJson = MetaJson.builder()
+                .listOfFields(fieldJsons)
+                .totalCarSlot(totalSlot)
+                .totalCarBooking(totalBooking)
+                .totalBusySlot(totalBusy)
+                .totalEmptySlot(totalEmpty)
+                .build();
+
+        return metaJson;
     }
 
 }

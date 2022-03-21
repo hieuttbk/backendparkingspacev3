@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Table(name = "area")
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

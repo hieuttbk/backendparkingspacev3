@@ -1,13 +1,13 @@
 package com.sparking.repository_impl;
 
-import com.sparking.entities.data.Field;
-import com.sparking.entities.data.Gateway;
-import com.sparking.entities.data.Manager;
-import com.sparking.entities.data.ManagerField;
+import com.sparking.entities.data.*;
 import com.sparking.entities.jsonResp.FieldJson;
+import com.sparking.repository.AreaRepo;
+import com.sparking.repository.DistrictRepo;
 import com.sparking.repository.FieldRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +25,6 @@ public class FieldRepo_Impl implements FieldRepo {
     private static Logger logger = LoggerFactory.getLogger(FieldRepo_Impl.class);
     @PersistenceContext
     EntityManager entityManager;
-
 
     @Override
     public Field createAndUpdate(Field field) {
@@ -46,18 +45,48 @@ public class FieldRepo_Impl implements FieldRepo {
 
     @Override
     public List<Field> findAll() {
-        return entityManager.createQuery("select x from Field x").getResultList();
+        return entityManager
+                .createQuery("select x from Field x").getResultList();
     }
 
-    @Override List<Field> filterByDistrictAndArea(String district, String area) {
-        return null;
+    @Override
+    public List<Field> filterByDistrict(int district) {
+        ArrayList<Field> fields = new ArrayList<Field>();
+        List<Area> listAreas = entityManager
+                .createQuery("Select a from Area a where a.idDistrict =:district")
+                .setParameter("district", district)
+                .getResultList();
+        for (int i = 0; i < listAreas.size(); i++) {
+            List<Field> listFields = entityManager
+                    .createQuery("Select f from Field f where f.idArea =:area")
+                    .setParameter("area", listAreas.get(i).getId())
+                    .getResultList();
+            if (listFields.size() > 0) {
+                for (int j = 0; j < listFields.size(); j++) {
+                    fields.add(listFields.get(j));
+                }
+            } else {
+                continue;
+            }
+        }
+
+        return fields;
     }
 
-    @Override List<Field> filterByDistrict(String district) {
-        return null;
-    }
+    @Override
+    public List<Field> filterByArea(int area) {
+        List<Field> allFields = findAll();
+        if (allFields.size() > 0) {
+            ArrayList<Field> fields = new ArrayList<Field>();
+            for (int i = 0; i < allFields.size(); i++) {
+                Field field = allFields.get(i);
+                if (field.getIdArea().equals(area)) {
+                    fields.add(field);
+                }
+            }
+            return fields;
+        }
 
-    @Override List<Field> filterByArea(String area) {
         return null;
     }
 
@@ -110,5 +139,4 @@ public class FieldRepo_Impl implements FieldRepo {
         }
         return false;
     }
-
 }

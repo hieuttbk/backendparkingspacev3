@@ -1,5 +1,6 @@
 package com.sparking.entities.jsonResp;
 
+import com.sparking.entities.data.Area;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,5 +28,5 @@ public class FieldJson {
     private int totalBook;
     private int totalSlot;
     private int busySlot;
-
+    private AreaJson area;
 }
