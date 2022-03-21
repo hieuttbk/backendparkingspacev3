@@ -17,6 +17,6 @@ public class RegisterForm {
     private String phone;
     private String image;
     private String sex;
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
+    @JsonFormat(pattern="YYYY-MM-DD")
     private Date birth;
 }

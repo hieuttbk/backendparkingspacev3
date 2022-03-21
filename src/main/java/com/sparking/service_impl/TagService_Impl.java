@@ -17,13 +17,38 @@ public class TagService_Impl implements TagService {
     TagRepo tagRepo;
 
     @Override
+    public List<Tag> getAllTags() {
+        return tagRepo.getAllTags();
+    }
+
+    @Override
     public Tag registerTagForUser(RegisterTagsPayload registerTagsPayload) {
         return tagRepo.registerTagForUser(registerTagsPayload);
     }
 
     @Override
-    public List<TagPackage> getAllNewsTag() {
-        return tagRepo.getAllNewsTag();
+    public Tag updateTagForUser(Tag tag) {
+        return tagRepo.updateTagForUser(tag);
+    }
+
+    @Override
+    public boolean deleteTagForUser(String id) {
+        return tagRepo.deleteTagForUser(id);
+    }
+
+    @Override
+    public List<TagPackage> getAllNewsTag(String quantity) {
+        return tagRepo.getAllNewsTag(quantity);
+    }
+
+    @Override
+    public List<TagPackage> allNewsTag() {
+        return tagRepo.allNewsTag();
+    }
+
+    @Override
+    public TagPackage getNewsTag(String id) {
+        return tagRepo.getNewsTag(id);
     }
 
     @Override

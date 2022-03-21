@@ -36,6 +36,16 @@ public class DetectorService_Impl implements DetectorService {
     }
 
     @Override
+    public boolean deleteDetector(Integer id) {
+        return detectorRepo.deleteDetector(id);
+    }
+
+    @Override
+    public Detector createDetector(DetectorPayload detectorPayload) {
+        return detectorRepo.createDetector(detectorPayload);
+    }
+
+    @Override
     public boolean delete(int id) {
 //        return detectorRepo.delete(id);
         return false;
@@ -43,14 +53,25 @@ public class DetectorService_Impl implements DetectorService {
 
     @Override
     public List<Detector> findAll() {
-        System.out.println(detectorRepo.findAll());
+//        System.out.println(detectorRepo.findAll());
         return detectorRepo.findAll();
     }
 
     @Override
-    public List<Detector> managerFind(String phone) {
-        Manager manager = managerRepo.findByEmail(phone);
+    public List<Detector> findByGateway(String gateway) {
+        return detectorRepo.findByGateway(gateway);
+    }
+
+    @Override
+    public List<Detector> managerFind(String email) {
+        Manager manager = managerRepo.findByEmail(email);
         return detectorRepo.managerFind(manager);
+    }
+
+    @Override
+    public List<Detector> managerGetByGateway(String email, String gateway) {
+        Manager manager = managerRepo.findByEmail(email);
+        return detectorRepo.managerGetByGateway(manager, gateway);
     }
 
     @Override

@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 CREATE TABLE field(
 	id int NOT NULL AUTO_INCREMENT,
     name varchar(120) not null,
@@ -19,18 +21,19 @@ CREATE TABLE gateway(
     address_gateway varchar(20) not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`)
+    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE slot(
-	id int NOT NULL AUTO_INCREMENT,
+	id int NOT NULL,
     field_id int not null,
     status_detector bit(1),
     status_cam bit(1),
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE
+) ENGINE=INNODB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 CREATE TABLE detector(
 	id int NOT NULL,
@@ -43,8 +46,8 @@ CREATE TABLE detector(
     last_time_setup datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`slot_id`) REFERENCES `slot` (`id`),
-    CONSTRAINT FOREIGN KEY (`gateway_id`) REFERENCES `gateway` (`id`)
+    CONSTRAINT FOREIGN KEY (`slot_id`) REFERENCES `slot` (`id`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`gateway_id`) REFERENCES `gateway` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE user(
@@ -70,7 +73,7 @@ CREATE TABLE tag(
     time_car_out datetime,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE manager(
@@ -97,8 +100,8 @@ CREATE TABLE contract(
     status varchar(1) not null, 
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`),
-    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE manager_field(
@@ -108,8 +111,8 @@ CREATE TABLE manager_field(
     last_time_setup datetime not null,
     primary key (id),
     UNIQUE KEY `id_UNIQUE` (`id`),
-	CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`),
-    CONSTRAINT FOREIGN KEY (`manager_id`) REFERENCES `manager` (`id`)
+	CONSTRAINT FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (`manager_id`) REFERENCES `manager` (`id`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE admin(
@@ -168,6 +171,22 @@ CREATE TABLE verify_table(
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE area (
+    id INT NOT NULL AUTO_INCREMENT,
+    area_name nvarchar(256) NOT NULL,
+    id_district INT NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY `id_UNIQUE` (`id`),
+    CONSTRAINT FOREIGN KEY (`id_district`) REFERENCES `district` (`id`) ON DELETE CASCADE
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE district (
+    id INT NOT NULL AUTO_INCREMENT,
+    district nvarchar(100) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE code_reset_pass(
 	id int not null AUTO_INCREMENT,
 	email varchar(40) not null,
@@ -176,7 +195,8 @@ CREATE TABLE code_reset_pass(
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `parking_space_v3`.`admin` (`id`, `email`, `pass`) VALUES ('0', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+BEGIN;
+INSERT INTO `parking_space_2021`.`admin` (`id`, `email`, `pass`) VALUES ('0', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 
 INSERT INTO `field` VALUES ('1', 'C9', '20.960377427559497', '105.79658800934396', "Đại học BKHN", "", '50000', 'O', 50, "Bãi đồ xe C9");
 INSERT INTO `field` VALUES ('2', 'C3', '21.0066272', '105.8416806', "Đại học BKHN", "", '50000', 'O', 40, "Bãi đồ xe C3");
@@ -196,14 +216,56 @@ INSERT INTO `field` VALUES ('14', 'Điểm đỗ xe Vạn Phúc, Ba Đình', 'H�
 INSERT INTO `gateway` VALUES("1","1","255.255.0.0");
 INSERT INTO `gateway` VALUES("2","2","255.255.0.8");
 
-INSERT INTO `parking_space_v3`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('1', '0a041b9462caa4a31bac3567e0b6e6fd9100787db2ab433d96f6d178cabfce90', '0', 'user1@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
-INSERT INTO `parking_space_v3`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('2', '6025d18fe48abd45168528f18a82e265dd98d421a7084aa09f61b341703901a3', '0', 'user2@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
-INSERT INTO `parking_space_v3`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('3', '5860faf02b6bc6222ba5aca523560f0e364ccd8b67bee486fe8bf7c01d492ccb', '0', 'user3@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
+INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('1', '0a041b9462caa4a31bac3567e0b6e6fd9100787db2ab433d96f6d178cabfce90', '0', 'user1@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
+INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('2', '6025d18fe48abd45168528f18a82e265dd98d421a7084aa09f61b341703901a3', '0', 'user2@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
+INSERT INTO `parking_space_2021`.`user` (`id`, `pass`, `id_number`, `email`, `equipment`, `address`, `phone`, `last_time_access`, `image`, `sex`, `birth`) VALUES ('3', '5860faf02b6bc6222ba5aca523560f0e364ccd8b67bee486fe8bf7c01d492ccb', '0', 'user3@gmail.com', 'string', 'string', 'string', '2021-04-29 00:40:00', 'string', 'n', '2020-10-10');
+
+-- District Insert
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('1', 'Ba Đình');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('2', 'Bắc Từ Liêm');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('3', 'Cầu Giấy');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('4', 'Đống Đa');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('5', 'Hai Bà Trưng');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('6', 'Hà Đông');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('7', 'Hoàn Kiếm');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('8', 'Hoàng Mai');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('9', 'Long Biên');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('10', 'Nam Từ Liêm');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('11', 'Tây Hồ');
+INSERT INTO `parking_space_2021`.`district` (`id`, `district`) VALUES ('12', 'Thanh Xuân');
+
+-- Area Insert
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('1', 'Trường Đại học Bách Khoa Hà Nội', '5');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('2', 'Phường Ngã Tư Sở', '4');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('3', 'Phường Nguyễn Du & Lê Đại Hành', '5');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('4', 'Phường Phúc La', '6');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('5', 'Phường Ngọc Hà & Cống Vị', '1');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('6', 'Phường Trung Tự', '4');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('7', 'Phường Thụy Khuê', '1');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('8', 'Phường Quảng An', '11');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('9', 'Khu đô thị Văn Phú', '6');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('10', 'Phường Trần Hưng Đạo', '7');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('11', 'Phường Tràng Tiền', '7');
+INSERT INTO `parking_space_2021`.`area` (`id`, `area_name`, `id_district`) VALUES ('12', 'Phường Liễu Giai', '1');
+
+
 
 ALTER TABLE tag MODIFY id varchar(50);
 
+-- Update detector table -- 13/11
+ALTER TABLE detector
+MODIFY gateway_id int not null,
+MODIFY battery_level varchar(20),
+MODIFY communication_level varchar(20),
+MODIFY last_time_update datetime;
 
--- update manager table --- 4/11
+-- after alter table detector
+--INSERT INTO `parking_space_2021`.`slot` (`field_id`, `status_detector`, `status_cam`) VALUES (1, 1, 1);
+--INSERT INTO `parking_space_2021`.`slot` (`field_id`, `status_detector`, `status_cam`) VALUES (2, 1, 0);
+--INSERT INTO `parking_space_2021`.`slot` (`field_id`, `status_detector`, `status_cam`) VALUES (3, 0, 1);
+
+
+
 ALTER TABLE manager
 ADD address varchar(120),
 ADD	phone varchar(45),
@@ -212,22 +274,10 @@ ADD sex varchar(1),
 ADD birth date,
 ADD id_number int;
 
--- create tag_package ---- 4/11
-CREATE TABLE tag_package(
-                        news_id int not null AUTO_INCREMENT,
-                        sign varchar(10) not null,
-                        seq varchar(20) not null,
-                        mty varchar(2) not null,
-                        tag_id varchar(20) not null,
-                        lat varchar(20) not null,
-                        log varchar(20) not null,
-                        tag_date varchar(20) not null,
-                        tag_time varchar(20) not null,
-                        state varchar (1) not null,
-                        primary key (news_id),
-                        UNIQUE KEY `id_UNIQUE` (`news_id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+ALTER TABLE field
+MODIFY latitude varchar(120),
+MODIFY longitude varchar(120);
 
 
 
@@ -242,3 +292,10 @@ CREATE TABLE tag_package(
 -- INSERT INTO `detector` VALUES ("7","255.255.0.107","29","1","015","Communication Level","2021-04-22 19:32:47","2021-04-22 19:25:54");
 -- INSERT INTO `detector` VALUES ("8","255.255.0.108","30","1","015","Communication Level","2021-04-22 20:32:47","2021-04-22 20:25:54");
 -- INSERT INTO `detector` VALUES ("9","255.255.0.109","31","1","015","Communication Level","2021-04-22 21:32:47","2021-04-22 21:25:54");
+
+
+INSERT INTO `manager` VALUES (1,'man1@gmail.com','58e02d8635563de1a93c43573ef8af294e96e023bb67adccf4d97b4b95b41bee','2021-11-09 16:59:22',_binary '','Số 1 Đại Cồ Việt','0123456789','url avatar','M','1990-10-10',123);
+INSERT INTO `manager` VALUES (2,'man@gmail.com','48b676e2b107da679512b793d5fd4cc4329f0c7c17a97cf6e0e3d1005b600b03','2021-11-09 17:13:54',_binary '',NULL,NULL,NULL,NULL,NULL,0);
+COMMIT;
+
+SET FOREIGN_KEY_CHECKS = 1;

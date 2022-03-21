@@ -3,9 +3,11 @@ package com.sparking.service;
 import com.sparking.entities.data.Field;
 import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.entities.jsonResp.FieldJson;
+import com.sparking.entities.jsonResp.MetaJson;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 public interface FieldService {
 
@@ -13,7 +15,11 @@ public interface FieldService {
 
     boolean delete(int id);
 
-    List<FieldJson> findAll();
+    MetaJson filterByDistrict(int district);
+
+    MetaJson filterByArea(int area);
+
+    MetaJson findAll();
 
     List<FieldJson> managerFind(String phone);
 
@@ -27,4 +33,5 @@ public interface FieldService {
 
     FieldJson data2Json(Field field);
 
+    List<FieldAnalysis> analysisByHour(int fieldId, long since, long until, String unit);
 }

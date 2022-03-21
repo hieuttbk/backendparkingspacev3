@@ -14,6 +14,5 @@ public class DetectorPayload {
     private String batteryLevel;
     private String loracomLevel;
     private String operatingMode;
-
-
+    private String lastTimeSetup;
 }

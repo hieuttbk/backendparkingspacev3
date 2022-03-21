@@ -14,7 +14,7 @@ public class UserUpdateInfo {
     private String image;
     private String address;
     private String sex;
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
+    @JsonFormat(pattern="YYYY-MM-DD")
     private Date birth;
 
 }

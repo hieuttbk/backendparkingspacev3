@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ManagerFieldService {
 
-    ManagerField createAndUpdate(ManagerFieldPayload managerFieldPayload);
+    List<ManagerField> createAndUpdate(ManagerFieldPayload managerFieldPayload);
 
     boolean delete(int id);
 

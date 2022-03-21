@@ -69,6 +69,17 @@ public class UserRepo_Impl implements UserRepo {
     }
 
     @Override
+    public User findById(int id) {
+        Query query = entityManager
+                .createQuery("select u from User u where u.id =: id");
+        List<User> users = query.setParameter("id", id).getResultList();
+        if(users.size() == 1){
+            return users.get(0);
+        }
+        return null;
+    }
+
+    @Override
     public User findByEmail(String email) {
         Query query = entityManager
                 .createQuery("select u from User u where u.email= :email");
@@ -118,10 +129,6 @@ public class UserRepo_Impl implements UserRepo {
     public boolean delete(int id) {
         User user = entityManager.find(User.class, id);
         if(user != null){
-            entityManager.createQuery("select x from Contract x where x.userId =:id")
-                    .setParameter("id", user.getId());
-            entityManager.createQuery("select x from Tag x where x.userId =:id")
-                    .setParameter("id", user.getId());
             entityManager.remove(user);
             return true;
         }
@@ -130,7 +137,11 @@ public class UserRepo_Impl implements UserRepo {
 
     @Override
     public List<User> findAll() {
-        return entityManager.createQuery("select x from User x").getResultList();
+        List<User> users = entityManager.createQuery("select x from User x").getResultList();
+        for (User user: users) {
+            
+        }
+        return users;
     }
 
     @Override

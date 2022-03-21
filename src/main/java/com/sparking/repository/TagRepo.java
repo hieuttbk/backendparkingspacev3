@@ -9,17 +9,25 @@ import java.util.List;
 
 public interface TagRepo {
 
-    Tag createAndUpdate(Tag tag);
+//    Tag createAndUpdate(Tag tag);
+//
+//    boolean delete(int id);
 
-    boolean delete(int id);
-
-    List<Tag> findAll();
+    List<Tag> getAllTags();
 
     Tag findByTagId(String id);
 
     Tag registerTagForUser(RegisterTagsPayload registerTagsPayload);
 
-    List<TagPackage> getAllNewsTag();
+    Tag updateTagForUser(Tag tag);
+
+    boolean deleteTagForUser(String id);
+
+    List<TagPackage> getAllNewsTag(String quantity);
+
+    List<TagPackage> allNewsTag();
+
+    TagPackage getNewsTag(String id);
 
     List<TagPackage> filterNewsTag(GetNewsTagPayload getNewsTagPayload);
 

@@ -15,6 +15,8 @@ public interface ManagerRepo {
 
     List<Manager> findAll();
 
+    Manager currentManager(String email);
+
     Manager login(LoginForm loginForm);
 
     Manager findByEmail(String email);

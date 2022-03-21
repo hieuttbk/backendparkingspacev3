@@ -3,6 +3,8 @@ package com.sparking.repository_impl;
 import com.sparking.entities.data.Detector;
 import com.sparking.entities.data.Gateway;
 import com.sparking.entities.data.Manager;
+import com.sparking.entities.jsonResp.MyResponse;
+import com.sparking.entities.payloadReq.DetectorPayload;
 import com.sparking.entities.payloadReq.UpdateSlotIdPayload;
 import com.sparking.repository.DetectorRepo;
 import com.sparking.repository.GatewayRepo;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +31,39 @@ public class DetectorRepo_Impl implements DetectorRepo {
 
     @Autowired
     GatewayRepo gatewayRepo;
+
+    @Override
+    public Detector createDetector(DetectorPayload detectorPayload) {
+        int detectorId = detectorPayload.getId();
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        List<Detector> detectors = entityManager.createQuery("select d from Detector d where d.id =: id")
+                .setParameter("id", detectorId).getResultList();
+        if (detectors.size() != 0) {
+//            logger.info(detectors.toString());
+            return null;
+        }
+        Detector detector = Detector.builder()
+                .id(detectorPayload.getId())
+                .addressDetector(detectorPayload.getAddressDetector())
+                .slotId(detectorPayload.getSlotId())
+                .gatewayId(detectorPayload.getGatewayId())
+                .lastTimeSetup(currentTime)
+                .build();
+        entityManager.merge(detector);
+        return detector;
+    }
+
+    @Override
+    public boolean deleteDetector(Integer id) {
+        List<Detector> detectors = entityManager.createQuery("select d from Detector d where d.id =: id")
+                .setParameter("id", id).getResultList();
+        if (detectors.size() != 0) {
+            Detector detector = detectors.get(0);
+            entityManager.createQuery("delete from Detector d where d.id =: id").setParameter("id", detector.getId()).executeUpdate();
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public Detector createAndUpdate(Detector detector) {
@@ -51,6 +87,12 @@ public class DetectorRepo_Impl implements DetectorRepo {
     }
 
     @Override
+    public List<Detector> findByGateway(String gateway) {
+        return entityManager.createQuery("Select d from Detector d where d.gatewayId =: gwid")
+                .setParameter("gwid", Integer.parseInt(gateway)).getResultList();
+    }
+
+    @Override
     public List<Detector> findBySlotId(int id) {
         return entityManager.createQuery("select d from Detector d where d.slotId = :id")
         .setParameter("id", id).getResultList();
@@ -63,6 +105,19 @@ public class DetectorRepo_Impl implements DetectorRepo {
         for(Gateway gateway: gateways){
             detectors.addAll(entityManager.createQuery("select x from Detector x where x.gatewayId =:id")
                     .setParameter("id", gateway.getId()).getResultList());
+        }
+        return detectors;
+    }
+
+    @Override
+    public List<Detector> managerGetByGateway(Manager manager, String gateway) {
+        List<Gateway> gateways = gatewayRepo.managerFind(manager);
+        List<Detector> detectors = new ArrayList<>();
+        for(Gateway gw: gateways){
+            detectors.addAll(entityManager.createQuery("select x from Detector x where x.gatewayId =:id and x.gatewayId =: gwid")
+                    .setParameter("id", gw.getId())
+                    .setParameter("gwid", Integer.parseInt(gateway))
+                    .getResultList());
         }
         return detectors;
     }
@@ -122,7 +177,4 @@ public class DetectorRepo_Impl implements DetectorRepo {
         }
         return false;
     }
-
-
-
 }

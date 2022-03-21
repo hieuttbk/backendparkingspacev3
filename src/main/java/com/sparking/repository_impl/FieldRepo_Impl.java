@@ -1,12 +1,13 @@
 package com.sparking.repository_impl;
 
-import com.sparking.entities.data.Field;
-import com.sparking.entities.data.Gateway;
-import com.sparking.entities.data.Manager;
-import com.sparking.entities.data.ManagerField;
+import com.sparking.entities.data.*;
+import com.sparking.entities.jsonResp.FieldJson;
+import com.sparking.repository.AreaRepo;
+import com.sparking.repository.DistrictRepo;
 import com.sparking.repository.FieldRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
 @Repository
@@ -23,7 +25,6 @@ public class FieldRepo_Impl implements FieldRepo {
     private static Logger logger = LoggerFactory.getLogger(FieldRepo_Impl.class);
     @PersistenceContext
     EntityManager entityManager;
-
 
     @Override
     public Field createAndUpdate(Field field) {
@@ -34,24 +35,7 @@ public class FieldRepo_Impl implements FieldRepo {
     public boolean delete(int id) {
         Field field = entityManager.find(Field.class, id);
         if(field != null){
-            // delete Contract -> ManagerField -> Detector -> Gateway -> Slot
-            entityManager.createQuery("delete from Contract x where x.fieldId =:id")
-                    .setParameter("id", id).executeUpdate();
 
-            entityManager.createQuery("delete from ManagerField x where x.fieldId =:id")
-                    .setParameter("id", id).executeUpdate();
-
-            List<Gateway> gateways = entityManager.createQuery("select x from Gateway x where x.fieldId =:id")
-                    .setParameter("id", id).getResultList();
-            for(Gateway gateway : gateways){
-                entityManager.createQuery("delete from Detector x where x.gatewayId =:id")
-                        .setParameter("id", gateway.getId()).executeUpdate();
-            }
-            entityManager.createQuery("delete from Gateway x where x.fieldId =:id")
-                    .setParameter("id", id).executeUpdate();
-
-            entityManager.createQuery("select x from Slot x where x.fieldId =:id")
-                    .setParameter("id", id).getResultList();
             entityManager.remove(field);
             return true;
         }else {
@@ -61,7 +45,49 @@ public class FieldRepo_Impl implements FieldRepo {
 
     @Override
     public List<Field> findAll() {
-        return entityManager.createQuery("select x from Field x").getResultList();
+        return entityManager
+                .createQuery("select x from Field x").getResultList();
+    }
+
+    @Override
+    public List<Field> filterByDistrict(int district) {
+        ArrayList<Field> fields = new ArrayList<Field>();
+        List<Area> listAreas = entityManager
+                .createQuery("Select a from Area a where a.idDistrict =:district")
+                .setParameter("district", district)
+                .getResultList();
+        for (int i = 0; i < listAreas.size(); i++) {
+            List<Field> listFields = entityManager
+                    .createQuery("Select f from Field f where f.idArea =:area")
+                    .setParameter("area", listAreas.get(i).getId())
+                    .getResultList();
+            if (listFields.size() > 0) {
+                for (int j = 0; j < listFields.size(); j++) {
+                    fields.add(listFields.get(j));
+                }
+            } else {
+                continue;
+            }
+        }
+
+        return fields;
+    }
+
+    @Override
+    public List<Field> filterByArea(int area) {
+        List<Field> allFields = findAll();
+        if (allFields.size() > 0) {
+            ArrayList<Field> fields = new ArrayList<Field>();
+            for (int i = 0; i < allFields.size(); i++) {
+                Field field = allFields.get(i);
+                if (field.getIdArea().equals(area)) {
+                    fields.add(field);
+                }
+            }
+            return fields;
+        }
+
+        return null;
     }
 
     @Override
@@ -113,5 +139,4 @@ public class FieldRepo_Impl implements FieldRepo {
         }
         return false;
     }
-
 }

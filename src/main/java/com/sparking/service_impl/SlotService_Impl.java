@@ -3,6 +3,7 @@ package com.sparking.service_impl;
 import com.sparking.entities.data.*;
 import com.sparking.entities.jsonResp.FieldJson;
 import com.sparking.entities.jsonResp.SlotJson;
+import com.sparking.entities.payloadReq.CreateNewSlotPayload;
 import com.sparking.repository.*;
 import com.sparking.security.JWTService;
 import com.sparking.service.FieldService;
@@ -41,6 +42,8 @@ public class SlotService_Impl implements SlotService {
     @Override
     public SlotJson createAndUpdate(Slot slot) {
         Slot newSlot = slotRepo.createAndUpdate(slot);
+
+//        System.out.println(newSlot);
         return data2Json(newSlot);
     }
 
@@ -50,19 +53,29 @@ public class SlotService_Impl implements SlotService {
     }
 
     @Override
+    public List<SlotJson> getByQuantity(String field, String quantity) {
+        return slotRepo.getByQuantityAndField(field, quantity).stream().map(this::data2Json).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SlotJson> getAll(String field) {
+        return slotRepo.getByField(field).stream().map(this::data2Json).collect(Collectors.toList());
+    }
+
+    @Override
     public List<SlotJson> findAll() {
         return slotRepo.findAll().stream().map(this::data2Json).collect(Collectors.toList());
     }
 
     @Override
-    public List<SlotJson> mnFindAll(String token) {
+    public List<SlotJson> mnGetByQuantity(String token, String field, String quantity) {
         List<SlotJson> slotJsons = new ArrayList<>();
         String email = jwtService.decode(token);
         Manager manager = managerRepo.findByEmail(email);
         if(manager == null){
             return null;
         }
-        List<Slot> slots = slotRepo.findAll();
+        List<Slot> slots = slotRepo.getByQuantityAndField(field, quantity);
         List <FieldJson> fieldJsons = fieldService.managerFind(email);
         for(FieldJson fieldJson : fieldJsons){
             slotJsons.addAll(
@@ -71,6 +84,90 @@ public class SlotService_Impl implements SlotService {
         }
         return slotJsons;
     }
+
+    @Override
+    public List<SlotJson> mnGetAll(String token, String field) {
+        List<SlotJson> slotJsons = new ArrayList<>();
+        String email = jwtService.decode(token);
+        Manager manager = managerRepo.findByEmail(email);
+        if(manager == null){
+            return null;
+        }
+        List<Slot> slots = slotRepo.getByField(field);
+        List <FieldJson> fieldJsons = fieldService.managerFind(email);
+        for(FieldJson fieldJson : fieldJsons){
+            slotJsons.addAll(
+                    slots.stream().filter(slot -> slot.getFieldId() == fieldJson.getId()).map(this::data2Json).collect(Collectors.toList())
+            );
+        }
+        return slotJsons;
+    }
+
+    // ----------- Admin ---------------
+
+    @Override
+    public List<Slot> getSlotByQuantityAndField(String field, String quantity) {
+        return slotRepo.getByQuantityAndField(field, quantity);
+    }
+
+    @Override
+    public List<Slot> getSlotByFieldId(String field) {
+        return slotRepo.getByField(field);
+    }
+
+    @Override
+    public List<Slot> getSlotByQuantity(String quantity) {
+        return slotRepo.getSlotByQuantity(quantity);
+    }
+
+    @Override
+    public List<Slot> getAllSlot() {
+        return slotRepo.findAll();
+    }
+
+    @Override
+    public Slot createNewSlot(CreateNewSlotPayload createNewSlotPayload) {
+        return slotRepo.createNewSlot(createNewSlotPayload);
+    }
+
+    @Override
+    public Slot updateSlot(Slot slot) {
+        return slotRepo.updateSlot(slot);
+    }
+
+    // -------------- Manager -----------------
+
+    @Override
+    public List<Slot> mnGetSlotByQuery(String email, String field, String quantity) {
+        return slotRepo.mnGetSlotByQuery(email, field, quantity);
+    }
+
+    @Override
+    public List<Slot> mnGetSlotByField(String email, String field) {
+        return slotRepo.mnGetSlotByField(email, field);
+    }
+
+    @Override
+    public List<Slot> mnGetSlotByQuantity(String email, String quantity) {
+        return slotRepo.mnGetSlotByQuantity(email, quantity);
+    }
+
+    @Override
+    public List<Slot> mnGetAllSlot(String email) {
+        return slotRepo.mnGetAllSlot(email);
+    }
+
+    @Override
+    public Slot mnCreateNewSlot(String email, CreateNewSlotPayload createNewSlotPayload) {
+        return slotRepo.mnCreateNewSlot(email, createNewSlotPayload);
+    }
+
+    @Override
+    public Slot mnUpdateSlot(Slot slot) {
+        return slotRepo.mnUpdateSlot(slot);
+    }
+
+    // ---------------------------------------
 
     @Override
     public SlotJson findById(int id) {
