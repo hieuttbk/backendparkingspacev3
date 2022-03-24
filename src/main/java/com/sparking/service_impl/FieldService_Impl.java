@@ -52,25 +52,21 @@ public class FieldService_Impl implements FieldService {
     @Override
     public FieldJson createAndUpdate(Field field) {
         Field oldField = fieldRepo.findById(field.getId());
+        FieldJson fieldJson;
 
-
-        FieldJson fieldJson = data2Json(field);
-
-        if(oldField != null){ // chi tao slot theo so space khi dang them moi field
-
-        }
-
-        else {
+        if (oldField != null) { // chi tao slot theo so space khi dang them moi field
             Field newField = fieldRepo.createAndUpdate(field);
+            fieldJson = data2Json(newField);
+        } else {
+            Field newField = fieldRepo.createAndUpdate(field);
+            fieldJson = data2Json(newField);
             for (int i = 0; i < fieldJson.getSpace().intValue(); i++) {
                 System.out.println("Field Service - " + i);
                 slotRepo.createAndUpdate(
                         new Slot(i + 1, newField.getId(), false, false, null)
                 );
             }
-            fieldJson = data2Json(newField);
         }
-//        System.out.println("Return FieldJson");
         return fieldJson;
     }
 

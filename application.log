@@ -1,17 +1,95 @@
-2022-03-22 00:01:13.129  INFO 11960 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 11960 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-03-22 00:01:13.140  INFO 11960 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-03-22 00:01:17.196  WARN 11960 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-03-22 00:01:18.901  INFO 11960 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-03-22 00:01:18.905  INFO 11960 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 6.318 seconds (JVM running for 6.982)
-2022-03-22 00:01:18.908  INFO 11960 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-03-22 00:01:21.210  INFO 11960 --- [DETECTOR] c.s.BackendParkingSpaceV2Application     : START TAG DETECTOR
-2022-03-22 00:01:21.211  INFO 11960 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-03-22 00:01:21.211  INFO 11960 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-03-22 00:01:21.211  INFO 11960 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-03-22 00:01:21.473  INFO 11960 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-03-22 00:01:48.901  INFO 11960 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-03-22 00:03:48.913  INFO 11960 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-03-22 00:05:48.907  INFO 11960 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-03-22 00:07:48.907  INFO 11960 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-03-22 00:09:48.899  INFO 11960 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-03-22 00:11:48.897  INFO 11960 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:07:18.288  INFO 16160 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 16160 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-03-24 17:07:18.298  INFO 16160 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-03-24 17:07:21.238  WARN 16160 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-03-24 17:07:22.658  INFO 16160 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-03-24 17:07:22.661  INFO 16160 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.812 seconds (JVM running for 5.343)
+2022-03-24 17:07:22.682  INFO 16160 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-03-24 17:07:24.899  INFO 16160 --- [DETECTOR] c.s.BackendParkingSpaceV2Application     : START TAG DETECTOR
+2022-03-24 17:07:24.899  INFO 16160 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-03-24 17:07:24.899  INFO 16160 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-03-24 17:07:24.899  INFO 16160 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-03-24 17:07:25.119  INFO 16160 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-03-24 17:07:52.663  INFO 16160 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:08:31.292  INFO 18348 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 18348 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-03-24 17:08:31.296  INFO 18348 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-03-24 17:08:34.374  WARN 18348 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-03-24 17:08:35.789  INFO 18348 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-03-24 17:08:35.793  INFO 18348 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.876 seconds (JVM running for 5.341)
+2022-03-24 17:08:35.795  INFO 18348 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-03-24 17:08:38.006  INFO 18348 --- [DETECTOR] c.s.BackendParkingSpaceV2Application     : START TAG DETECTOR
+2022-03-24 17:08:38.007  INFO 18348 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-03-24 17:08:38.007  INFO 18348 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-03-24 17:08:38.007  INFO 18348 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-03-24 17:08:38.223  INFO 18348 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-03-24 17:09:05.803  INFO 18348 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:11:05.797  INFO 18348 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:12:16.729  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 1740 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-03-24 17:12:16.731  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-03-24 17:12:19.481  WARN 1740 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-03-24 17:12:20.839  INFO 1740 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-03-24 17:12:20.842  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.516 seconds (JVM running for 4.987)
+2022-03-24 17:12:20.845  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-03-24 17:12:23.074  INFO 1740 --- [DETECTOR] c.s.BackendParkingSpaceV2Application     : START TAG DETECTOR
+2022-03-24 17:12:23.075  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-03-24 17:12:23.075  INFO 1740 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-03-24 17:12:23.076  INFO 1740 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-03-24 17:12:23.335  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-03-24 17:12:50.849  INFO 1740 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:16:52.379  INFO 13188 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 13188 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-03-24 17:16:52.382  INFO 13188 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-03-24 17:16:55.234  WARN 13188 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-03-24 17:16:56.878  INFO 13188 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-03-24 17:16:56.882  INFO 13188 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.868 seconds (JVM running for 5.338)
+2022-03-24 17:16:56.888  INFO 13188 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-03-24 17:16:59.173  INFO 13188 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-03-24 17:16:59.173  INFO 13188 --- [DETECTOR] c.s.BackendParkingSpaceV2Application     : START TAG DETECTOR
+2022-03-24 17:16:59.174  INFO 13188 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-03-24 17:16:59.174  INFO 13188 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-03-24 17:16:59.742  INFO 13188 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-03-24 17:17:26.872  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:19:26.866  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:21:26.872  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:23:26.873  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:25:26.875  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:27:26.872  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:29:26.873  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:31:26.869  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:33:26.868  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:35:26.863  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:37:26.874  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:39:26.868  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:41:26.873  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:43:26.872  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:45:26.869  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:46:56.864  INFO 13188 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-03-24 17:47:26.872  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:49:26.863  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:51:26.872  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:53:26.875  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:55:26.868  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:57:26.873  INFO 13188 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 17:58:32.893  INFO 4688 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 4688 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-03-24 17:58:32.895  INFO 4688 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-03-24 17:58:35.704  WARN 4688 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-03-24 17:58:37.374  INFO 4688 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-03-24 17:58:37.394  INFO 4688 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.929 seconds (JVM running for 5.431)
+2022-03-24 17:58:37.397  INFO 4688 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-03-24 17:58:40.442  INFO 4688 --- [DETECTOR] c.s.BackendParkingSpaceV2Application     : START TAG DETECTOR
+2022-03-24 17:58:40.442  INFO 4688 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-03-24 17:58:40.442  INFO 4688 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-03-24 17:58:40.443  INFO 4688 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-03-24 17:58:40.673  INFO 4688 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-03-24 17:59:07.384  INFO 4688 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 18:01:07.379  INFO 4688 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-03-24 18:02:10.832  INFO 19232 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 19232 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-03-24 18:02:10.836  INFO 19232 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-03-24 18:02:13.760  WARN 19232 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-03-24 18:02:15.134  INFO 19232 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-03-24 18:02:15.137  INFO 19232 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.668 seconds (JVM running for 5.149)
+2022-03-24 18:02:15.141  INFO 19232 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-03-24 18:02:17.323  INFO 19232 --- [DETECTOR] c.s.BackendParkingSpaceV2Application     : START TAG DETECTOR
+2022-03-24 18:02:17.325  INFO 19232 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-03-24 18:02:17.325  INFO 19232 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-03-24 18:02:17.326  INFO 19232 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-03-24 18:02:17.616  INFO 19232 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-03-24 18:02:45.144  INFO 19232 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
