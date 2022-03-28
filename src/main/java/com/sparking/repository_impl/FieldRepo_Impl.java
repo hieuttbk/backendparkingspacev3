@@ -50,11 +50,6 @@ public class FieldRepo_Impl implements FieldRepo {
     }
 
     @Override
-    public List<Field> filterByDistrictAndArea(int district, int area) {
-        return null;
-    }
-
-    @Override
     public List<Field> filterByDistrict(int district) {
         ArrayList<Field> fields = new ArrayList<Field>();
         List<Area> listAreas = entityManager
