@@ -15,6 +15,8 @@ public interface FieldRepo{
 
     List<Field> findAll();
 
+    List<Field> filterByDistrictAndArea(int district, int area);
+
     List<Field> filterByDistrict(int district);
 
     List<Field> filterByArea(int area);

@@ -15,6 +15,8 @@ public interface FieldService {
 
     boolean delete(int id);
 
+    MetaJson filterByDistrictAndArea(int district, int area);
+
     MetaJson filterByDistrict(int district);
 
     MetaJson filterByArea(int area);

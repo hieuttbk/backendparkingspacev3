@@ -76,6 +76,12 @@ public class FieldService_Impl implements FieldService {
     }
 
     @Override
+    public MetaJson filterByDistrictAndArea(int district, int area) {
+        List<FieldJson> fieldJsons = fieldRepo.filterByDistrictAndArea(district, area).stream().map(this::data2Json).collect(Collectors.toList());
+        return formatMetaJson(fieldJsons);
+    }
+
+    @Override
     public MetaJson findAll() {
         List<FieldJson> fieldJsons = fieldRepo.findAll().stream().map(this::data2Json).collect(Collectors.toList());
         return formatMetaJson(fieldJsons);
