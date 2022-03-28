@@ -101,7 +101,10 @@ public class UserService_Impl implements UserService {
         if(user == null){
             return null;
         }
-        FieldJson fieldJson = fieldService.data2Json(new Field(bookPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), "", null));
+        FieldJson fieldJson = fieldService.data2Json(
+                new Field(
+                        bookPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), "", null)
+        );
         if(fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
             && bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
             && bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() >= Integer.parseInt(timeConditionsToOrder)// 30 minute
