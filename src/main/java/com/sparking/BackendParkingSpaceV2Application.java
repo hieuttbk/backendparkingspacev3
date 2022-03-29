@@ -101,19 +101,19 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
 //        logger.info("DELETE EXPIRED CONTRACT");
      //   update();
-//        GetDataDetector.main(args);
+        GetDataDetector.main(args);
 
-//        new Thread("DETECTOR"){
-//            @Override
-//            public void run() {
-//                logger.info("START TAG DETECTOR");
-//                try {
-//                    GetDataDetector.main(args);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }.start();
+        new Thread("DETECTOR"){
+            @Override
+            public void run() {
+                logger.info("START TAG DETECTOR");
+                try {
+                    GetDataDetector.main(args);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
 
 
         new Thread("TAG"){
