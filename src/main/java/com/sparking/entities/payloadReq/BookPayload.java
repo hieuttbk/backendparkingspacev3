@@ -14,9 +14,8 @@ import java.sql.Timestamp;
 public class BookPayload {
     private Integer fieldId;
     private String carNumber;
-//    vì default timezone đang là GMT+7 rồi nên không viết timezone = "GMT+7" cũng vẫn được
-    @JsonFormat(pattern="YYYY-MM-DD HH:mm:ss", timezone = "GMT+7")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "GMT+7")
     private Timestamp timeInBook;
-    @JsonFormat(pattern="YYYY-MM-DD HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "GMT+7")
     private Timestamp timeOutBook;
 }

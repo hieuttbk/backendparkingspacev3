@@ -55,6 +55,7 @@ public class CommonController {
     public ResponseEntity<Object> login(@RequestBody LoginForm loginForm) throws Exception {
         User user =  userService.login(loginForm);
         Manager man = managerService.login(loginForm);
+//        System.out.println(loginForm);
         if(user !=null){
             return ResponseEntity.ok(MyResponse
                     .loginSuccess("user",new UserLoginPayload(jwtService.getToken(loginForm.getEmail()),user)));

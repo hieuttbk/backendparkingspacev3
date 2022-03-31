@@ -105,14 +105,17 @@ public class UserService_Impl implements UserService {
                 new Field(
                         bookPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), "", null)
         );
-        if(fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
-            && bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
-            && bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() >= Integer.parseInt(timeConditionsToOrder)// 30 minute
-        ){
-            return userRepo.book(bookPayload, user);
-        }else {
-            return null;
-        }
+        System.out.println("Debug - " + fieldJson);
+//        if(fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
+//            && bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
+//            && bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() >= Integer.parseInt(timeConditionsToOrder)// 30 minute
+//        ){
+//            System.out.println(fieldJson);
+//            return userRepo.book(bookPayload, user);
+//        } else {
+//            return null;
+//        }
+        return null;
     }
 
     @Override
