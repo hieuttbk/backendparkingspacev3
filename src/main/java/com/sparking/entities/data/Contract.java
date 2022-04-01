@@ -1,5 +1,6 @@
 package com.sparking.entities.data;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,15 +29,19 @@ public class Contract  {
     private Integer userId;
 
     @Column(name = "time_car_in")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-DD HH:mm:ss")
     private Timestamp timeCarIn;
 
     @Column(name = "time_car_out")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-DD HH:mm:ss")
     private Timestamp timeCarOut;
 
-    @Column(name = "time_in_book", nullable = true)
+    @Column(name = "time_in_book")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-DD HH:mm:ss")
     private Timestamp timeInBook;
 
-    @Column(name = "time_out_book", nullable = true)
+    @Column(name = "time_out_book")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-DD HH:mm:ss")
     private Timestamp timeOutBook;
 
     @Column(name = "car_number", nullable = false)
