@@ -89,12 +89,17 @@ public class UserService_Impl implements UserService {
                 logger.debug("User Not Found");
                 throw new Exception("User Not Found ...");
             }
+            System.out.println("User - " + user);
             String equipment = parkPayload.getEquipment();
             if (!user.getEquipment().equals(equipment)) {
                 throw new IOException("Equipment Invalid ...");
             }
+
+            System.out.println("Equipment - " + (user.getEquipment().equals(equipment)));
             int userId = user.getId();
             List<Contract> contracts = contractRepo.getContractByUserId(userId);
+
+            System.out.println("ListContract - " + contracts);
 
             if (contracts.size() < 0 ) {
                 return null;
@@ -103,6 +108,9 @@ public class UserService_Impl implements UserService {
 
             double timeCarIn = lastContract.getTimeCarIn().getTime();
             double timeInBook = lastContract.getTimeInBook().getTime();
+
+            System.out.println("timeCarIn - " + timeCarIn);
+            System.out.println("timeInBook - " + timeInBook);
 
             if (!(lastContract.getTimeCarIn() == null)) {
                 throw new Exception("User was not pre-booking after parking ...");

@@ -79,7 +79,7 @@ public class ContractRepo_Impl implements ContractRepo {
 
     @Override
     public List<Contract> getContractByUserId(int userId) {
-        List<Contract> contracts = entityManager.createQuery("Select c from Contract c where u.userId = :userId")
+        List<Contract> contracts = entityManager.createQuery("Select c from Contract c where c.userId = :userId")
                 .setParameter("userId", userId).getResultList();
         return contracts;
     }
