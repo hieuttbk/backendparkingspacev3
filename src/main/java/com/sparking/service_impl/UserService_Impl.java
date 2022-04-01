@@ -82,20 +82,43 @@ public class UserService_Impl implements UserService {
 
     @Override
     public Contract park(ParkPayload parkPayload, String email) {
-        User user = userRepo.findByEmail(email);
-        if(user == null) {
+        final long timeExpiredBooking = 3600 * 1000;
+        try {
+            User user = userRepo.findByEmail(email);
+            if(user == null) {
+                logger.debug("User Not Found");
+                throw new Exception("User Not Found ...");
+            }
+            String equipment = parkPayload.getEquipment();
+            if (!user.getEquipment().equals(equipment)) {
+                throw new IOException("Equipment Invalid ...");
+            }
+            int userId = user.getId();
+            List<Contract> contracts = contractRepo.getContractByUserId(userId);
+
+            if (contracts.size() < 0 ) {
+                return null;
+            }
+            Contract lastContract = contracts.get(contracts.size() - 1);
+
+            double timeCarIn = lastContract.getTimeCarIn().getTime();
+            double timeInBook = lastContract.getTimeInBook().getTime();
+
+            if (!(lastContract.getTimeCarIn() == null)) {
+                throw new Exception("User was not pre-booking after parking ...");
+            } else if ((timeCarIn < timeInBook) ||
+                    (timeCarIn - timeInBook >= timeExpiredBooking)
+            ) {
+                throw new Exception("Time booking was expired ...");
+            } else {
+                logger.info("User parking ...");
+                return userRepo.park(parkPayload, lastContract);
+            }
+        } catch (Exception e) {
+            logger.error("Parking went wrong ...");
+            e.printStackTrace();
             return null;
         }
-
-      //  long timeNow = new Date().getTime();
-       // FieldJson fieldJson = fieldService.data2Json(new Field(parkPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), ""));
-
-     //   if(fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()){
-            System.out.println("Parking ok" + parkPayload);
-            return userRepo.park(parkPayload, user);
-       // }else {
-        //    return null;
-       // }
     }
 
 
@@ -104,7 +127,7 @@ public class UserService_Impl implements UserService {
     public Contract book(BookPayload bookPayload, String email) {
         try {
             User user = userRepo.findByEmail(email);
-            if(user == null){
+            if (user == null){
                 return null;
             }
             Field field = fieldRepo.findById(bookPayload.getFieldId());
@@ -118,18 +141,11 @@ public class UserService_Impl implements UserService {
             );
             logger.info(fieldJson.toString());
 
-//            System.out.println(bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime());
-//            System.out.println("Check time - " + (bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()));
-//            System.out.println("Check slot - " + (fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()));
-//            System.out.println("Check timestamp - " + new Timestamp(new Date().getTime()));
-//            System.out.println("Check timeInBook - " + bookPayload.getTimeInBook());
-
             if (fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
                     && bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
                     && bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() >= Integer.parseInt(timeConditionsToOrder)// 30 minute
             ) {
                 logger.info("userRepository Booking ... ");
-//                System.out.println(fieldJson);
                 return userRepo.book(bookPayload, user);
             } else {
                 throw new IOException("Invalid timeBooking, Please Pre Order booking 30 minutes");

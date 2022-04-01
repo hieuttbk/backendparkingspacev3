@@ -25,6 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Scheduled;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -39,6 +40,8 @@ import static org.hibernate.internal.CoreLogging.logger;
 public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
     private static Logger logger = LoggerFactory.getLogger(BackendParkingSpaceV2Application.class);
+
+    final static long rateUpdateDataCam = 300 * 1000;
 
     @Autowired
     SlotRepo slotRepo;
@@ -148,7 +151,9 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 //        }
 //    }
 
-    public boolean getDataCam() throws FileNotFoundException {
+    @Scheduled(fixedRate = rateUpdateDataCam, initialDelay = 60000)
+    public boolean getDataCam() throws FileNotFoundException, ParseException {
+        logger.info("UPDATE DATA CAM COMPLETE");
         File file = new File (pathDataCam);
         if (!file.exists()) {
             return false;
@@ -165,7 +170,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
             rows.clear();
             rows.addAll(newRows);
 
-            System.out.println("Rows Size " + rows.size());
+//            System.out.println("Rows Size " + rows.size());
             for (int i = 1; i < rows.size(); i++){
                 String rowChild = rows.get(i);
                 boolean status = rowChild.split(" ")[2].equals("1");
@@ -177,7 +182,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
                         .filter(slot -> slot.getId() == slotID)
                         .collect(Collectors.toList())
                         .get(0);
-                System.out.println("Debug - " + oldSlot);
+//                System.out.println("Debug - " + oldSlot);
                 if (oldSlot != null) {
                     oldSlot.setStatusCam(status);
                     if (rowChild.split(" ").length == 4) {
