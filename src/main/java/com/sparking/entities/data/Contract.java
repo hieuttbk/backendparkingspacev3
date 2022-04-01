@@ -28,20 +28,16 @@ public class Contract  {
     @Column(name = "user_id", nullable = false)
     private Integer userId;
 
-    @Column(name = "time_car_in")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-DD HH:mm:ss")
+    @Column(name = "time_car_in", nullable = true)
     private Timestamp timeCarIn;
 
-    @Column(name = "time_car_out")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-DD HH:mm:ss")
+    @Column(name = "time_car_out", nullable = true)
     private Timestamp timeCarOut;
 
     @Column(name = "time_in_book")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-DD HH:mm:ss")
     private Timestamp timeInBook;
 
     @Column(name = "time_out_book")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-DD HH:mm:ss")
     private Timestamp timeOutBook;
 
     @Column(name = "car_number", nullable = false)

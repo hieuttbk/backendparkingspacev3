@@ -14,10 +14,13 @@ import com.sparking.security.SHA256Service;
 import com.sparking.service.ContractService;
 import com.sparking.service.FieldService;
 import com.sparking.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -28,6 +31,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService_Impl implements UserService {
+    private static Logger logger = LoggerFactory.getLogger(UserService_Impl.class);
 
     @Autowired
     UserRepo userRepo;
@@ -82,6 +86,7 @@ public class UserService_Impl implements UserService {
         if(user == null){
             return null;
         }
+
       //  long timeNow = new Date().getTime();
        // FieldJson fieldJson = fieldService.data2Json(new Field(parkPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), ""));
 
@@ -97,25 +102,37 @@ public class UserService_Impl implements UserService {
 
     @Override
     public Contract book(BookPayload bookPayload, String email) {
-        User user = userRepo.findByEmail(email);
-        if(user == null){
+        try {
+            User user = userRepo.findByEmail(email);
+            if(user == null){
+                return null;
+            }
+            Field field = fieldRepo.findById(bookPayload.getFieldId());
+            if (field == null) {
+                throw new Exception("Cannot find Field");
+            }
+            int idArea = field.getIdArea();
+            FieldJson fieldJson = fieldService.data2Json(
+                    new Field(
+                            bookPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), "", idArea)
+            );
+            logger.info(fieldJson.toString());
+            System.out.println(bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime());
+            if (fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
+                    && bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
+                    && bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() >= Integer.parseInt(timeConditionsToOrder)// 30 minute
+            ) {
+                logger.info("userRepository Booking ... ");
+//                System.out.println(fieldJson);
+                return userRepo.book(bookPayload, user);
+            } else {
+                throw new IOException("Invalid timeBooking, Please Pre Order booking 30 minutes");
+            }
+        } catch (Exception e) {
+            logger.error("Booking went wrong ...");
+            e.printStackTrace();
             return null;
         }
-        FieldJson fieldJson = fieldService.data2Json(
-                new Field(
-                        bookPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), "", null)
-        );
-        System.out.println("Debug - " + fieldJson);
-//        if(fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
-//            && bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
-//            && bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() >= Integer.parseInt(timeConditionsToOrder)// 30 minute
-//        ){
-//            System.out.println(fieldJson);
-//            return userRepo.book(bookPayload, user);
-//        } else {
-//            return null;
-//        }
-        return null;
     }
 
     @Override

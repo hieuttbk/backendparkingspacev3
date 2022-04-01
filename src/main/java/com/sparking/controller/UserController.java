@@ -54,7 +54,7 @@ public class UserController {
     @PostMapping("api/us/book")
     public ResponseEntity<Object> book(@RequestBody BookPayload bookPayload, @RequestHeader String token){
         String email = jwtService.decode(token);
-        System.out.println(bookPayload);
+//        System.out.println(bookPayload);
         return ResponseEntity.ok(MyResponse.success(userService.book(bookPayload, email)));
     }
 
