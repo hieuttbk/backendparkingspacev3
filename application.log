@@ -1761,3 +1761,85 @@ java.lang.NullPointerException: null
 2022-04-01 12:41:35.901  INFO 14884 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
 2022-04-01 12:43:35.925  INFO 14884 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
 2022-04-01 12:45:35.935  INFO 14884 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-04-01 14:29:06.193  INFO 5808 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 5808 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-04-01 14:29:06.197  INFO 5808 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-04-01 14:29:09.002  WARN 5808 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-04-01 14:29:11.225  INFO 5808 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-04-01 14:29:11.233  INFO 5808 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 5.386 seconds (JVM running for 5.876)
+2022-04-01 14:29:11.237  INFO 5808 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-04-01 14:29:11.237  INFO 5808 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-04-01 14:29:11.237  INFO 5808 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-04-01 14:29:11.237  INFO 5808 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-04-01 14:29:11.903  INFO 5808 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-04-01 14:29:22.668  INFO 5808 --- [http-nio-6969-exec-1] c.s.service_impl.UserService_Impl        : FieldJson(id=2, name=, latitude=, longitude=, address=, image=, price=50000.0, openstatus=, space=0.0, details=, totalBook=0, totalSlot=33, busySlot=8, area=AreaJson(id=13, areaName=Ph??ng Mai D?ch, district=District(id=3, district=C?u Gi?y)))
+2022-04-01 14:29:22.672 ERROR 5808 --- [http-nio-6969-exec-1] c.s.service_impl.UserService_Impl        : Booking went wrong ...
+2022-04-01 14:29:41.232  INFO 5808 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-04-01 14:31:47.366  INFO 17284 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 17284 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-04-01 14:31:47.370  INFO 17284 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-04-01 14:31:50.092  WARN 17284 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-04-01 14:31:51.345  INFO 17284 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-04-01 14:31:51.349  INFO 17284 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.689 seconds (JVM running for 5.278)
+2022-04-01 14:31:51.353  INFO 17284 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-04-01 14:31:51.353  INFO 17284 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-04-01 14:31:51.353  INFO 17284 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-04-01 14:31:51.353  INFO 17284 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-04-01 14:31:51.864  INFO 17284 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-04-01 14:32:06.790  INFO 17284 --- [http-nio-6969-exec-1] c.s.service_impl.UserService_Impl        : FieldJson(id=2, name=, latitude=, longitude=, address=, image=, price=50000.0, openstatus=, space=0.0, details=, totalBook=0, totalSlot=33, busySlot=8, area=AreaJson(id=13, areaName=Ph??ng Mai D?ch, district=District(id=3, district=C?u Gi?y)))
+2022-04-01 14:32:06.794 ERROR 17284 --- [http-nio-6969-exec-1] c.s.service_impl.UserService_Impl        : Booking went wrong ...
+2022-04-01 14:32:21.358  INFO 17284 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-04-01 14:34:21.355  INFO 17284 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-04-01 14:36:21.348  INFO 17284 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-04-01 14:37:59.420  INFO 4372 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 4372 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-04-01 14:37:59.424  INFO 4372 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-04-01 14:38:02.362  WARN 4372 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-04-01 14:38:03.699  INFO 4372 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-04-01 14:38:03.723  INFO 4372 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.679 seconds (JVM running for 5.498)
+2022-04-01 14:38:03.727  INFO 4372 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-04-01 14:38:03.727  INFO 4372 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-04-01 14:38:03.727  INFO 4372 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-04-01 14:38:03.727  INFO 4372 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-04-01 14:38:04.796  INFO 4372 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-04-01 14:38:09.181  INFO 4372 --- [http-nio-6969-exec-1] c.s.service_impl.UserService_Impl        : FieldJson(id=2, name=, latitude=, longitude=, address=, image=, price=50000.0, openstatus=, space=0.0, details=, totalBook=0, totalSlot=33, busySlot=8, area=AreaJson(id=13, areaName=Ph??ng Mai D?ch, district=District(id=3, district=C?u Gi?y)))
+2022-04-01 14:38:09.181 ERROR 4372 --- [http-nio-6969-exec-1] c.s.service_impl.UserService_Impl        : Booking went wrong ...
+2022-04-01 14:38:33.705  INFO 4372 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-04-01 14:40:47.960  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 1740 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-04-01 14:40:47.964  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-04-01 14:40:50.736  WARN 1740 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-04-01 14:40:51.981  INFO 1740 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-04-01 14:40:51.985  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.376 seconds (JVM running for 4.837)
+2022-04-01 14:40:51.989  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-04-01 14:40:51.989  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-04-01 14:40:51.989  INFO 1740 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-04-01 14:40:51.989  INFO 1740 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-04-01 14:40:52.570  INFO 1740 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-04-01 14:40:56.522  INFO 1740 --- [http-nio-6969-exec-1] c.s.service_impl.UserService_Impl        : FieldJson(id=2, name=, latitude=, longitude=, address=, image=, price=50000.0, openstatus=, space=0.0, details=, totalBook=0, totalSlot=33, busySlot=8, area=AreaJson(id=13, areaName=Ph??ng Mai D?ch, district=District(id=3, district=C?u Gi?y)))
+2022-04-01 14:40:56.522 ERROR 1740 --- [http-nio-6969-exec-1] c.s.service_impl.UserService_Impl        : Booking went wrong ...
+2022-04-01 14:41:21.990  INFO 1740 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-04-01 14:43:34.738  INFO 8280 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 8280 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-04-01 14:43:34.738  INFO 8280 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-04-01 14:43:37.471  WARN 8280 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-04-01 14:43:38.729  INFO 8280 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-04-01 14:43:38.733  INFO 8280 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.497 seconds (JVM running for 4.953)
+2022-04-01 14:43:38.733  INFO 8280 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-04-01 14:43:38.737  INFO 8280 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-04-01 14:43:38.737  INFO 8280 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-04-01 14:43:38.737  INFO 8280 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-04-01 14:43:39.493  INFO 8280 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-04-01 14:43:42.126  INFO 8280 --- [http-nio-6969-exec-2] c.s.service_impl.UserService_Impl        : FieldJson(id=2, name=, latitude=, longitude=, address=, image=, price=50000.0, openstatus=, space=0.0, details=, totalBook=0, totalSlot=33, busySlot=8, area=AreaJson(id=13, areaName=Ph??ng Mai D?ch, district=District(id=3, district=C?u Gi?y)))
+2022-04-01 14:43:42.130 ERROR 8280 --- [http-nio-6969-exec-2] c.s.service_impl.UserService_Impl        : Booking went wrong ...
+2022-04-01 14:44:08.734  INFO 8280 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-04-01 14:46:46.480  INFO 10004 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 10004 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-04-01 14:46:46.484  INFO 10004 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-04-01 14:46:49.555  WARN 10004 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-04-01 14:46:51.610  INFO 10004 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-04-01 14:46:51.614  INFO 10004 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 5.484 seconds (JVM running for 5.995)
+2022-04-01 14:46:51.618  INFO 10004 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-04-01 14:46:51.618  INFO 10004 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-04-01 14:46:51.618  INFO 10004 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-04-01 14:46:51.618  INFO 10004 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-04-01 14:46:52.588  INFO 10004 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-04-01 14:47:13.205  INFO 10004 --- [http-nio-6969-exec-2] c.s.service_impl.UserService_Impl        : FieldJson(id=2, name=, latitude=, longitude=, address=, image=, price=50000.0, openstatus=, space=0.0, details=, totalBook=0, totalSlot=33, busySlot=8, area=AreaJson(id=13, areaName=Ph??ng Mai D?ch, district=District(id=3, district=C?u Gi?y)))
+2022-04-01 14:47:13.205 ERROR 10004 --- [http-nio-6969-exec-2] c.s.service_impl.UserService_Impl        : Booking went wrong ...
+2022-04-01 14:47:21.615  INFO 10004 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-04-01 14:47:39.574  INFO 10004 --- [http-nio-6969-exec-3] c.s.service_impl.UserService_Impl        : FieldJson(id=2, name=, latitude=, longitude=, address=, image=, price=50000.0, openstatus=, space=0.0, details=, totalBook=0, totalSlot=33, busySlot=8, area=AreaJson(id=13, areaName=Ph??ng Mai D?ch, district=District(id=3, district=C?u Gi?y)))
+2022-04-01 14:47:39.578  INFO 10004 --- [http-nio-6969-exec-3] c.s.service_impl.UserService_Impl        : userRepository Booking ... 

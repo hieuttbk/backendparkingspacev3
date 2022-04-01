@@ -52,14 +52,14 @@ public class UserController {
     }
 
     @PostMapping("api/us/book")
-    public ResponseEntity<Object> book(@RequestBody BookPayload bookPayload, @RequestHeader String token){
+    public ResponseEntity<Object> book(@RequestBody BookPayload bookPayload, @RequestHeader String token) throws Exception{
         String email = jwtService.decode(token);
-//        System.out.println(bookPayload);
+//        System.out.println(bookPayload.getTimeInBook());
         return ResponseEntity.ok(MyResponse.success(userService.book(bookPayload, email)));
     }
 
     @PostMapping("api/us/parking")
-    public ResponseEntity<Object> park(@RequestBody ParkPayload parkPayload, @RequestHeader String token){
+    public ResponseEntity<Object> park(@RequestBody ParkPayload parkPayload, @RequestHeader String token) {
         String email = jwtService.decode(token);
         return ResponseEntity.ok(MyResponse.success(userService.park(parkPayload, email)));
     }

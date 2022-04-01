@@ -13,9 +13,9 @@ public class BookPayload {
 
     private String carNumber;
 
-    @JsonFormat(pattern="YYYY-MM-DD HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "GMT+7")
     private Timestamp timeInBook;
 
-    @JsonFormat(pattern="YYYY-MM-DD HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "GMT+7")
     private Timestamp timeOutBook;
 }

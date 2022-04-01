@@ -83,7 +83,7 @@ public class UserService_Impl implements UserService {
     @Override
     public Contract park(ParkPayload parkPayload, String email) {
         User user = userRepo.findByEmail(email);
-        if(user == null){
+        if(user == null) {
             return null;
         }
 
@@ -117,7 +117,13 @@ public class UserService_Impl implements UserService {
                             bookPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), "", idArea)
             );
             logger.info(fieldJson.toString());
-            System.out.println(bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime());
+
+//            System.out.println(bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime());
+//            System.out.println("Check time - " + (bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()));
+//            System.out.println("Check slot - " + (fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()));
+//            System.out.println("Check timestamp - " + new Timestamp(new Date().getTime()));
+//            System.out.println("Check timeInBook - " + bookPayload.getTimeInBook());
+
             if (fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
                     && bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
                     && bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() >= Integer.parseInt(timeConditionsToOrder)// 30 minute

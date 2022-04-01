@@ -10,7 +10,7 @@ public class ParkPayload {
     private Integer fieldId;
     private String equipment;
     //    vì default timezone đang là GMT+7 rồi nên không viết timezone = "GMT+7" cũng vẫn được
-    @JsonFormat(pattern="YYYY-MM-DD HH:mm")
+    @JsonFormat(pattern="YYYY-MM-DD HH:mm:ss")
     private Timestamp timeCarIn;
 //    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
 //    private Timestamp timeOutBook;

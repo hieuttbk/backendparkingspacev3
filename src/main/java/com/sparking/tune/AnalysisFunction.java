@@ -108,7 +108,6 @@ public class AnalysisFunction {
 
  //   @Scheduled(fixedRate = rateUpdateAnalysis,initialDelay = 120000)
     @Scheduled(fixedRate = rateUpdateAnalysis,initialDelay = 30000)
-
     void updateStatsFieldFreq() throws ParseException {
         logger.info("UPDATE ANALYSIS DATABASE: PERIODICALLY");
         List<StatsField> s = statsFieldRepo.getLatest();
