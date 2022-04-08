@@ -5,6 +5,8 @@ import com.sparking.entities.payloadReq.*;
 import com.sparking.repository.*;
 import com.sparking.security.SHA256Service;
 import com.sparking.service.SendMailService;
+import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +20,6 @@ import java.util.*;
 @Transactional(rollbackFor = Exception.class, timeout = 30000)
 @Repository
 public class UserRepo_Impl implements UserRepo {
-
     @PersistenceContext
     EntityManager entityManager;
     @Autowired
@@ -240,20 +241,16 @@ public class UserRepo_Impl implements UserRepo {
     }
 
     @Override
-    public Contract park(ParkPayload parkPayload, User user) {
-        System.out.println("UserRepo_Impl.park" + parkPayload);
-        return contractRepo.createAndUpdate(Contract.builder()
-                .fieldId(parkPayload.getFieldId())
-                .timeInBook(null)
-                .timeOutBook(null)
-                .carNumber(parkPayload.getEquipment())
-                .dtCreate(new Timestamp(new Date().getTime()))
-                .timeCarIn(parkPayload.getTimeCarIn())
-                .timeCarOut(null)
-                .status("Y")
-                .cost("")
-                .userId(user.getId())
-                .build());
+    public Contract park(ParkPayload parkPayload, Contract lastContract) {
+        Timestamp timeCarIn = parkPayload.getTimeCarIn();
+        int contractId = lastContract.getId();
+        Query query = entityManager
+                .createQuery("update Contract c set c.timeCarIn =:timeCarIn and c.status =:status where c.id =:contractId")
+                .setParameter("timeCarIn", timeCarIn).setParameter("status", "Y").setParameter("contractId", contractId);
+
+        entityManager.merge(query);
+        List<Contract> contracts = entityManager.createQuery("Select c from Contract c where c.id =:id").setParameter("id", contractId).getResultList();
+        return contracts.get(0);
     }
 
     @Override

@@ -19,6 +19,7 @@ public interface ContractRepo {
 
     List<Contract> findByField(int fieldId);
 
+    List<Contract> getContractByUserId(int userId);
 
 //    List<Contract>  findBySlotId(int slotId);
 

@@ -26,7 +26,8 @@ public class ContractRepo_Impl implements ContractRepo {
 
     @Override
     public Contract createAndUpdate(Contract contract) {
-        System.out.println("ContractRepo_Impl.createAndUpdate" + contract);
+//        System.out.println("ContractRepo_Impl.createAndUpdate" + contract);
+//        System.out.println("Contract Debug - " + contract.getStatus());
         if(!contract.getStatus().equals("V")// đặt trước
                 && !contract.getStatus().equals("Y")// đã thuê
                 && !contract.getStatus().equals("C")// đã huỷ
@@ -76,5 +77,10 @@ public class ContractRepo_Impl implements ContractRepo {
         return contracts;
     }
 
-
+    @Override
+    public List<Contract> getContractByUserId(int userId) {
+        List<Contract> contracts = entityManager.createQuery("Select c from Contract c where c.userId = :userId")
+                .setParameter("userId", userId).getResultList();
+        return contracts;
+    }
 }

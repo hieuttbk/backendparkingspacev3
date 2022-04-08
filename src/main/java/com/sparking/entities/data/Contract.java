@@ -1,5 +1,6 @@
 package com.sparking.entities.data;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,16 +28,16 @@ public class Contract  {
     @Column(name = "user_id", nullable = false)
     private Integer userId;
 
-    @Column(name = "time_car_in")
+    @Column(name = "time_car_in", nullable = true)
     private Timestamp timeCarIn;
 
-    @Column(name = "time_car_out")
+    @Column(name = "time_car_out", nullable = true)
     private Timestamp timeCarOut;
 
-    @Column(name = "time_in_book", nullable = true)
+    @Column(name = "time_in_book")
     private Timestamp timeInBook;
 
-    @Column(name = "time_out_book", nullable = true)
+    @Column(name = "time_out_book")
     private Timestamp timeOutBook;
 
     @Column(name = "car_number", nullable = false)
