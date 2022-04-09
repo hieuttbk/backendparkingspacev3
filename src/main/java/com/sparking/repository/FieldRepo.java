@@ -21,6 +21,10 @@ public interface FieldRepo{
 
     List<Field> managerFind(Manager manager);
 
+    List<Field> managerFilterByDistrict(int district, Manager manager);
+
+    List<Field> managerFilterByArea(int area, Manager manager);
+
     Field managerUpdate(Field field, Manager manager);
 
     boolean managerDelete(int id, Manager manager);

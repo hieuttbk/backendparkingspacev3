@@ -4,6 +4,7 @@ import com.sparking.entities.data.Field;
 import com.sparking.entities.jsonResp.FieldAnalysis;
 import com.sparking.entities.jsonResp.FieldJson;
 import com.sparking.entities.jsonResp.MetaJson;
+import com.sparking.entities.jsonResp.MyResponse;
 
 import java.text.ParseException;
 import java.util.List;
@@ -15,13 +16,17 @@ public interface FieldService {
 
     boolean delete(int id);
 
-    MetaJson filterByDistrict(int district);
+    MyResponse filterByDistrict(int district);
 
-    MetaJson filterByArea(int area);
+    MyResponse filterByArea(int area);
 
-    MetaJson findAll();
+    MyResponse findAll();
 
-    List<FieldJson> managerFind(String phone);
+    MyResponse managerFilterByDistrict(int district, String decode);
+
+    MyResponse managerFilterByArea(int area, String decode);
+
+    List<FieldJson> managerFind(String decode);
 
     FieldJson managerUpdate(Field field, String phone);
 

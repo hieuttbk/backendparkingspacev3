@@ -1,19 +1,19 @@
 package com.sparking.service_impl;
 
 import com.sparking.entities.data.*;
-import com.sparking.entities.jsonResp.AreaJson;
-import com.sparking.entities.jsonResp.FieldAnalysis;
-import com.sparking.entities.jsonResp.FieldJson;
-import com.sparking.entities.jsonResp.MetaJson;
+import com.sparking.entities.jsonResp.*;
 import com.sparking.repository.*;
 import com.sparking.security.JWTService;
 import com.sparking.service.ContractService;
 import com.sparking.service.FieldService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class FieldService_Impl implements FieldService {
+    private static final Logger logger = LoggerFactory.getLogger(FieldService_Impl.class);
+
     @Autowired
     private AreaRepo areaRepo;
 
@@ -76,21 +78,77 @@ public class FieldService_Impl implements FieldService {
     }
 
     @Override
-    public MetaJson findAll() {
-        List<FieldJson> fieldJsons = fieldRepo.findAll().stream().map(this::data2Json).collect(Collectors.toList());
-        return formatMetaJson(fieldJsons);
+    public MyResponse findAll() {
+        try {
+            List<FieldJson> fieldJsons = fieldRepo.findAll().stream().map(this::data2Json).collect(Collectors.toList());
+            return MyResponse.success(formatMetaJson(fieldJsons));
+        } catch (Exception e) {
+            if (e instanceof Exception) {
+                throw e;
+            }
+            this.logger.error("findAll went wrong ... - " + e.toString());
+            return MyResponse.fail(e);
+        }
     }
 
     @Override
-    public MetaJson filterByDistrict(int district) {
-        List<FieldJson> fieldJsons = fieldRepo.filterByDistrict(district).stream().map(this::data2Json).collect(Collectors.toList());
-        return formatMetaJson(fieldJsons);
+    public MyResponse filterByDistrict(int district) {
+        try {
+            List<FieldJson> fieldJsons = fieldRepo.filterByDistrict(district).stream().map(this::data2Json).collect(Collectors.toList());
+            return MyResponse.success(formatMetaJson(fieldJsons));
+        } catch (Exception e) {
+            if (e instanceof Exception) {
+                throw e;
+            }
+            this.logger.error("filterByDistrict went wrong ... - " + e.toString());
+            return MyResponse.fail(e);
+        }
     }
 
     @Override
-    public MetaJson filterByArea(int area) {
-        List<FieldJson> fieldJsons = fieldRepo.filterByArea(area).stream().map(this::data2Json).collect(Collectors.toList());
-        return formatMetaJson(fieldJsons);
+    public MyResponse filterByArea(int area) {
+        try {
+            List<FieldJson> fieldJsons = fieldRepo.filterByArea(area).stream().map(this::data2Json).collect(Collectors.toList());
+//             Testing Error
+//            throw new Exception("Some thing went wrong ...");
+            return MyResponse.success(formatMetaJson(fieldJsons));
+        } catch (Exception e) {
+            if (e instanceof Exception) {
+                throw e;
+            }
+            this.logger.error("filterByArea went wrong ... - " + e.toString());
+            return MyResponse.fail(e);
+        }
+    }
+
+    @Override
+    public MyResponse managerFilterByDistrict(int district, String decode) {
+        Manager manager = getManager(decode);
+        try {
+            List<FieldJson> fieldJsons = fieldRepo.managerFilterByDistrict(district, manager).stream().map(this::data2Json).collect(Collectors.toList());
+            return MyResponse.success(formatMetaJson(fieldJsons));
+        } catch (Exception e) {
+            if (e instanceof IOException) {
+                throw e;
+            }
+            this.logger.error("managerFilterByDistrict went wrong ... - " + e.toString());
+            return MyResponse.fail(e);
+        }
+    }
+
+    @Override
+    public MyResponse managerFilterByArea(int area, String decode) {
+        Manager manager = getManager(decode);
+        try {
+            List<FieldJson> fieldJsons = fieldRepo.managerFilterByArea(area, manager).stream().map(this::data2Json).collect(Collectors.toList());
+            return MyResponse.success(formatMetaJson(fieldJsons));
+        } catch (Exception e) {
+            if (e instanceof IOException) {
+                throw e;
+            }
+            this.logger.error("managerFilterByArea went wrong ... - " + e.toString());
+            return MyResponse.fail(e);
+        }
     }
 
 
@@ -392,6 +450,10 @@ public class FieldService_Impl implements FieldService {
                 .build();
 
         return metaJson;
+    }
+
+    private final Manager getManager(String decode) {
+        return managerRepo.findByEmail(decode);
     }
 
 }
