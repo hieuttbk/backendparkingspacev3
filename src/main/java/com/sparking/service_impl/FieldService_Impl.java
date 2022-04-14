@@ -153,12 +153,12 @@ public class FieldService_Impl implements FieldService {
 
 
    @Override
-    public List<FieldJson> managerFind(String email) {
-        Manager manager = managerRepo.findByEmail(email);
-        if (manager == null) {
-            return null;
-        }
-        return fieldRepo.managerFind(manager).stream().map(this::data2Json).collect(Collectors.toList());
+    public List<FieldJson> managerFind(String decode) {
+       Manager manager = getManager(decode);
+       if (manager == null) {
+           return null;
+       }
+       return fieldRepo.managerFind(manager).stream().map(this::data2Json).collect(Collectors.toList());
     }
 
     @Override
@@ -424,6 +424,17 @@ public class FieldService_Impl implements FieldService {
 
         System.out.println("analysisByHour done");
         return rs;
+    }
+
+    @Override
+    public final MyResponse formatField(String decode) {
+        try {
+            List<FieldJson> fieldJsons = this.managerFind(decode);
+            return MyResponse.success(formatMetaJson(fieldJsons));
+        } catch (Exception e) {
+            FieldService_Impl.logger.error("FormatField wrong ... - " + e.toString());
+            return MyResponse.fail(e.getStackTrace());
+        }
     }
 
     private static MetaJson formatMetaJson(List<FieldJson> fieldJsons) {

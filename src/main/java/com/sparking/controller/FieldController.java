@@ -70,7 +70,7 @@ public class FieldController {
             return ResponseEntity.ok(fieldService.managerFilterByArea(Integer.parseInt(area), decode));
         }
 //        return ResponseEntity.ok(fieldService.managerFind(decode));
-        return ResponseEntity.ok(MyResponse.success(fieldService.managerFind(decode)));
+        return ResponseEntity.ok(fieldService.formatField(decode));
     }
 
 
