@@ -79,10 +79,15 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
         return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.ant("/**")).build();
     }
 
-    @Value("${pathCamStatus}")
-    String pathDataCam;
+    @Value("${pathCamStatusD5}")
+    String pathDataCamD5;
+
+    @Value("${pathCamStatusD3}")
+    String pathDataCamD3;
+
     @Value("${pathDetectorStatus}")
     String pathDetectorStatus;
+
     @Value("${timeExpiredContract}")
     String timeExpiredContract;
 
@@ -152,26 +157,33 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 //    }
 
     @Scheduled(fixedRate = rateUpdateDataCam, initialDelay = 60000)
-    public boolean getDataCam() throws FileNotFoundException, ParseException {
+    public boolean getDataCam() throws FileNotFoundException {
         logger.info("UPDATE DATA CAM COMPLETE");
-        File file = new File (pathDataCam);
-        if (!file.exists()) {
+        File fileD3 = new File (pathDataCamD3);
+        File fileD5 = new File(pathDataCamD5);
+        if (!fileD3.exists() || !fileD5.exists()) {
             return false;
         }
 
-        Scanner myReader = new Scanner(file);
+        Scanner myReaderD5 = new Scanner(fileD5);
+        Scanner myReaderD3 = new Scanner(fileD3);
         List<String> newRows = new ArrayList<>();
-        while (myReader.hasNextLine()) {
-            String row = myReader.nextLine();
+        while (myReaderD3.hasNextLine()) {
+            String row = myReaderD3.nextLine();
             newRows.add(row);
         }
+        while(myReaderD5.hasNextLine()) {
+            String row = myReaderD5.nextLine();
+            newRows.add(row);
+        }
+
+        System.out.println("File: " + newRows);
         if(!rows.equals(newRows)) {
             System.out.println("Data cam has changed");
             rows.clear();
             rows.addAll(newRows);
 
-//            System.out.println("Rows Size " + rows.size());
-            for (int i = 1; i < rows.size(); i++){
+            for (int i = 0; i < rows.size(); i++){
                 String rowChild = rows.get(i);
                 boolean status = rowChild.split(" ")[2].equals("1");
 
@@ -182,12 +194,16 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
                         .filter(slot -> slot.getId() == slotID)
                         .collect(Collectors.toList())
                         .get(0);
-//                System.out.println("Debug - " + oldSlot);
+
                 if (oldSlot != null) {
                     oldSlot.setStatusCam(status);
                     if (rowChild.split(" ").length == 4) {
                         String carNumber = rowChild.split(" ")[3];
-                        oldSlot.setCarNumber(carNumber);
+                        if (carNumber != null) {
+                            oldSlot.setCarNumber(carNumber);
+                        } else {
+                            oldSlot.setCarNumber(null);
+                        }
                     }
                 }
 
@@ -213,7 +229,8 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
             System.out.println("Data cam has updated successfully");
         }
 
-        myReader.close();
+        myReaderD3.close();
+        myReaderD5.close();
         return true;
     }
 

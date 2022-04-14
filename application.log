@@ -860,3 +860,40 @@ java.lang.NullPointerException: null
 2022-04-14 09:51:09.319  INFO 872 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
 2022-04-14 09:51:09.977  INFO 872 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
 2022-04-14 09:51:09.978  INFO 872 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-04-14 12:48:15.050  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 15316 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-04-14 12:48:15.053  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-04-14 12:48:18.273  WARN 15316 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-04-14 12:48:19.768  INFO 15316 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-04-14 12:48:19.772  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 5.098 seconds (JVM running for 5.855)
+2022-04-14 12:48:19.775  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-04-14 12:48:19.777  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-04-14 12:48:19.777  INFO 15316 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-04-14 12:48:19.778  INFO 15316 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-04-14 12:48:21.160  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-04-14 12:48:21.161  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-04-14 12:48:21.248 ERROR 15316 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:798) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:779) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:322) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	at com.sparking.BackendParkingSpaceV2Application.main(BackendParkingSpaceV2Application.java:74) [classes/:na]
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 2
+	at com.sparking.BackendParkingSpaceV2Application.getDataCam(BackendParkingSpaceV2Application.java:188) [classes/:na]
+	at com.sparking.BackendParkingSpaceV2Application.run(BackendParkingSpaceV2Application.java:146) [classes/:na]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:795) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
+	... 5 common frames omitted
+
+2022-04-14 12:50:41.390  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 12316 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-04-14 12:50:41.394  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-04-14 12:50:45.080  WARN 12316 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-04-14 12:50:46.760  INFO 12316 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-04-14 12:50:46.764  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 5.766 seconds (JVM running for 6.518)
+2022-04-14 12:50:46.768  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-04-14 12:50:46.770  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-04-14 12:50:46.770  INFO 12316 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-04-14 12:50:46.770  INFO 12316 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-04-14 12:50:48.451  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-04-14 12:50:48.452  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
