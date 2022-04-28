@@ -29,13 +29,13 @@ public class Detector {
     @Column(name = "gateway_id", nullable = false)
     private Integer gatewayId;
 
-    @Column(name = "battery_level", nullable = false)
+    @Column(name = "battery_level")
     private String batteryLevel;
 
-    @Column(name = "communication_level", nullable = false)
+    @Column(name = "communication_level")
     private String communication_level;
 
-    @Column(name = "last_time_update", nullable = false)
+    @Column(name = "last_time_update")
     private Timestamp lastTimeUpdate;
 
     @Column(name = "last_time_setup", nullable = false)

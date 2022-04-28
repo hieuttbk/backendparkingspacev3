@@ -14,6 +14,8 @@ public interface UserRepo {
 
     boolean register(RegisterForm registerForm);
 
+    User findById(int id);
+
     User findByEmail(String email);
 
     User createAndUpdate(User user);
@@ -32,7 +34,9 @@ public interface UserRepo {
 
     boolean verifyResetPass(VerifyResetPassPayload verifyResetPassPayload);
 
-    Contract park(ParkPayload parkPayload, User user);
+    Contract park(ParkPayload parkPayload, Contract contract);
 
     User findByTagId(String tagId);
+
+    User findById(Integer userId);
 }

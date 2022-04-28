@@ -14,10 +14,13 @@ import com.sparking.security.SHA256Service;
 import com.sparking.service.ContractService;
 import com.sparking.service.FieldService;
 import com.sparking.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -28,6 +31,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService_Impl implements UserService {
+    private static Logger logger = LoggerFactory.getLogger(UserService_Impl.class);
 
     @Autowired
     UserRepo userRepo;
@@ -78,36 +82,85 @@ public class UserService_Impl implements UserService {
 
     @Override
     public Contract park(ParkPayload parkPayload, String email) {
-        User user = userRepo.findByEmail(email);
-        if(user == null){
+        final long timeExpiredBooking = 3600 * 1000;
+        try {
+            User user = userRepo.findByEmail(email);
+            if(user == null) {
+                logger.debug("User Not Found");
+                throw new Exception("User Not Found ...");
+            }
+            System.out.println("User - " + user);
+            String equipment = parkPayload.getEquipment();
+            if (!user.getEquipment().equals(equipment)) {
+                throw new IOException("Equipment Invalid ...");
+            }
+
+            System.out.println("Equipment - " + (user.getEquipment().equals(equipment)));
+            int userId = user.getId();
+            List<Contract> contracts = contractRepo.getContractByUserId(userId);
+
+            System.out.println("ListContract - " + contracts);
+
+            if (contracts.size() < 0 ) {
+                return null;
+            }
+            Contract lastContract = contracts.get(contracts.size() - 1);
+
+            double timeCarIn = lastContract.getTimeCarIn().getTime();
+            double timeInBook = lastContract.getTimeInBook().getTime();
+
+            System.out.println("timeCarIn - " + timeCarIn);
+            System.out.println("timeInBook - " + timeInBook);
+
+            if (!(lastContract.getTimeCarIn() == null)) {
+                throw new Exception("User was not pre-booking after parking ...");
+            } else if ((timeCarIn < timeInBook) ||
+                    (timeCarIn - timeInBook >= timeExpiredBooking)
+            ) {
+                throw new Exception("Time booking was expired ...");
+            } else {
+                logger.info("User parking ...");
+                return userRepo.park(parkPayload, lastContract);
+            }
+        } catch (Exception e) {
+            logger.error("Parking went wrong ...");
+            e.printStackTrace();
             return null;
         }
-      //  long timeNow = new Date().getTime();
-       // FieldJson fieldJson = fieldService.data2Json(new Field(parkPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), ""));
-
-     //   if(fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()){
-            System.out.println("Parking ok" + parkPayload);
-            return userRepo.park(parkPayload, user);
-       // }else {
-        //    return null;
-       // }
     }
 
 
 
     @Override
     public Contract book(BookPayload bookPayload, String email) {
-        User user = userRepo.findByEmail(email);
-        if(user == null){
-            return null;
-        }
-        FieldJson fieldJson = fieldService.data2Json(new Field(bookPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), ""));
-        if(fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
-            && bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
-            && bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() >= Integer.parseInt(timeConditionsToOrder)// 30 minute
-        ){
-            return userRepo.book(bookPayload, user);
-        }else {
+        try {
+            User user = userRepo.findByEmail(email);
+            if (user == null){
+                return null;
+            }
+            Field field = fieldRepo.findById(bookPayload.getFieldId());
+            if (field == null) {
+                throw new Exception("Cannot find Field");
+            }
+            int idArea = field.getIdArea();
+            FieldJson fieldJson = fieldService.data2Json(
+                    new Field(
+                            bookPayload.getFieldId(),"","","","","",50000.0,"",new BigDecimal("0.0"), "", idArea)
+            );
+            logger.info(fieldJson.toString());
+
+            if (fieldJson.getTotalSlot() > fieldJson.getBusySlot()/2 + fieldJson.getTotalBook()
+                    && bookPayload.getTimeInBook().getTime() < bookPayload.getTimeOutBook().getTime()
+                    && bookPayload.getTimeInBook().getTime() - new Timestamp(new Date().getTime()).getTime() >= Integer.parseInt(timeConditionsToOrder)// 30 minute
+            ) {
+                logger.info("userRepository Booking ... ");
+                return userRepo.book(bookPayload, user);
+            } else {
+                throw new IOException("Invalid timeBooking, Please Pre Order booking 30 minutes");
+            }
+        } catch (Exception e) {
+            logger.error("Booking went wrong ...");
+            e.printStackTrace();
             return null;
         }
     }

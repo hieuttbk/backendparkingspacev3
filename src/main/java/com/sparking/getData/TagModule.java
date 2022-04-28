@@ -1,9 +1,7 @@
 package com.sparking.getData;
 
 import com.sparking.common.ConfigVar;
-import com.sparking.entities.data.Contract;
-import com.sparking.entities.data.Field;
-import com.sparking.entities.data.User;
+import com.sparking.entities.data.*;
 import com.sparking.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,12 +26,15 @@ public class TagModule {
     FieldRepo fieldRepo;
     @Autowired
     SlotRepo slotRepo;
+    @Autowired
+    TagRepo tagRepo;
+
 
     private static UserRepo userRepoStatic;
     private static ContractRepo contractRepoStatic;
     private static FieldRepo fieldRepoStatic;
     private static SlotRepo slotRepoStatic;
-
+    private static TagRepo tagRepoStatic;
 
     @PostConstruct
     private void initStatic() {
@@ -41,6 +42,7 @@ public class TagModule {
         contractRepoStatic = this.contractRepo;
         fieldRepoStatic = this.fieldRepo;
         slotRepoStatic = this.slotRepo;
+        tagRepoStatic = this.tagRepo;
     }
 
     final static String SIGN = "@V2X,";
@@ -68,7 +70,7 @@ public class TagModule {
 
         ServerSocket listener = null;
 
-        System.out.println("Server is waiting to accept user...");
+        System.out.println("[For TAG] Server is waiting to accept user...");
         int clientNumber = 0;
 
         // open ServerSocket (port)
@@ -112,7 +114,7 @@ public class TagModule {
             this.socketOfServer = socketOfServer;
 
             // Log
-            log("New connection with client# " + this.clientNumber + " at "
+            log("New connection with tag# " + this.clientNumber + " at "
                     + socketOfServer);
         }
 
@@ -150,10 +152,10 @@ public class TagModule {
                     String contents = is.readLine();
                     // System.out.println("DEBUG 1: " + line);
                     if (contents == null) {
-                        //	System.out.println("NO data in mess from client");
+//                        	System.out.println("NO data in mess from client");
                     } else {
-                        //	log("Content = " + contents);
-
+                        // log("Content = " + contents);
+                        // System.out.print(contents);
                         // 205.205.205.6,@V2X,SIZE,ID,CMD,LAT,LONG,DATE,TIME
                         String[] pram = contents.split(",");
 
@@ -162,15 +164,41 @@ public class TagModule {
                             TagPacket packet = new TagPacket(pram[0], pram[1],
                                     pram[2], pram[3], pram[4], pram[5], pram[6],
                                     pram[7], pram[8]);
-						/*	System.out.println("SIGN = " + packet.getSign());
-							System.out.println("SEQ = " + packet.getNumOfPacket());
-							System.out.println("MTY = " + packet.getTypeOfPacket());
-							System.out.println("ID = " + packet.getId());
-							System.out.println("LAT = " + packet.getLat());
-							System.out.println("LONG = " + packet.getLng());
-							System.out.println("DATE = " + packet.getDate());
-							System.out.println("TIME = " + packet.getTime());
-							System.out.println("STATE = " + packet.getState());*/
+
+
+                            //TODO:
+                            // create packet_tag logging in database
+                            // API to create tagId mapping with userId (using email parameter)
+
+//                          System.out.print("Date: " + pram[6]);
+
+//                            Tag tagCurrent = tagRepoStatic.findByTagId(packet.getId());
+//                            if (tagCurrent == null) {
+//                                packet.setState("2");
+//                            }
+//                            TagPackage tagPackage = TagPackage.builder()
+//                                    .sign(packet.getSign())
+//                                    .seq(packet.getNumOfPacket())
+//                                    .mty(packet.getTypeOfPacket())
+//                                    .tagId(packet.getId())
+//                                    .lat(packet.getLat())
+//                                    .log(packet.getLng())
+//                                    .date(FormatDateFromNewsTag.FormatDate(packet.getDate()))
+//                                    .time(packet.getTime())
+//                                    .state(packet.getState())
+//                                    .build();
+//
+//                            tagRepoStatic.createNewsFromTag(tagPackage);
+
+//						    System.out.println("SIGN = " + packet.getSign());
+//							System.out.println("SEQ = " + packet.getNumOfPacket());
+//							System.out.println("MTY = " + packet.getTypeOfPacket());
+//							System.out.println("ID = " + packet.getId());
+//							System.out.println("LAT = " + packet.getLat());
+//							System.out.println("LONG = " + packet.getLng());
+//							System.out.println("DATE = " + packet.getDate());
+//							System.out.println("TIME = " + packet.getTime());
+//							System.out.println("STATE = " + packet.getState());
 
                             //1. tagID registered by User ?
                             // return user
@@ -197,6 +225,8 @@ public class TagModule {
                             boolean carOut = !carIn;
 
                             // CHECK LOC and FULL SLOT
+                            //TODO:
+                                // tune RANGE and GPS to  match with only field !!!!
                             System.out.println("[TagModule] Process with LOC");
                             int fieldId = -1;
                             Double price = 0.0;
@@ -224,7 +254,10 @@ public class TagModule {
 
                             // CHECK REGISTERED TAG
                             System.out.println("[TagModule] Process with tagID = " + packet.getId());
-                            User user = userRepoStatic.findByTagId(packet.getId());
+                            Tag tag = tagRepoStatic.findByTagId(packet.getId());
+                            User user = userRepoStatic.findById(tag.getUserId());
+                          //  User user = userRepoStatic.findByTagId(packet.getId());
+
 
 
                             if (fieldId < 0) {
@@ -238,14 +271,15 @@ public class TagModule {
                                 System.out.println("[TagModule] No user with " + packet.getId());
                             } else {
 
-
+                                System.out.println("[TagModule] FiedId is " + fieldId);
                                 Contract contract = null;
                                 boolean checkBooked = false; //
                                 boolean checkStateContract = false;
 
                                 List<Contract> contracts = contractRepoStatic.findByUser(user);
-                                if (contracts == null) {
+                                if (contracts.size()<1) {
                                     System.out.println("No Contract");
+                                    state = StateServer.ERR;
                                     if (carIn) {
                                         checkStateContract = true;  // người dùng mới hoàn toàn, chưa tạo contract
                                     } else {
@@ -275,81 +309,80 @@ public class TagModule {
                                         }
                                     }
 
-                                if (checkStateContract) {
-                                    //   System.out.println("Check contract " + contract.getId() +  contract.getStatus());
-                                    if (!checkBooked && carIn) { // no booked before >> book immediately
-                                        // find all Fields and find whether Tag in a field ?
-                                        // Tag in field > parking
-                                        contractRepoStatic.createAndUpdate(Contract.builder()
-                                                .fieldId(fieldId)
-                                                .timeInBook(null)
-                                                .timeOutBook(null)
-                                                .carNumber(user.getEquipment())
-                                                .dtCreate(new Timestamp(new Date().getTime()))
-                                                .timeCarIn(timestamp)
-                                                .timeCarOut(null)
-                                                .status("I")
-                                                .cost("")
-                                                .userId(user.getId())
-                                                .build());
-                                        state = StateServer.IN;
-                                        System.out.println("[TagModule] Car in parking with new contract");
-                                    } else { // booked >> check LOC || car out
-                                        int fieldIdContract = contract.getFieldId();
-                                        if (fieldId == fieldIdContract) { // match contract update tag
-                                            if (carIn) { // update booked and tag in
-                                                contract.setTimeCarIn(timestamp);
-                                                contract.setStatus("Y");
-                                                contractRepoStatic.createAndUpdate(contract);
-                                                state = StateServer.IN;
-                                                System.out.println("[TagModule] Car in parking with booked contract");
-                                            } else { // update when tag out
-                                                contract.setTimeCarOut(timestamp);
-                                                contract.setStatus("R");
-                                                double cost = (double) (contract.getTimeCarOut().getTime() - contract.getTimeCarIn().getTime()) / 1000 / 60 / 60 * price;
-
-                                                if (cost > 0) {
-                                                    contract.setCost(String.valueOf(cost));
+                                    if (checkStateContract) {
+                                        //   System.out.println("Check contract " + contract.getId() +  contract.getStatus());
+                                        if (!checkBooked && carIn) { // no booked before >> book immediately
+                                            // find all Fields and find whether Tag in a field ?
+                                            // Tag in field > parking
+                                            contractRepoStatic.createAndUpdate(Contract.builder()
+                                                    .fieldId(fieldId)
+                                                    .timeInBook(null)
+                                                    .timeOutBook(null)
+                                                    .carNumber(user.getEquipment())
+                                                    .dtCreate(new Timestamp(new Date().getTime()))
+                                                    .timeCarIn(timestamp)
+                                                    .timeCarOut(null)
+                                                    .status("I")
+                                                    .cost("")
+                                                    .userId(user.getId())
+                                                    .build());
+                                            state = StateServer.IN;
+                                            System.out.println("[TagModule] Car in parking with new contract");
+                                        } else { // booked >> check LOC || car out
+                                            int fieldIdContract = contract.getFieldId();
+                                            if (fieldId == fieldIdContract) { // match contract update tag
+                                                if (carIn) { // update booked and tag in
+                                                    contract.setTimeCarIn(timestamp);
+                                                    contract.setStatus("Y");
                                                     contractRepoStatic.createAndUpdate(contract);
-                                                    state = StateServer.OUT;
-                                                    System.out.println("[TagModule] Car out OK");
-                                                } else {
-                                                    System.out.println("Time car out < Time car in ");
-                                                    state = StateServer.ERR;
+                                                    state = StateServer.IN;
+                                                    System.out.println("[TagModule] OK: Car in parking with booked contract");
+                                                } else { // update when tag out
+                                                    contract.setTimeCarOut(timestamp);
+                                                    contract.setStatus("R");
+                                                    double cost = (double) (contract.getTimeCarOut().getTime() - contract.getTimeCarIn().getTime()) / 1000 / 60 / 60 * price;
+
+                                                    if (cost > 0) {
+                                                        contract.setCost(String.valueOf(cost));
+                                                        contractRepoStatic.createAndUpdate(contract);
+                                                        state = StateServer.OUT;
+                                                        System.out.println("[TagModule] Car out OK");
+                                                    } else {
+                                                        System.out.println("Time car out < Time car in ");
+                                                        state = StateServer.ERR;
+                                                    }
+
                                                 }
+                                            } else {
+                                                if (carOut) {
+                                                    state = StateServer.ERR;
+                                                    System.out.println("[TagModule] Tag -out is not in right fields of contract");
+                                                } else { // arrive wrong field
+                                                    System.out.println("[TagModule] Car in parking with new contract BUT wrong field");
+                                                    contractRepoStatic.createAndUpdate(Contract.builder()
+                                                            .fieldId(fieldId)
+                                                            .timeInBook(null)
+                                                            .timeOutBook(null)
+                                                            .carNumber(user.getEquipment())
+                                                            .dtCreate(new Timestamp(new Date().getTime()))
+                                                            .timeCarIn(timestamp)
+                                                            .timeCarOut(null)
+                                                            .status("Y")
+                                                            .cost("")
+                                                            .userId(user.getId())
+                                                            .build());
+                                                    state = StateServer.IN;
+                                                    contract.setStatus("R"); // change current(wrong) contract to R
+                                                    contractRepoStatic.createAndUpdate(contract);
 
-                                            }
-                                        } else {
-                                            if (carOut) {
-                                                state = StateServer.ERR;
-                                                System.out.println("[TagModule] Tag -out is not in right fields of contract");
-                                            } else { // arrive wrong field
-                                                System.out.println("[TagModule] Car in parking with new contract BUT wrong field");
-                                                contractRepoStatic.createAndUpdate(Contract.builder()
-                                                        .fieldId(fieldId)
-                                                        .timeInBook(null)
-                                                        .timeOutBook(null)
-                                                        .carNumber(user.getEquipment())
-                                                        .dtCreate(new Timestamp(new Date().getTime()))
-                                                        .timeCarIn(timestamp)
-                                                        .timeCarOut(null)
-                                                        .status("Y")
-                                                        .cost("")
-                                                        .userId(user.getId())
-                                                        .build());
-                                                state = StateServer.IN;
-                                                contract.setStatus("R"); // change current(wrong) contract to R
-                                                contractRepoStatic.createAndUpdate(contract);
-
+                                                }
                                             }
                                         }
+                                    } else {
+                                        state = StateServer.ERR;
+                                        System.out.println("ERROR STATE of current or latest contract");
                                     }
-                                } else {
-                                    state = StateServer.ERR;
-                                    System.out.println("ERROR STATE of current or latest contract");
                                 }
-
-                            }
                             }
 
 
@@ -428,7 +461,7 @@ public class TagModule {
 
                             break; // end of connection OK
                         } else {
-                            System.out.println("WRONG message: ");
+                            System.out.println("Waiting ACK message: ");
                         }
                     }
 

@@ -68,6 +68,12 @@ private static Logger logger = LoggerFactory.getLogger(ManagerRepo_Impl.class);
     }
 
     @Override
+    public Manager currentManager(String email) {
+        Manager manager = findByEmail(email);
+        return manager;
+    }
+
+    @Override
     public Manager login(LoginForm loginForm) {
         List<Manager> managers = entityManager
                 .createQuery("select m from Manager m where m.email= :email and m.pass = :password")
@@ -140,7 +146,7 @@ private static Logger logger = LoggerFactory.getLogger(ManagerRepo_Impl.class);
                 .createQuery("select x from CodeResetPass x where x.email =: email")
                 .setParameter("email", verifyResetPassPayload.getEmail())
                 .getResultList();
-        if(codeResetPasses.size()!= 0
+        if(codeResetPasses.size() != 0
                 && codeResetPasses.get(codeResetPasses.size() - 1).getCode().equals(verifyResetPassPayload.getCode())){
 
             oldMan.setPass(SHA256Service.getSHA256(verifyResetPassPayload.getPass()));
@@ -152,8 +158,8 @@ private static Logger logger = LoggerFactory.getLogger(ManagerRepo_Impl.class);
     }
 
     public String getRandomCode(){
-        String rs="";
-        for (int i=0; i< 4; i++){
+        String rs = "";
+        for (int i = 0; i < 4; i++){
             rs += String.valueOf((int) (Math.random() * 10));
         }
         return rs + new Date().getTime()/1000;

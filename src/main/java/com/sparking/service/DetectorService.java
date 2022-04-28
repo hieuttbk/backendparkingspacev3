@@ -8,13 +8,21 @@ import java.util.List;
 
 public interface DetectorService {
 
+    Detector createDetector(DetectorPayload detectorPayload);
+
+    boolean deleteDetector(Integer id);
+
     Detector createAndUpdate(DetectorPayload detectorPayload);
 
     boolean delete(int id);
 
     List<Detector> findAll();
 
-    List<Detector> managerFind(String phone);
+    List<Detector> findByGateway(String gateway);
+
+    List<Detector> managerFind(String email);
+
+    List<Detector> managerGetByGateway(String email, String gateway);
 
     Detector managerCreateAndUpdate(DetectorPayload detectorPayload, String phone);
 

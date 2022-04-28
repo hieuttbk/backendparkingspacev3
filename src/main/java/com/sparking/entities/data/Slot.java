@@ -16,7 +16,6 @@ import javax.persistence.*;
 public class Slot {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -28,4 +27,7 @@ public class Slot {
 
     @Column(name = "status_detector")
     private Boolean statusDetector;
+
+    @Column(name = "car_number")
+    private String carNumber;
 }

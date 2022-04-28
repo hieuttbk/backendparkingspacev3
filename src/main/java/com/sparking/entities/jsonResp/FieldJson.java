@@ -1,12 +1,18 @@
 package com.sparking.entities.jsonResp;
 
+import com.sparking.entities.data.Area;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Builder
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
+@Builder
 public class FieldJson {
 
     private int id;
@@ -22,5 +28,5 @@ public class FieldJson {
     private int totalBook;
     private int totalSlot;
     private int busySlot;
-
+    private AreaJson area;
 }

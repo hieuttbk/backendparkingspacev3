@@ -2,8 +2,10 @@ package com.sparking.repository;
 
 import com.sparking.entities.data.Field;
 import com.sparking.entities.data.Manager;
+import com.sparking.entities.jsonResp.FieldJson;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FieldRepo{
 
@@ -13,7 +15,15 @@ public interface FieldRepo{
 
     List<Field> findAll();
 
+    List<Field> filterByDistrict(int district);
+
+    List<Field> filterByArea(int area);
+
     List<Field> managerFind(Manager manager);
+
+    List<Field> managerFilterByDistrict(int district, Manager manager);
+
+    List<Field> managerFilterByArea(int area, Manager manager);
 
     Field managerUpdate(Field field, Manager manager);
 

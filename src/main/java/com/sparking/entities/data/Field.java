@@ -41,9 +41,11 @@ public class Field  {
     private String openstatus;
 
     @Column(name = "space", nullable = false)
-    private BigDecimal space ;
+    private BigDecimal space;
 
     @Column(name = "details", nullable = false, columnDefinition = "longtext")
     private String details;
 
+    @Column(name = "id_area")
+    private Integer idArea;
 }

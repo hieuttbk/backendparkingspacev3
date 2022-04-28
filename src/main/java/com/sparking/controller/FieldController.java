@@ -4,11 +4,13 @@ import com.sparking.entities.data.Field;
 import com.sparking.entities.jsonResp.MyResponse;
 import com.sparking.security.JWTService;
 import com.sparking.service.FieldService;
+import org.apache.http.client.fluent.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.Map;
 
 @RestController
 public class FieldController {
@@ -38,8 +40,16 @@ public class FieldController {
     }
 
     @GetMapping(value = {"api/public/field/find_all","api/ad/field/find_all"})// can multiple mapping
-    public ResponseEntity<Object> findAll(){
-        return ResponseEntity.ok(MyResponse.success(fieldService.findAll()));
+    public ResponseEntity<Object> findAll(
+                @RequestParam(value = "district", required = false) final String district,
+                @RequestParam(value = "area", required = false) final String area
+            ) {
+        if (district != null) {
+            return ResponseEntity.ok(fieldService.filterByDistrict(Integer.parseInt(district)));
+        } else if (area != null) {
+            return ResponseEntity.ok(fieldService.filterByArea(Integer.parseInt(area)));
+        }
+        return ResponseEntity.ok(fieldService.findAll());
     }
 
     @DeleteMapping("api/ad/field/delete/{id}")
@@ -48,10 +58,21 @@ public class FieldController {
     }
 
     @GetMapping(value = {"api/mn/field/find_all"})
-    public ResponseEntity<Object> managerFindAll(@RequestHeader String token){
-        String phone = jwtService.decode(token);
-        return ResponseEntity.ok(MyResponse.success(fieldService.managerFind(phone)));
+    public ResponseEntity<Object> managerFindField(
+            @RequestHeader String token,
+            @RequestParam(value = "district", required = false) final String district,
+            @RequestParam(value = "area", required = false) final String area
+    ) {
+        String decode = jwtService.decode(token);
+        if (district != null) {
+            return ResponseEntity.ok(fieldService.managerFilterByDistrict(Integer.parseInt(district), decode));
+        } else if (area != null) {
+            return ResponseEntity.ok(fieldService.managerFilterByArea(Integer.parseInt(area), decode));
+        }
+//        return ResponseEntity.ok(fieldService.managerFind(decode));
+        return ResponseEntity.ok(fieldService.formatField(decode));
     }
+
 
     @PostMapping(value = {"api/mn/field/update"})
     public ResponseEntity<Object> managerUpdate(@RequestBody Field field ,@RequestHeader String token){

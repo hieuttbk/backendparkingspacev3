@@ -1,6 +1,7 @@
 package com.sparking.controller;
 
 import com.sparking.entities.jsonResp.MyResponse;
+import com.sparking.entities.payloadReq.DetectorPayload;
 import com.sparking.entities.payloadReq.UpdateSlotIdPayload;
 import com.sparking.entities.payloadReq.UpdateSlotIdPayload;
 import com.sparking.security.JWTService;
@@ -24,7 +25,10 @@ public class DetectorController {
 //    }
 
     @GetMapping("api/ad/detector/find_all")
-    public ResponseEntity<Object> findAll(){
+    public ResponseEntity<Object> findAll(@RequestParam(value = "gwid", required = false) final String gateway){
+        if (gateway != null && Integer.parseInt(gateway) > 0) {
+            return ResponseEntity.ok(MyResponse.success(detectorService.findByGateway(gateway)));
+        }
         return ResponseEntity.ok(MyResponse.success(detectorService.findAll()));
     }
 
@@ -34,9 +38,13 @@ public class DetectorController {
 //    }
 
     @GetMapping(value = {"api/mn/detector/find_all"})
-    public ResponseEntity<Object> managerFindAll(@RequestHeader String token){
-        String phone = jwtService.decode(token);
-        return ResponseEntity.ok(MyResponse.success(detectorService.managerFind(phone)));
+    public ResponseEntity<Object> managerFindAll(@RequestHeader String token,
+                                                 @RequestParam(value = "gwid", required = false) final String gateway){
+        String email = jwtService.decode(token);
+        if (gateway != null && Integer.parseInt(gateway) > 0) {
+            return ResponseEntity.ok(MyResponse.success(detectorService.managerGetByGateway(email, gateway)));
+        }
+        return ResponseEntity.ok(MyResponse.success(detectorService.managerFind(email)));
     }
 
 //    @PostMapping("api/mn/detector/create_and_update")
@@ -64,9 +72,22 @@ public class DetectorController {
     }
 
     @PostMapping("api/ad/detector")
+    public ResponseEntity<Object> createDetector(@RequestBody DetectorPayload detectorPayload) {
+        return ResponseEntity.ok(MyResponse.success(detectorService.createDetector(detectorPayload)));
+    }
+
+    @PutMapping("api/ad/detector")
     public ResponseEntity<Object> UpdateSlotId(
             @RequestBody UpdateSlotIdPayload updateSlotIdPayload
     ) {
         return ResponseEntity.ok(MyResponse.success(detectorService.updateSlotId(updateSlotIdPayload)));
+    }
+
+    @DeleteMapping("api/ad/detector/{id}")
+    public ResponseEntity<Object> deleteDetector(@PathVariable Integer id) {
+        if (id == null) {
+            return ResponseEntity.ok(MyResponse.fail("Invalid Detector"));
+        }
+        return ResponseEntity.ok(MyResponse.success(detectorService.deleteDetector(id)));
     }
 }
