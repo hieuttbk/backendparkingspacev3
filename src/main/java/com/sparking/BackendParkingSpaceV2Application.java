@@ -41,7 +41,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 
     private static Logger logger = LoggerFactory.getLogger(BackendParkingSpaceV2Application.class);
 
-    final static long rateUpdateDataCam = 300 * 1000;
+    final static long rateUpdateDataCam = 2000;
 
     @Autowired
     SlotRepo slotRepo;
@@ -136,9 +136,6 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
             }
         }.start();
 
-
-
-
         logger.info("UPDATE STATS FIELD");
         AnalysisFunction.updateStatsField();
 
@@ -156,7 +153,7 @@ public class BackendParkingSpaceV2Application implements CommandLineRunner {
 //        }
 //    }
 
-    @Scheduled(fixedRate = rateUpdateDataCam, initialDelay = 60000)
+    @Scheduled(fixedRate = rateUpdateDataCam, initialDelay = 2000)
     public boolean getDataCam() throws FileNotFoundException {
         logger.info("UPDATE DATA CAM COMPLETE");
         File fileD3 = new File (pathDataCamD3);

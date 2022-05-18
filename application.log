@@ -1,904 +1,124 @@
-2022-04-28 14:51:35.807  INFO 6008 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-62VA20P with PID 6008 (D:\be-lab\backendparkingspacev3\target\classes started by Admin in D:\be-lab\backendparkingspacev3)
-2022-04-28 14:51:36.038  INFO 6008 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-28 14:51:46.633  WARN 6008 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-28 14:51:51.537  INFO 6008 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 34.104 seconds (JVM running for 40.136)
-2022-04-28 14:51:51.554  INFO 6008 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 00:46:18.602  INFO 780 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 780 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 00:46:18.613  INFO 780 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 00:46:21.488  WARN 780 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 00:46:22.940  INFO 780 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 00:46:22.943  INFO 780 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.8 seconds (JVM running for 5.314)
-2022-04-14 00:46:22.945  INFO 780 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 00:46:22.947  INFO 780 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 00:46:22.963  INFO 780 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 00:46:22.964  INFO 780 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 00:46:23.680  INFO 780 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 00:46:23.681  INFO 780 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 00:46:52.953  INFO 780 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 00:47:22.949  INFO 780 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 00:48:22.297 ERROR 780 --- [http-nio-6969-exec-5] c.s.service_impl.AreaService_Impl        : Manager GetAll Areas wrong: java.lang.NullPointerException
-2022-04-14 00:48:22.314 ERROR 780 --- [http-nio-6969-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
-
-java.lang.NullPointerException: null
-	at com.sparking.service_impl.AreaService_Impl.mnGetAllAreas(AreaService_Impl.java:38) ~[classes/:na]
-	at com.sparking.controller.AreaController.managerGetAllAreas(AreaController.java:24) ~[classes/:na]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_45]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_45]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_45]
-	at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_45]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at com.sparking.security.JWTFilterManager.doFilter(JWTFilterManager.java:28) ~[classes/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_45]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_45]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
-
-2022-04-14 00:48:52.945  INFO 780 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 00:50:52.953  INFO 780 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 00:52:22.949  INFO 780 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 00:52:52.947  INFO 780 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 00:54:52.954  INFO 780 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 00:56:52.941  INFO 780 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 00:57:22.954  INFO 780 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 00:58:52.943  INFO 780 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:00:52.945  INFO 780 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:02:22.947  INFO 780 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 01:02:52.944  INFO 780 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:24:58.237  INFO 13472 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 13472 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 01:24:58.240  INFO 13472 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 01:25:00.936  WARN 13472 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 01:25:02.240  INFO 13472 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 01:25:02.247  INFO 13472 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.43 seconds (JVM running for 4.945)
-2022-04-14 01:25:02.249  INFO 13472 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 01:25:02.250  INFO 13472 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 01:25:02.251  INFO 13472 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 01:25:02.251  INFO 13472 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 01:25:02.805  INFO 13472 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 01:25:02.805  INFO 13472 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 01:25:32.243  INFO 13472 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:26:02.244  INFO 13472 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 01:27:32.254  INFO 13472 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:29:32.249  INFO 13472 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:29:44.599 ERROR 13472 --- [http-nio-6969-exec-2] c.s.service_impl.AreaService_Impl        : Manager GetAll Areas wrong: java.lang.NullPointerException
-2022-04-14 01:29:44.616 ERROR 13472 --- [http-nio-6969-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
-
-java.lang.NullPointerException: null
-	at com.sparking.service_impl.AreaService_Impl.mnGetAllAreas(AreaService_Impl.java:41) ~[classes/:na]
-	at com.sparking.controller.AreaController.managerGetAllAreas(AreaController.java:24) ~[classes/:na]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_45]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_45]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_45]
-	at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_45]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at com.sparking.security.JWTFilterManager.doFilter(JWTFilterManager.java:28) ~[classes/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_45]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_45]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
-
-2022-04-14 01:31:02.249  INFO 13472 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 01:31:32.245  INFO 13472 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:33:32.240  INFO 13472 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:34:13.341  INFO 3660 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 3660 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 01:34:13.344  INFO 3660 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 01:34:15.836  WARN 3660 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 01:34:17.078  INFO 3660 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 01:34:17.080  INFO 3660 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.082 seconds (JVM running for 4.527)
-2022-04-14 01:34:17.082  INFO 3660 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 01:34:17.084  INFO 3660 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 01:34:17.084  INFO 3660 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 01:34:17.084  INFO 3660 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 01:34:17.604  INFO 3660 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 01:34:17.605  INFO 3660 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 01:34:27.897 ERROR 3660 --- [http-nio-6969-exec-2] c.s.service_impl.AreaService_Impl        : Manager GetAll Areas wrong: java.lang.NullPointerException
-2022-04-14 01:34:27.910 ERROR 3660 --- [http-nio-6969-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
-
-java.lang.NullPointerException: null
-	at com.sparking.service_impl.AreaService_Impl.mnGetAllAreas(AreaService_Impl.java:41) ~[classes/:na]
-	at com.sparking.controller.AreaController.managerGetAllAreas(AreaController.java:24) ~[classes/:na]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_45]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_45]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_45]
-	at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_45]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at com.sparking.security.JWTFilterManager.doFilter(JWTFilterManager.java:28) ~[classes/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_45]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_45]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
-
-2022-04-14 01:34:47.081  INFO 3660 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:35:29.644  INFO 20080 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 20080 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 01:35:29.647  INFO 20080 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 01:35:32.089  WARN 20080 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 01:35:33.246  INFO 20080 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 01:35:33.249  INFO 20080 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.955 seconds (JVM running for 4.43)
-2022-04-14 01:35:33.251  INFO 20080 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 01:35:33.252  INFO 20080 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 01:35:33.252  INFO 20080 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 01:35:33.252  INFO 20080 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 01:35:33.644  INFO 20080 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 01:35:33.644  INFO 20080 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 01:35:35.710 ERROR 20080 --- [http-nio-6969-exec-2] c.s.service_impl.AreaService_Impl        : Manager GetAll Areas wrong: java.lang.NullPointerException
-2022-04-14 01:35:35.723 ERROR 20080 --- [http-nio-6969-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
-
-java.lang.NullPointerException: null
-	at com.sparking.service_impl.AreaService_Impl.mnGetAllAreas(AreaService_Impl.java:41) ~[classes/:na]
-	at com.sparking.controller.AreaController.managerGetAllAreas(AreaController.java:24) ~[classes/:na]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_45]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_45]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_45]
-	at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_45]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at com.sparking.security.JWTFilterManager.doFilter(JWTFilterManager.java:28) ~[classes/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_45]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_45]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
-
-2022-04-14 01:36:03.253  INFO 20080 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:36:33.248  INFO 20080 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 01:36:50.134 ERROR 20080 --- [http-nio-6969-exec-5] c.s.service_impl.AreaService_Impl        : Manager GetAll Areas wrong: java.lang.NullPointerException
-2022-04-14 01:36:50.135 ERROR 20080 --- [http-nio-6969-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
-
-java.lang.NullPointerException: null
-	at com.sparking.service_impl.AreaService_Impl.mnGetAllAreas(AreaService_Impl.java:41) ~[classes/:na]
-	at com.sparking.controller.AreaController.managerGetAllAreas(AreaController.java:24) ~[classes/:na]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_45]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_45]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_45]
-	at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_45]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at com.sparking.security.JWTFilterManager.doFilter(JWTFilterManager.java:28) ~[classes/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_45]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_45]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
-
-2022-04-14 01:37:35.852  INFO 268 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 268 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 01:37:35.855  INFO 268 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 01:37:38.307  WARN 268 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 01:37:39.523  INFO 268 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 01:37:39.526  INFO 268 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.023 seconds (JVM running for 4.492)
-2022-04-14 01:37:39.528  INFO 268 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 01:37:39.529  INFO 268 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 01:37:39.529  INFO 268 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 01:37:39.530  INFO 268 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 01:37:39.896  INFO 268 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 01:37:39.897  INFO 268 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 01:37:42.289 ERROR 268 --- [http-nio-6969-exec-1] c.s.service_impl.AreaService_Impl        : Manager GetAll Areas wrong: java.lang.NullPointerException
-2022-04-14 01:38:09.531  INFO 268 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:38:39.528  INFO 268 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 01:40:09.530  INFO 268 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:40:37.445  INFO 11344 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 11344 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 01:40:37.448  INFO 11344 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 01:40:39.925  WARN 11344 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 01:40:41.140  INFO 11344 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 01:40:41.144  INFO 11344 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.043 seconds (JVM running for 4.515)
-2022-04-14 01:40:41.146  INFO 11344 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 01:40:41.147  INFO 11344 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 01:40:41.147  INFO 11344 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 01:40:41.147  INFO 11344 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 01:40:41.674  INFO 11344 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 01:40:41.675  INFO 11344 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 01:40:48.165 ERROR 11344 --- [http-nio-6969-exec-2] c.s.service_impl.AreaService_Impl        : Manager GetAll Areas wrong: java.lang.NullPointerException
-2022-04-14 01:41:11.151  INFO 11344 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 01:41:16.111 ERROR 11344 --- [http-nio-6969-exec-4] c.s.service_impl.AreaService_Impl        : Manager GetAll Areas wrong: java.lang.NullPointerException
-2022-04-14 01:41:41.149  INFO 11344 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:12:20.741  INFO 7764 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 7764 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:12:20.751  INFO 7764 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:12:23.390  WARN 7764 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:12:24.672  INFO 7764 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:12:24.675  INFO 7764 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.296 seconds (JVM running for 4.766)
-2022-04-14 09:12:24.677  INFO 7764 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:12:24.678  INFO 7764 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:12:24.679  INFO 7764 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:12:24.679  INFO 7764 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:12:25.476  INFO 7764 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:12:25.476  INFO 7764 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:12:41.612 ERROR 7764 --- [http-nio-6969-exec-3] c.s.service_impl.AreaService_Impl        : Manager GetAll Areas wrong: java.lang.NullPointerException
-2022-04-14 09:12:54.685  INFO 7764 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:13:24.673  INFO 7764 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:15:03.765  INFO 9032 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 9032 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:15:03.768  INFO 9032 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:15:06.489  WARN 9032 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:15:07.749  INFO 9032 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:15:07.752  INFO 9032 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.335 seconds (JVM running for 4.805)
-2022-04-14 09:15:07.755  INFO 9032 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:15:07.757  INFO 9032 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:15:07.757  INFO 9032 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:15:07.757  INFO 9032 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:15:08.304  INFO 9032 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:15:08.305  INFO 9032 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:15:13.753 ERROR 9032 --- [http-nio-6969-exec-2] c.s.service_impl.AreaService_Impl        : Manager GetAll Areas wrong: java.lang.NullPointerException
-2022-04-14 09:15:37.763  INFO 9032 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:16:07.755  INFO 9032 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:16:59.864  INFO 21304 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 21304 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:16:59.867  INFO 21304 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:17:02.375  WARN 21304 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:17:03.703  INFO 21304 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:17:03.707  INFO 21304 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.191 seconds (JVM running for 4.662)
-2022-04-14 09:17:03.717  INFO 21304 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:17:03.728  INFO 21304 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:17:03.728  INFO 21304 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:17:03.729  INFO 21304 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:17:04.250  INFO 21304 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:17:04.250  INFO 21304 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:17:18.494 ERROR 21304 --- [http-nio-6969-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
-
-java.lang.NullPointerException: null
-	at com.sparking.service_impl.AreaService_Impl.mnGetAllAreas(AreaService_Impl.java:59) ~[classes/:na]
-	at com.sparking.controller.AreaController.managerGetAllAreas(AreaController.java:24) ~[classes/:na]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_45]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_45]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_45]
-	at java.lang.reflect.Method.invoke(Method.java:497) ~[na:1.8.0_45]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:878) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:792) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733) ~[tomcat-embed-core-9.0.39.jar:4.0.FR]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at com.sparking.security.JWTFilterManager.doFilter(JWTFilterManager.java:28) ~[classes/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) ~[spring-security-web-5.3.5.RELEASE.jar:5.3.5.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.10.RELEASE.jar:5.2.10.RELEASE]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_45]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_45]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.39.jar:9.0.39]
-	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_45]
-
-2022-04-14 09:17:33.719  INFO 21304 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:18:03.714  INFO 21304 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:19:33.706  INFO 21304 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:20:40.929  INFO 11348 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 11348 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:20:40.932  INFO 11348 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:20:43.465  WARN 11348 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:20:44.731  INFO 11348 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:20:44.733  INFO 11348 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.149 seconds (JVM running for 4.627)
-2022-04-14 09:20:44.736  INFO 11348 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:20:44.737  INFO 11348 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:20:44.737  INFO 11348 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:20:44.737  INFO 11348 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:20:45.234  INFO 11348 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:20:45.235  INFO 11348 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:21:10.924  INFO 11348 --- [http-nio-6969-exec-1] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:21:14.739  INFO 11348 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:21:44.738  INFO 11348 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:22:58.900  INFO 4632 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 4632 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:22:58.903  INFO 4632 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:23:01.424  WARN 4632 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:23:02.711  INFO 4632 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:23:02.714  INFO 4632 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.166 seconds (JVM running for 4.635)
-2022-04-14 09:23:02.717  INFO 4632 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:23:02.718  INFO 4632 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:23:02.718  INFO 4632 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:23:02.719  INFO 4632 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:23:03.220  INFO 4632 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:23:03.220  INFO 4632 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:23:07.119  INFO 4632 --- [http-nio-6969-exec-2] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:23:32.720  INFO 4632 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:24:22.321  INFO 22168 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 22168 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:24:22.324  INFO 22168 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:24:24.740  WARN 22168 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:24:25.960  INFO 22168 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:24:25.963  INFO 22168 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.986 seconds (JVM running for 4.454)
-2022-04-14 09:24:25.966  INFO 22168 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:24:25.967  INFO 22168 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:24:25.967  INFO 22168 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:24:25.967  INFO 22168 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:24:26.333  INFO 22168 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:24:26.333  INFO 22168 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:24:29.316  INFO 22168 --- [http-nio-6969-exec-1] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:25:02.106  INFO 20564 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 20564 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:25:02.109  INFO 20564 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:25:04.530  WARN 20564 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:25:05.723  INFO 20564 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:25:05.726  INFO 20564 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.963 seconds (JVM running for 4.439)
-2022-04-14 09:25:05.728  INFO 20564 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:25:05.730  INFO 20564 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:25:05.730  INFO 20564 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:25:05.730  INFO 20564 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:25:06.102  INFO 20564 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:25:06.102  INFO 20564 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:25:14.387  INFO 20564 --- [http-nio-6969-exec-2] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:25:14.389  INFO 20564 --- [http-nio-6969-exec-2] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:25:14.391  INFO 20564 --- [http-nio-6969-exec-2] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:25:14.392 ERROR 20564 --- [http-nio-6969-exec-2] c.s.repository_impl.AreaRepo_Impl        : Area null
-2022-04-14 09:25:35.736  INFO 20564 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:26:05.734  INFO 20564 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:27:35.742  INFO 20564 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:29:02.944  INFO 15716 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 15716 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:29:02.947  INFO 15716 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:29:05.378  WARN 15716 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:29:06.573  INFO 15716 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:29:06.575  INFO 15716 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.978 seconds (JVM running for 4.469)
-2022-04-14 09:29:06.578  INFO 15716 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:29:06.579  INFO 15716 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:29:06.579  INFO 15716 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:29:06.579  INFO 15716 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:29:06.950  INFO 15716 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:29:06.950  INFO 15716 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:29:10.674  INFO 15716 --- [http-nio-6969-exec-2] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:29:10.676  INFO 15716 --- [http-nio-6969-exec-2] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:29:10.678  INFO 15716 --- [http-nio-6969-exec-2] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:29:36.575  INFO 15716 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:30:12.725  INFO 21092 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 21092 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:30:12.728  INFO 21092 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:30:15.150  WARN 21092 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:30:16.329  INFO 21092 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:30:16.331  INFO 21092 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.946 seconds (JVM running for 4.412)
-2022-04-14 09:30:16.334  INFO 21092 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:30:16.335  INFO 21092 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:30:16.335  INFO 21092 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:30:16.335  INFO 21092 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:30:16.721  INFO 21092 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:30:16.721  INFO 21092 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:30:25.161  INFO 21092 --- [http-nio-6969-exec-2] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:30:25.164  INFO 21092 --- [http-nio-6969-exec-2] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:30:57.416  INFO 19732 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 19732 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:30:57.418  INFO 19732 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:30:59.853  WARN 19732 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:31:01.028  INFO 19732 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:31:01.031  INFO 19732 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.956 seconds (JVM running for 4.433)
-2022-04-14 09:31:01.033  INFO 19732 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:31:01.034  INFO 19732 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:31:01.035  INFO 19732 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:31:01.035  INFO 19732 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:31:01.395  INFO 19732 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:31:01.396  INFO 19732 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:31:10.343  INFO 19732 --- [http-nio-6969-exec-2] c.s.repository_impl.AreaRepo_Impl        : ManagerField null
-2022-04-14 09:31:31.031  INFO 19732 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:32:20.064  INFO 5476 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 5476 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:32:20.067  INFO 5476 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:32:22.539  WARN 5476 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:32:23.795  INFO 5476 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:32:23.798  INFO 5476 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.075 seconds (JVM running for 4.53)
-2022-04-14 09:32:23.800  INFO 5476 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:32:23.801  INFO 5476 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:32:23.801  INFO 5476 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:32:23.801  INFO 5476 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:32:24.319  INFO 5476 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:32:24.320  INFO 5476 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:32:53.805  INFO 5476 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:43:05.236  INFO 18560 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 18560 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:43:05.239  INFO 18560 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:43:07.978  WARN 18560 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:43:09.429  INFO 18560 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:43:09.433  INFO 18560 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.557 seconds (JVM running for 5.023)
-2022-04-14 09:43:09.435  INFO 18560 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:43:09.437  INFO 18560 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:43:09.437  INFO 18560 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:43:09.438  INFO 18560 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:43:09.953  INFO 18560 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:43:09.954  INFO 18560 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:43:21.130 ERROR 18560 --- [http-nio-6969-exec-1] c.s.service_impl.DistrictService_Impl    : mnGetAllDistricts wrong: java.lang.NullPointerException
-2022-04-14 09:43:39.440  INFO 18560 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:44:09.442  INFO 18560 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:44:35.764  INFO 15140 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 15140 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:44:35.767  INFO 15140 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:44:38.431  WARN 15140 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:44:40.011  INFO 15140 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:44:40.013  INFO 15140 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.601 seconds (JVM running for 5.093)
-2022-04-14 09:44:40.016  INFO 15140 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:44:40.018  INFO 15140 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:44:40.018  INFO 15140 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:44:40.019  INFO 15140 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:44:40.690 ERROR 15140 --- [http-nio-6969-exec-2] c.s.service_impl.DistrictService_Impl    : mnGetAllDistricts wrong: java.lang.NullPointerException
-2022-04-14 09:44:40.826  INFO 15140 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:44:40.827  INFO 15140 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:44:43.476 ERROR 15140 --- [http-nio-6969-exec-3] c.s.service_impl.DistrictService_Impl    : mnGetAllDistricts wrong: java.lang.NullPointerException
-2022-04-14 09:45:10.012  INFO 15140 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:45:16.487 ERROR 15140 --- [http-nio-6969-exec-5] c.s.service_impl.DistrictService_Impl    : mnGetAllDistricts wrong: java.lang.NullPointerException
-2022-04-14 09:45:40.015  INFO 15140 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:47:10.023  INFO 15140 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:47:30.718  INFO 12400 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 12400 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:47:30.721  INFO 12400 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:47:33.197  WARN 12400 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:47:34.404  INFO 12400 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:47:34.407  INFO 12400 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.037 seconds (JVM running for 4.518)
-2022-04-14 09:47:34.409  INFO 12400 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:47:34.410  INFO 12400 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:47:34.410  INFO 12400 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:47:34.411  INFO 12400 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:47:34.786  INFO 12400 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:47:34.787  INFO 12400 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:47:37.328 ERROR 12400 --- [http-nio-6969-exec-1] c.s.service_impl.DistrictService_Impl    : mnGetAllDistricts wrong: java.lang.NullPointerException
-2022-04-14 09:48:21.620  INFO 4168 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 4168 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:48:21.622  INFO 4168 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:48:24.068  WARN 4168 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:48:25.233  INFO 4168 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:48:25.237  INFO 4168 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 3.96 seconds (JVM running for 4.437)
-2022-04-14 09:48:25.239  INFO 4168 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:48:25.241  INFO 4168 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:48:25.241  INFO 4168 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:48:25.241  INFO 4168 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:48:25.606  INFO 4168 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:48:25.607  INFO 4168 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:48:45.316 ERROR 4168 --- [http-nio-6969-exec-1] c.s.service_impl.DistrictService_Impl    : mnGetAllDistricts wrong: java.lang.NullPointerException
-2022-04-14 09:48:55.241  INFO 4168 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
-2022-04-14 09:49:25.241  INFO 4168 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 09:51:05.158  INFO 872 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 872 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 09:51:05.162  INFO 872 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 09:51:07.922  WARN 872 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 09:51:09.312  INFO 872 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 09:51:09.315  INFO 872 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.508 seconds (JVM running for 4.981)
-2022-04-14 09:51:09.317  INFO 872 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 09:51:09.319  INFO 872 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 09:51:09.319  INFO 872 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 09:51:09.319  INFO 872 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 09:51:09.977  INFO 872 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 09:51:09.978  INFO 872 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 12:48:15.050  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 15316 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 12:48:15.053  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 12:48:18.273  WARN 15316 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 12:48:19.768  INFO 15316 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 12:48:19.772  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 5.098 seconds (JVM running for 5.855)
-2022-04-14 12:48:19.775  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 12:48:19.777  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 12:48:19.777  INFO 15316 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 12:48:19.778  INFO 15316 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 12:48:21.160  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 12:48:21.161  INFO 15316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
-2022-04-14 12:48:21.248 ERROR 15316 --- [main] o.s.boot.SpringApplication               : Application run failed
-
-java.lang.IllegalStateException: Failed to execute CommandLineRunner
-	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:798) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
-	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:779) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:322) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
-	at com.sparking.BackendParkingSpaceV2Application.main(BackendParkingSpaceV2Application.java:74) [classes/:na]
-Caused by: java.lang.ArrayIndexOutOfBoundsException: 2
-	at com.sparking.BackendParkingSpaceV2Application.getDataCam(BackendParkingSpaceV2Application.java:188) [classes/:na]
-	at com.sparking.BackendParkingSpaceV2Application.run(BackendParkingSpaceV2Application.java:146) [classes/:na]
-	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:795) [spring-boot-2.3.5.RELEASE.jar:2.3.5.RELEASE]
-	... 5 common frames omitted
-
-2022-04-14 12:50:41.390  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 12316 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
-2022-04-14 12:50:41.394  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
-2022-04-14 12:50:45.080  WARN 12316 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-04-14 12:50:46.760  INFO 12316 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
-2022-04-14 12:50:46.764  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 5.766 seconds (JVM running for 6.518)
-2022-04-14 12:50:46.768  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
-2022-04-14 12:50:46.770  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
-2022-04-14 12:50:46.770  INFO 12316 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
-2022-04-14 12:50:46.770  INFO 12316 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
-2022-04-14 12:50:48.451  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
-2022-04-14 12:50:48.452  INFO 12316 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:18:49.385  INFO 15980 --- [main] c.s.BackendParkingSpaceV2Application     : Starting BackendParkingSpaceV2Application on DESKTOP-43VL7LQ with PID 15980 (C:\Users\Hyacinth\Desktop\backendparkingspacev3\target\classes started by Hyacinth in C:\Users\Hyacinth\Desktop\backendparkingspacev3)
+2022-05-18 22:18:49.394  INFO 15980 --- [main] c.s.BackendParkingSpaceV2Application     : No active profile set, falling back to default profiles: default
+2022-05-18 22:18:52.211  WARN 15980 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-05-18 22:18:53.567  INFO 15980 --- [scheduling-1] com.sparking.tune.ExpiredContract        : DELETE EXPIRED CONTRACT PERIODICALLY
+2022-05-18 22:18:53.573  INFO 15980 --- [main] c.s.BackendParkingSpaceV2Application     : Started BackendParkingSpaceV2Application in 4.64 seconds (JVM running for 5.275)
+2022-05-18 22:18:53.576  INFO 15980 --- [main] c.s.BackendParkingSpaceV2Application     : SERVER STARTED
+2022-05-18 22:18:53.578  INFO 15980 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE STATS FIELD
+2022-05-18 22:18:53.578  INFO 15980 --- [TAG] c.s.BackendParkingSpaceV2Application     : START TAG MODULE
+2022-05-18 22:18:53.578  INFO 15980 --- [main] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: FIRST TIME
+2022-05-18 22:18:54.182  INFO 15980 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATABASE SLOT USING DATA FROM CAM
+2022-05-18 22:18:54.182  INFO 15980 --- [main] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:18:54.563  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:18:55.552  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:18:56.559  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:18:57.557  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:18:58.558  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:18:59.566  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:00.559  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:01.556  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:02.565  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:03.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:04.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:05.560  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:06.556  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:07.553  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:08.564  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:09.552  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:10.554  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:11.550  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:12.561  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:13.559  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:14.557  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:15.554  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:16.553  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:17.563  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:18.563  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:19.560  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:20.555  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:21.553  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:22.564  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:23.563  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:23.565  INFO 15980 --- [scheduling-1] com.sparking.tune.AnalysisFunction       : UPDATE ANALYSIS DATABASE: PERIODICALLY
+2022-05-18 22:19:24.559  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:25.554  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:26.565  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:27.561  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:28.556  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:29.553  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:30.564  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:31.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:32.558  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:33.553  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:34.559  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:35.563  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:36.556  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:37.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:38.556  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:39.563  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:40.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:41.556  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:42.553  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:43.551  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:44.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:45.561  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:46.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:47.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:48.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:49.560  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:50.558  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:51.555  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:52.565  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:53.565  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:54.557  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:55.552  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:56.564  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:57.558  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:58.552  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:19:59.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:00.561  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:01.554  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:02.565  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:03.564  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:04.558  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:05.553  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:06.565  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:07.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:08.558  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:09.554  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:10.551  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:11.560  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:12.563  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:13.559  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:14.554  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:15.553  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:16.565  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:17.558  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:18.554  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:19.553  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:20.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:21.559  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:22.554  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:23.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:24.558  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:25.552  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:26.554  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:27.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:28.559  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:29.566  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:30.551  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:31.564  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:32.560  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:33.557  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:34.552  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:35.564  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:36.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:37.560  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:38.555  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:39.557  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:40.554  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:41.561  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:42.562  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:43.558  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:44.565  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
+2022-05-18 22:20:45.555  INFO 15980 --- [scheduling-1] c.s.BackendParkingSpaceV2Application     : UPDATE DATA CAM COMPLETE
